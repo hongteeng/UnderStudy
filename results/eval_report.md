@@ -39,7 +39,7 @@ The key difference is that diamond has strong covalent bonds extending throughou
 
 - UnderStudy rule score: 
 - Baseline rule score: 
-- Notes: 
+- Notes: US is better because theres a good structure
 
 ---
 
@@ -71,7 +71,7 @@ This is why metals can be bent, hammered, or shaped into sheets instead of shatt
 
 - UnderStudy rule score: 
 - Baseline rule score: 
-- Notes: 
+- Notes: baseline is better because splitting the qn into parts make it clearer
 
 ---
 
