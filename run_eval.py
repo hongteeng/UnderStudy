@@ -6,10 +6,12 @@ from pathlib import Path
 
 from answer import generate_understudy_answer
 from baseline import generate_baseline_answer
+from format_eval_report import format_report
 
 
 PROJECT_ROOT = Path(__file__).parent
 DEFAULT_OUTPUT_PATH = PROJECT_ROOT / "results" / "eval_output.csv"
+DEFAULT_REPORT_PATH = PROJECT_ROOT / "results" / "eval_report.md"
 CSV_FIELDS = [
     "question_id",
     "question",
@@ -40,6 +42,15 @@ def parse_arguments() -> argparse.Namespace:
         default=DEFAULT_OUTPUT_PATH,
         help=f"CSV path to write (default: {DEFAULT_OUTPUT_PATH}).",
     )
+    parser.add_argument(
+        "--report",
+        type=Path,
+        default=DEFAULT_REPORT_PATH,
+        help=(
+            f"Readable Markdown report path to write (default: {DEFAULT_REPORT_PATH}). "
+            "Written automatically alongside the CSV on every run."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -68,28 +79,33 @@ def main() -> None:
     args = parse_arguments()
     questions = load_questions(args.question_directory)
 
+    rows = []
+    for question_id, question in questions:
+        print(f"Running {question_id}...")
+        rows.append(
+            {
+                "question_id": question_id,
+                "question": question,
+                "understudy_answer": generate_understudy_answer(question),
+                "baseline_answer": generate_baseline_answer(question),
+                "understudy_rule_score": "",
+                "baseline_rule_score": "",
+                "understudy_syllabus_overshoot": "",
+                "baseline_syllabus_overshoot": "",
+                "reviewer_notes": "",
+            }
+        )
+
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8", newline="") as csv_file:
         writer = csv.DictWriter(csv_file, fieldnames=CSV_FIELDS)
         writer.writeheader()
-
-        for question_id, question in questions:
-            print(f"Running {question_id}...")
-            writer.writerow(
-                {
-                    "question_id": question_id,
-                    "question": question,
-                    "understudy_answer": generate_understudy_answer(question),
-                    "baseline_answer": generate_baseline_answer(question),
-                    "understudy_rule_score": "",
-                    "baseline_rule_score": "",
-                    "understudy_syllabus_overshoot": "",
-                    "baseline_syllabus_overshoot": "",
-                    "reviewer_notes": "",
-                }
-            )
-
+        writer.writerows(rows)
     print(f"Evaluation output written to {args.output}")
+
+    args.report.parent.mkdir(parents=True, exist_ok=True)
+    args.report.write_text(format_report(rows), encoding="utf-8")
+    print(f"Readable report written to {args.report}")
 
 
 if __name__ == "__main__":
