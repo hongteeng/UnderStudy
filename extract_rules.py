@@ -19,7 +19,7 @@ PROJECT_ROOT = Path(__file__).parent
 RAW_TRANSCRIPTS_DIR = PROJECT_ROOT / "data" / "transcripts" / "raw"
 REVIEWED_TRANSCRIPTS_DIR = PROJECT_ROOT / "data" / "transcripts" / "reviewed"
 PROMPT_PATH = PROJECT_ROOT / "prompts" / "extract_rules_prompt.md"
-DEFAULT_OUTPUT_PATH = PROJECT_ROOT / "data" / "rules_draft.md"
+RULE_DRAFTS_DIR = PROJECT_ROOT / "data" / "rule_drafts"
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -29,8 +29,12 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--output",
         type=Path,
-        default=DEFAULT_OUTPUT_PATH,
-        help=f"Markdown path to write (default: {DEFAULT_OUTPUT_PATH}).",
+        default=None,
+        help=(
+            "Markdown path to write. Defaults to "
+            f"{RULE_DRAFTS_DIR}/<transcript_name>_rules_draft.md, named after "
+            "the source transcript(s)."
+        ),
     )
     return parser.parse_args()
 
@@ -41,7 +45,7 @@ def select_transcript_directory() -> Path:
     return RAW_TRANSCRIPTS_DIR
 
 
-def load_transcripts() -> str:
+def load_transcripts() -> tuple[str, list[str]]:
     transcript_directory = select_transcript_directory()
     if not transcript_directory.is_dir():
         raise FileNotFoundError(
@@ -50,6 +54,7 @@ def load_transcripts() -> str:
         )
 
     sources = []
+    names = []
     for path in sorted(transcript_directory.rglob("*")):
         if not path.is_file() or path.name.startswith("."):
             continue
@@ -57,10 +62,16 @@ def load_transcripts() -> str:
         if content:
             relative_path = path.relative_to(PROJECT_ROOT)
             sources.append(f"## Source: {relative_path}\n{content}")
+            names.append(path.stem)
 
     if not sources:
         raise ValueError(f"No non-empty transcripts found in {transcript_directory}.")
-    return "\n\n".join(sources)
+    return "\n\n".join(sources), names
+
+
+def default_output_path(transcript_names: list[str]) -> Path:
+    combined_name = "_and_".join(transcript_names)
+    return RULE_DRAFTS_DIR / f"{combined_name}_rules_draft.md"
 
 
 def load_extraction_prompt() -> str:
@@ -100,12 +111,13 @@ def generate_draft(instructions: str, transcripts: str) -> str:
 def main() -> None:
     args = parse_arguments()
     instructions = load_extraction_prompt()
-    transcripts = load_transcripts()
+    transcripts, transcript_names = load_transcripts()
     draft = generate_draft(instructions, transcripts)
 
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(draft + "\n", encoding="utf-8")
-    print(f"Tutor-reviewable rules draft written to {args.output}")
+    output_path = args.output or default_output_path(transcript_names)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(draft + "\n", encoding="utf-8")
+    print(f"Tutor-reviewable rules draft written to {output_path}")
     print("Review it, then copy approved content into data/rules.md.")
 
 

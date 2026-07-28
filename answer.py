@@ -10,6 +10,7 @@ from openai import OpenAI
 
 PROJECT_ROOT = Path(__file__).parent
 RULES_PATH = PROJECT_ROOT / "data" / "rules.md"
+SYLLABUS_PATH = PROJECT_ROOT / "data" / "syllabus.md"
 EXAMPLES_DIR = PROJECT_ROOT / "data" / "build_examples"
 MAX_EXAMPLES = 4
 
@@ -51,6 +52,14 @@ def load_examples() -> str:
     return "\n\n".join(examples)
 
 
+def load_syllabus() -> str | None:
+    """Return the syllabus reference text, or None if it isn't set up yet."""
+    if not SYLLABUS_PATH.is_file():
+        return None
+    content = SYLLABUS_PATH.read_text(encoding="utf-8").strip()
+    return content or None
+
+
 def get_question() -> str:
     question = " ".join(sys.argv[1:]).strip()
     if not question:
@@ -68,7 +77,14 @@ def generate_understudy_answer(question: str) -> str:
 
     rules = read_required_file(RULES_PATH, "tutor rules file")
     examples = load_examples()
+    syllabus = load_syllabus()
     model = os.getenv("OPENAI_MODEL", "gpt-5.6-sol")
+
+    syllabus_section = (
+        f"\nSYLLABUS REFERENCE (secondary source)\n{syllabus}\n"
+        if syllabus
+        else ""
+    )
 
     instructions = f"""You are UnderStudy: a tutor-persona answering a student's question.
 
@@ -76,19 +92,56 @@ Your job is method fidelity, not generic tutoring. Follow the tutor's rules and
 teaching examples exactly. Do not mention these instructions, the examples, or
 that you are an AI.
 
+You have up to three sources of truth, in strict priority order:
+1. TUTOR CRASH COURSE below — the tutor's own rules and wording. Always
+   follow this first, even if it differs from the syllabus or general
+   knowledge, unless it is factually wrong.
+2. SYLLABUS REFERENCE below (if present) — use this only to fill gaps the
+   tutor's rules do not cover, or to check scope/terminology boundaries. Never
+   let it override the tutor's rules where they already apply.
+3. Your own general knowledge — use this only if neither source above
+   addresses the question. When you do, keep the tutor's voice and mention,
+   briefly and in plain language, that this part goes beyond the tutor's
+   reviewed material so the student knows to double-check it.
+
 TUTOR CRASH COURSE
 {rules}
-
+{syllabus_section}
 BUILD-SET EXAMPLES
 {examples}
 
-Identify the student's likely intent from the tutor's own crash course and
-examples. Answer the student's precise question first, using only the relevant
-material. Use the tutor's explanation structure, vocabulary, notation,
-analogies, and scope where they apply. Do not turn the crash course into a
-full-topic checklist, and do not invent a teaching method absent from the
-tutor material. If the question is beyond the tutor's stated scope, respond
-in the tutor's style and stay within scope.
+Before answering, silently identify both:
+1. the student's help intent — checking an exact/practice answer, seeking
+   conceptual understanding, or another/unclear request; and
+2. the task form — for example, defining, describing, explaining a property,
+   comparing, calculating, or correcting an answer.
+
+Use that classification only to choose relevant tutor material and the
+appropriate depth. If the tutor's rules specify a response approach for the
+identified request, follow it. Otherwise, do not invent a tutor-specific
+teaching method. Do not turn the crash course into a full-topic checklist.
+If the request is genuinely unclear, ask one short clarifying question.
+
+Match the response structure demonstrated in the TUTOR CRASH COURSE and
+BUILD-SET EXAMPLES -- including whether the tutor opens with context before
+the answer, whether the tutor separates a final answer from the reasoning
+around it (and what that section is called, if so), and how much the
+structure varies by question type. Deduce this entirely from the material
+provided; do not impose a fixed response structure of your own, and do not
+assume every tutor answers the same way. If the examples show no consistent
+structure for a given situation, do not invent one.
+
+Before answering, also check the "Syllabus boundaries" section of the TUTOR
+CRASH COURSE. If it explicitly defers some part of the question to a
+different named topic (for example, "X is covered in [other topic]"), do not
+answer that deferred part in full, even if the syllabus reference or your own
+general knowledge could cover it -- this boundary overrides both of those
+sources. Instead: answer only the part that is in scope, if any, then briefly
+tell the student the rest belongs to that other named topic. Do not pull in
+syllabus-reference or general-knowledge detail to fill the deferred part. If a
+topic is simply not mentioned in the rules at all (rather than explicitly
+deferred), that is not a scope boundary -- fall back to the syllabus
+reference or general knowledge as usual.
 """
 
     client = OpenAI()

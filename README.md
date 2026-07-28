@@ -13,12 +13,28 @@ answers in that tutor's method when the tutor is unavailable.
    python extract_rules.py
    ```
 
-   Review and edit `data/rules_draft.md`, then copy its approved content to
-   `data/rules.md`.
-4. Copy `templates/build_example_template.md` to `data/build_examples/01.md`
+   This writes `data/rule_drafts/<transcript_name>_rules_draft.md`, named
+   after the source transcript(s).
+4. Open that draft file yourself and resolve every review marker in it:
+   for each `⚠ REVIEW REQUIRED` block, pick `IF KEEP`, `IF EDIT`, or
+   `IF EXCLUDE` and delete the rest of the block; for each item under
+   `## Needs tutor decision`, make the call and edit the relevant rule
+   directly. The draft is not usable until no `REVIEW REQUIRED`, `IF KEEP`,
+   `IF EDIT`, or `Needs tutor decision` text remains in it.
+5. Apply the reviewed draft into `data/rules.md`:
+
+   ```bash
+   python apply_rules.py
+   ```
+
+   This refuses to run if the draft still has unresolved markers, so you
+   cannot accidentally publish an un-reviewed claim. Re-running it after
+   editing the same draft again replaces that source's content in
+   `rules.md` rather than duplicating it.
+6. Copy `templates/build_example_template.md` to `data/build_examples/01.md`
    through `04.md`, then replace the template content with 3–4 real,
    tutor-written Q&As.
-5. Run an answer:
+7. Run an answer:
 
    ```bash
    python answer.py "What is the difference between ionic and covalent bonding?"
@@ -70,7 +86,7 @@ data/
   recordings/processed/             # audio successfully transcribed
   transcripts/raw/                  # unedited transcription output
   transcripts/reviewed/             # tutor-approved transcripts
-  rules_draft.md                    # AI-generated draft rules; never used directly
+  rule_drafts/                      # AI-generated draft rules, named per transcript; never used directly
   extracted_examples/drafts/        # AI-suggested teaching examples
   extracted_examples/approved/      # tutor-approved candidates
   rules.md                          # final tutor-approved teaching rules
@@ -86,8 +102,9 @@ python extract_rules.py
 ```
 
 The script uses reviewed transcripts when any are available; otherwise it uses
-the raw transcripts. It writes `data/rules_draft.md`. The tutor must review
-and edit this draft before copying the approved content into `data/rules.md`.
+the raw transcripts. It writes `data/rule_drafts/<transcript_name>_rules_draft.md`,
+named after the source transcript(s). The tutor must review and edit this
+draft before copying the approved content into `data/rules.md`.
 Only `data/rules.md` and `data/build_examples/` are used for student answers.
 
 Use [recording_manifest_template.csv](templates/recording_manifest_template.csv)
