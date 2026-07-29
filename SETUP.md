@@ -18,8 +18,8 @@ You should see `(.venv)` at the beginning of your terminal prompt. Run the
 
 ## 2. Add your API key locally
 
-Create a file named `.env` in this project folder. It is ignored by Git and
-must not be committed or shared.
+Create a file named `.env` in this project folder. The complete set of optional
+settings is shown in `.env.example`. The real `.env` is ignored by Git.
 
 Add this line, replacing the placeholder with your actual key:
 
@@ -31,6 +31,19 @@ Optional: choose a different available model without editing Python code:
 
 ```text
 OPENAI_MODEL=gpt-5.6-sol
+```
+
+Lesson transcription defaults to the speaker-aware transcription model:
+
+```text
+OPENAI_TRANSCRIPTION_MODEL=gpt-4o-transcribe-diarize
+```
+
+For recordings larger than 24 MB, install `ffmpeg` so the automation can
+compress and split them:
+
+```bash
+brew install ffmpeg
 ```
 
 ## 3. Run the smoke test
@@ -52,5 +65,9 @@ UnderStudy API connection successful.
 - `ModuleNotFoundError`: activate `.venv`, then run `pip install -r requirements.txt`.
 - Authentication or quota error: check that you pasted an active API key and
   that the OpenAI project holding the Launchpad credits is selected.
+- `Install ffmpeg`: the recording exceeds the upload limit; run
+  `brew install ffmpeg`, then retry the failed recording.
+- A failed recording is not retried automatically unless the worker was
+  started with `--retry-failed`.
 
 Never put an API key in source code, a chat message, or a Git commit.
