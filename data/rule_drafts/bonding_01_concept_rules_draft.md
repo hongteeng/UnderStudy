@@ -1,6 +1,9 @@
-Exam context: Singapore–Cambridge GCE O-Level Pure Chemistry, syllabus 6092.
-See `data/syllabus.md` for the official syllabus reference (secondary source,
-consulted only where these rules don't cover something).
+# Draft tutor rules: chemical bonding and structure
+
+## Review status
+
+- Draft extracted from one concept lesson transcript. It captures the tutor’s recurring explanation order and answer wording, but requires review of several scientific claims and scope statements flagged inline. (data/transcripts/raw/bonding_01_concept)
+- The recurring teaching sequence is: identify the material type, state its structure, describe its bonding, then link the bonding to physical properties. (data/transcripts/raw/bonding_01_concept)
 
 ## Student-request types and recognition cues
 
@@ -31,8 +34,6 @@ consulted only where these rules don't cover something).
 
 ## Wording to avoid or qualify
 
-- The sea of delocalised electrons means that each metal cation has electrons to balance it, to make it an atom.  
-
 - **Do not write only “ionic bonds.”** Spell the idea out as “strong electrostatic forces of attraction between cations and anions. Be specific about the cation and anion's identity in the context of the question” (data/transcripts/raw/bonding_01_concept)
 - **Do not write only “metallic bonds.”** Spell the idea out as “strong electrostatic forces of attraction between the metal cations and the sea of delocalized electrons.” (data/transcripts/raw/bonding_01_concept)
 - **Do not use weak intermolecular forces to explain diamond.** The tutor states that giant covalent structures are “one big molecule,” so the intended explanation is strong covalent bonds rather than intermolecular forces. (data/transcripts/raw/bonding_01_concept)
@@ -40,9 +41,9 @@ consulted only where these rules don't cover something).
 - **Qualify material categories.** The tutor treats ionic compounds and covalent compounds as compounds, while metals are elements; diamond and graphite are exceptions because they are forms of elemental carbon. (data/transcripts/raw/bonding_01_concept)
 - **Graphite bonding:** describe graphite as having strong covalent bonds between carbon atoms in each layer and weak forces between the layers. (data/transcripts/raw/bonding_01_concept)
 
-## Topic map and reusable explanations
 
-- Metals conduct electricity because the sea of delocalised electrons acts as charge carriers.  
+
+## Topic map and reusable explanations
 
 - **Material types:** introduce three types of materials: ionic compounds, covalent compounds, and metals. (data/transcripts/raw/bonding_01_concept)
 - **Physical properties covered:** melting/boiling point, electrical conductivity, and hardness for selected materials such as graphite and metals. (data/transcripts/raw/bonding_01_concept)
@@ -82,6 +83,7 @@ consulted only where these rules don't cover something).
 
  **Metals:** metals are elements found in several regions of the periodic table; the examples and trends taught here focus on Group 1 and transition metals. (data/transcripts/raw/bonding_01_concept, tutor-edited)
 
+
 ## Analogies and examples to reuse
 
 - **Graphite and metals:** reuse “layers can easily slide past each other” to connect graphite’s softness with metal malleability and ductility. (data/transcripts/raw/bonding_01_concept)
@@ -92,6 +94,7 @@ consulted only where these rules don't cover something).
 - **Carbon allotropes:** compare diamond and graphite as substances made of carbon but having different structures, bonds, and therefore different properties. (data/transcripts/raw/bonding_01_concept)
 
 - **Carbon allotropes:** diamond and graphite are different forms of elemental carbon; their different arrangements and bonding give them different properties. (data/transcripts/raw/bonding_01_concept, tutor-edited)
+
 
 ## Misconceptions to pre-empt
 
@@ -105,8 +108,6 @@ consulted only where these rules don't cover something).
 
 ## Syllabus boundaries
 
-- For this topic, describe metals as generally having high boiling/melting points; detailed Group 1 exceptions belong to Patterns in the Periodic Table."
-
 - **Topic scope:** chemical bonding and structure covers types of compounds/materials, their structures, their bonds, and their physical properties. (data/transcripts/raw/bonding_01_concept)
 - **Covalent structures in scope:** simple molecular structures and giant covalent structures. (data/transcripts/raw/bonding_01_concept)
 - **Named giant covalent structures in scope:** diamond, graphite, and silicon dioxide. (data/transcripts/raw/bonding_01_concept)
@@ -117,4 +118,8 @@ consulted only where these rules don't cover something).
 - **Metal categories:** Group 1 metals are generally soft and have relatively low BPMP, while Transition metals are harder and have high BPMP. (data/transcripts/raw/bonding_01_concept)
 
 
-- This is O Level Pure Chemistry Syllabus
+- This is O Level Pure Chemistry Syllabus. (data/transcripts/raw/bonding_01_concept)
+
+## Source coverage
+
+- **data/transcripts/raw/bonding_01_concept:** Establishes the tutor’s main explanation sequence of structure, bonding, then physical properties. Covers ionic compounds, simple molecular substances, giant covalent structures, and metals; emphasises exact bonding definitions, charge-carrier explanations, high/low BPMP explanations, graphite layers, diamond hardness, and metal malleability/ductility. Also provides examples, including carbon dioxide, sulphur dioxide, nitrogen, diamond, graphite, and silicon dioxide, and identifies several areas requiring scientific or syllabus-scope review.
