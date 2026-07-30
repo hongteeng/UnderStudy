@@ -2,6 +2,7 @@
 
 import argparse
 import csv
+import re
 from pathlib import Path
 
 from answer import generate_understudy_answer
@@ -54,13 +55,22 @@ def parse_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def natural_sort_key(path: Path) -> tuple:
+    """Sort filenames like q2, q10 in numeric order (2, 10) instead of
+    lexicographic order (10, 2), while still sorting sensibly if a filename
+    has no leading number at all."""
+    match = re.search(r"\d+", path.stem)
+    number = int(match.group()) if match else float("inf")
+    return (number, path.stem)
+
+
 def load_questions(question_directory: Path) -> list[tuple[str, str]]:
     if not question_directory.is_dir():
         raise FileNotFoundError(
             f"Question directory does not exist: {question_directory}"
         )
 
-    question_files = sorted(question_directory.glob("*.md"))
+    question_files = sorted(question_directory.glob("*.md"), key=natural_sort_key)
     if not question_files:
         raise FileNotFoundError(
             f"No Markdown question files found in: {question_directory}"
