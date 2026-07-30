@@ -17,7 +17,6 @@ from openai import (
 
 PROJECT_ROOT = Path(__file__).parent
 RAW_TRANSCRIPTS_DIR = PROJECT_ROOT / "data" / "transcripts" / "raw"
-REVIEWED_TRANSCRIPTS_DIR = PROJECT_ROOT / "data" / "transcripts" / "reviewed"
 PROMPT_PATH = PROJECT_ROOT / "prompts" / "extract_rules_prompt.md"
 RULE_DRAFTS_DIR = PROJECT_ROOT / "data" / "rule_drafts"
 
@@ -39,14 +38,8 @@ def parse_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def select_transcript_directory() -> Path:
-    if REVIEWED_TRANSCRIPTS_DIR.is_dir() and any(REVIEWED_TRANSCRIPTS_DIR.iterdir()):
-        return REVIEWED_TRANSCRIPTS_DIR
-    return RAW_TRANSCRIPTS_DIR
-
-
 def load_transcripts() -> tuple[str, list[str]]:
-    transcript_directory = select_transcript_directory()
+    transcript_directory = RAW_TRANSCRIPTS_DIR
     if not transcript_directory.is_dir():
         raise FileNotFoundError(
             "No transcript directory found. Add text transcripts to "
@@ -118,7 +111,7 @@ def main() -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(draft + "\n", encoding="utf-8")
     print(f"Tutor-reviewable rules draft written to {output_path}")
-    print("Review it, then copy approved content into data/rules.md.")
+    print(f"Review it with: python review_rules.py {output_path}")
 
 
 if __name__ == "__main__":

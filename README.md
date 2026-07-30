@@ -87,8 +87,7 @@ materials used by students:
 data/
   recordings/incoming/              # newly uploaded lesson audio
   recordings/processed/             # audio successfully transcribed
-  transcripts/raw/                  # unedited transcription output
-  transcripts/reviewed/             # tutor-approved transcripts
+  transcripts/raw/                  # transcription output; the only transcript source extract_rules.py reads
   rule_drafts/                      # AI-generated draft rules, named per transcript; never used directly
   rules.md                          # final tutor-approved teaching rules and worked Q&A examples
 ```
@@ -205,15 +204,14 @@ the background worker with `python install_lesson_automation.py --uninstall`.
 ### Hong Ting's manual transcript-to-rules operation
 
 To run Hong Ting's original extractor manually, create one combined draft from
-all available reviewed transcripts (or all raw transcripts when no reviewed
-files exist):
+all available raw transcripts:
 
 ```bash
 python extract_rules.py
 ```
 
-The script uses reviewed transcripts when any are available; otherwise it uses
-the raw transcripts. It writes `data/rule_drafts/<transcript_name>_rules_draft.md`,
+The script reads every transcript in `data/transcripts/raw/`. It writes
+`data/rule_drafts/<transcript_name>_rules_draft.md`,
 named after the source transcript(s), including a `## Build Examples` section
 for any complete question-and-answer exchanges found in the source. The tutor
 must review and edit this draft (`review_rules.py` or by hand) before applying
