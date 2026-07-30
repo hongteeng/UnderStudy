@@ -34,10 +34,28 @@ SECTION_ORDER = [
     "Analogies and examples to reuse",
     "Misconceptions to pre-empt",
     "Syllabus boundaries",
+    "Build Examples",
 ]
 
 # Draft-only sections that must never be copied into rules.md.
 META_SECTIONS = {"Review status", "Needs tutor decision", "Review summary", "Source coverage"}
+
+# Sections whose items are multi-paragraph and must be split on their own
+# "### " subheadings instead of on blank lines -- a single Build Example
+# routinely contains several paragraphs (question, talk-through, final
+# answer) that belong together as one block.
+HEADING_DELIMITED_SECTIONS = {"Build Examples"}
+
+
+def split_blocks(title: str, body: str) -> "list[str]":
+    """Split a section body into its individual rule/example blocks."""
+    if not body.strip():
+        return []
+    if title in HEADING_DELIMITED_SECTIONS:
+        blocks = re.split(r"\n(?=###\s)", body.strip())
+    else:
+        blocks = re.split(r"\n\s*\n", body)
+    return [block.strip() for block in blocks if block.strip()]
 
 # If any of these strings are still present, the draft has not been fully
 # reviewed and this script refuses to touch rules.md.
@@ -100,9 +118,8 @@ def find_untagged_blocks(sections: "dict[str, str]") -> "list[tuple[str, str]]":
     for title, body in sections.items():
         if title in META_SECTIONS or not body.strip():
             continue
-        for block in re.split(r"\n\s*\n", body):
-            block = block.strip()
-            if block and not re.search(r"\([^()]*\)\s*$", block):
+        for block in split_blocks(title, body):
+            if not re.search(r"\([^()]*\)\s*$", block):
                 untagged.append((title, block))
     return untagged
 
@@ -155,13 +172,12 @@ def source_key_from_draft(draft_path: Path) -> str:
     return stem[: -len(suffix)] if stem.endswith(suffix) else stem
 
 
-def remove_blocks_for_source(body: str, source_key: str) -> str:
-    """Drop existing bullet blocks tagged with this source, so re-applying
-    an updated draft replaces old content instead of duplicating it."""
+def remove_blocks_for_source(title: str, body: str, source_key: str) -> str:
+    """Drop existing blocks tagged with this source, so re-applying an
+    updated draft replaces old content instead of duplicating it."""
     if not body.strip():
         return body
-    blocks = re.split(r"\n\s*\n", body)
-    kept = [block for block in blocks if source_key not in block]
+    kept = [block for block in split_blocks(title, body) if source_key not in block]
     return "\n\n".join(kept).strip("\n")
 
 
@@ -174,7 +190,7 @@ def merge(existing_text: str, draft_text: str, source_key: str) -> str:
 
     merged_sections = dict(existing_sections)
     for title, draft_body in draft_sections.items():
-        current_body = remove_blocks_for_source(merged_sections.get(title, ""), source_key)
+        current_body = remove_blocks_for_source(title, merged_sections.get(title, ""), source_key)
         new_body = draft_body.strip("\n")
         if not new_body:
             merged_sections[title] = current_body

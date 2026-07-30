@@ -203,3 +203,63 @@ consulted only where these rules don't cover something).
 - **Included scope:** oxidation-state rules, oxidation-state explanations of redox, oxidizing-agent questions, and electron, hydrogen, and oxygen transfer. (data/transcripts/raw/redox.md)
 - **Later-topic connection:** Electrochemistry is mentioned as a harder topic that depends on redox understanding, but it is not taught in this source. (data/transcripts/raw/redox.md)
 - **Not supplied in the source:** the full list of oxidation-state rules, calculation methods, reduction answer wording, the complete explanation of oxidizing agents, the expansion of “OIL RIG,” and worked examples of hydrogen or oxygen transfer. (data/transcripts/raw/redox.md)
+
+## Build Examples
+
+### Example: Why graphite is soft but has high BPMP
+
+**Question:** Why is graphite soft but have high bpmp?
+
+**Answer:**
+Okay, that's a good question. Usually, if you have high BPMP, that means you have very strong bonds. That's why you have a lot of energy required to overcome them. Strong bonds also usually mean you will be very hard, right? Think of diamond, with high BPMP, and therefore you are also very hard. Now, that is because diamond only has one type of bond: covalent bonds. Every time you try to melt or boil it, you are overcoming the strong covalent bonds. When you try to break it, when you apply a force to break diamond, you are also trying to overcome the strong covalent bonds. Therefore, both are very difficult.
+
+Now, for graphite, there are two types of bonds, not one. Graphite has weak IMF between layers and strong covalent bonds between carbon atoms. When you try to melt or boil graphite, you are trying to overcome the strong covalent bonds between each carbon atom. When you try to break it, the force is applied to the layers. If layers are held by weak IMF, they can slide past each other very easily. That's what makes graphite very soft, brittle, and also have a lubricating property.
+
+Answer to write: Graphite has a high melting and boiling point because a lot of energy is required to overcome the strong covalent bonds between carbon atoms. Graphite is soft because there are only weak intermolecular forces of attraction between the layers, so the layers of carbon atoms can easily slide past each other.
+
+(data/build_examples/01.md)
+
+### Example: Comparing the properties of zinc and carbon dioxide
+
+**Question:** Exam Qn: Compare the differences in properties between zinc and carbon dioxide
+
+**Answer:**
+If you look at this question, every time you see the word "compare," you know that you need to talk about both zinc and carbon dioxide. When you talk about properties, there are two types of properties: chemical properties and physical properties.
+
+Chemical properties refer to the type of reactions that substances undergo. What determines the type of reactions they undergo? The number of valence electrons. If I belong to the same group, I have the same number of valence electrons, therefore I will undergo the same chemical reactions. That makes sense.
+
+The other type of property is a physical property. A physical property is all about the topic of bonding and structure. In this question, they didn't specify whether it is a chemical property or a physical property, but we choose to answer physical property because that is the most straightforward one. Do we really know about the chemical properties of zinc and carbon dioxide? Sure! Zinc is a metal, and carbon dioxide is a gas, so one reacts with acid while the other doesn't. The most straightforward and easiest one will be to answer the physical property.
+
+Let's go through how to answer the physical property for zinc and carbon dioxide. In the topic of bonding and structure, we learn that the first step is always to tell me the structure. If you want to talk about physical property, you must first talk about the structure. Zinc has a giant metallic lattice structure, whereas carbon dioxide has a simple molecular structure.
+
+So far, so good. What's next? 1. Determine the structure. 2. Tell me the bonding and link it to the physical property. I would say zinc has a high boiling and melting point, while carbon dioxide has a low boiling and melting point. A lot of energy is required to overcome the strong electrostatic forces of attraction between the zinc cations and a sea of delocalised electrons, whereas very little energy is required to overcome the weak intermolecular forces of attraction in carbon dioxide. That's my answer. I have successfully compared the difference between BPMP, between zinc and carbon dioxide.
+
+Answer to write: Zinc has a giant metallic lattice structure, so it has a high melting and boiling point because a lot of energy is required to overcome the strong electrostatic forces of attraction between the metal cations and the sea of delocalised electrons. Carbon dioxide has a simple molecular structure, so it has a low melting and boiling point because very little energy is required to overcome the weak intermolecular forces of attraction between molecules.
+
+(data/build_examples/02.md)
+
+### Example: Why "giant covalent structure," not "giant molecular structure"
+
+**Question:** Is it wrong to say "giant molecular structure"? Why is it that "simple molecular structure" is called "simple molecular structure", while "giant" is "giant covalent structure" and not "giant molecular structure"?
+
+**Answer:**
+Diamond, graphite, SiO₂ — these aren't molecules, okay? They're just one big structure. So calling it "giant molecular structure" doesn't quite work; it should be "giant covalent structure."
+
+The real difference is discreteness. A simple molecule like CO₂ is discrete — you can count it, and no matter how many CO₂ molecules you have, each one is still just 3 atoms. Fixed size, every time.
+
+A giant covalent structure doesn't work like that. There's no "one unit" you can point to and say "that's one diamond." It's just atoms bonded to atoms bonded to atoms, on and on, as one continuous network — however big your sample is. That's why it's not discrete, and why "molecule" is the wrong word for it.
+
+So: not wrong to think they're both "big" — but the thing that actually separates simple molecular from giant covalent isn't size, it's whether you can isolate one countable, fixed-composition unit. CO₂ you can. Diamond you can't.
+
+(data/build_examples/03.md)
+
+### Example: How to know if a substance is solid or liquid at room temperature
+
+**Question:** How do you know that lead is a solid at room temperature while water is a liquid at room temperature?
+
+**Answer:**
+Okay, that's a good question. First, we need to understand that your state at room temperature solely depends on your boiling and melting point. If you recall, if we want to understand boiling and melting point, we always link to structure and bonding. There we go. Now we know that we are at the topic of structure and bonding, right? Same thing. Let's talk about the structure of lead and compare it to the structure of water. Lead has a giant metallic lattice structure, while water has a simple molecular structure. Therefore, the next step is to talk about the physical property and link it to the bonding. We know the physical property in this case we are talking about is boiling and melting point.
+
+We say lead has a very strong molecular structure. A lot of energy is required to overcome the strong electrostatic forces of attraction between the lead cations and the sea of delocalized electrons. Therefore, lead has a high boiling and melting point and is a solid at room temperature. Whereas water, very little energy is required to overcome its weak intermolecular forces of attraction. Therefore, water has a low boiling and melting point and is liquid at room temperature. And that's it. That's our answer.
+
+(data/build_examples/04.md)

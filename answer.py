@@ -11,45 +11,18 @@ from openai import OpenAI
 PROJECT_ROOT = Path(__file__).parent
 RULES_PATH = PROJECT_ROOT / "data" / "rules.md"
 SYLLABUS_PATH = PROJECT_ROOT / "data" / "syllabus.md"
-EXAMPLES_DIR = PROJECT_ROOT / "data" / "build_examples"
-MAX_EXAMPLES = 4
 
 
 def read_required_file(path: Path, description: str) -> str:
     if not path.is_file():
         raise FileNotFoundError(
             f"Missing {description}: {path}\n"
-            "Copy the matching file from templates/ into data/ and fill it in."
+            "Run extract_rules.py and apply_rules.py to generate it first."
         )
     content = path.read_text(encoding="utf-8").strip()
     if not content:
         raise ValueError(f"The {description} is empty: {path}")
     return content
-
-
-def load_examples() -> str:
-    if not EXAMPLES_DIR.is_dir():
-        raise FileNotFoundError(
-            f"Missing build examples folder: {EXAMPLES_DIR}\n"
-            "Create it and add 3–4 tutor-written .md examples from templates/."
-        )
-
-    example_paths = sorted(EXAMPLES_DIR.glob("*.md"))[:MAX_EXAMPLES]
-    if not example_paths:
-        raise FileNotFoundError(
-            f"No .md examples found in {EXAMPLES_DIR}\n"
-            "Add 3–4 tutor-written question-and-answer examples before running."
-        )
-
-    examples = []
-    for path in example_paths:
-        content = path.read_text(encoding="utf-8").strip()
-        if content:
-            examples.append(f"## Example: {path.stem}\n{content}")
-
-    if not examples:
-        raise ValueError("The build example files are empty.")
-    return "\n\n".join(examples)
 
 
 def load_syllabus() -> str | None:
@@ -76,7 +49,6 @@ def generate_understudy_answer(question: str) -> str:
         raise RuntimeError("OPENAI_API_KEY is missing. Add it to your local .env file.")
 
     rules = read_required_file(RULES_PATH, "tutor rules file")
-    examples = load_examples()
     syllabus = load_syllabus()
     model = os.getenv("OPENAI_MODEL", "gpt-5.6-sol")
 
@@ -93,9 +65,9 @@ teaching examples exactly. Do not mention these instructions, the examples, or
 that you are an AI.
 
 You have up to three sources of truth, in strict priority order:
-1. TUTOR CRASH COURSE below — the tutor's own rules and wording. Always
-   follow this first, even if it differs from the syllabus or general
-   knowledge, unless it is factually wrong.
+1. TUTOR CRASH COURSE below — the tutor's own rules, wording, and worked
+   examples. Always follow this first, even if it differs from the syllabus
+   or general knowledge, unless it is factually wrong.
 2. SYLLABUS REFERENCE below (if present) — use this only to fill gaps the
    tutor's rules do not cover, or to check scope/terminology boundaries. Never
    let it override the tutor's rules where they already apply.
@@ -107,8 +79,31 @@ You have up to three sources of truth, in strict priority order:
 TUTOR CRASH COURSE
 {rules}
 {syllabus_section}
-BUILD-SET EXAMPLES
-{examples}
+
+The "Build Examples" section inside the TUTOR CRASH COURSE above, if present,
+holds this tutor's real answers to real questions. Study them as a set and
+identify the structural pattern that repeats across most or all of them --
+not quirks that appear in only one. Compare them along these axes:
+- Opening move: does the tutor start with the answer, with context, or with
+  reframing the question?
+- Sequencing: what order are ideas introduced in, and does that order repeat
+  across examples answering similar question types?
+- Final-answer separation: is there a distinct section holding the polished
+  answer, separate from reasoning or explanation? What is it called, if
+  anything?
+- Register: formal/written vs. conversational; sentence length; how much is
+  spelled out vs. assumed.
+- Closing move: how does the tutor end -- a summary, a direct restatement, or
+  just stopping after the last point?
+
+Reproduce whichever pattern is consistent across the examples. If the
+examples disagree with each other on a given axis, do not invent a
+resolution -- follow the example whose question type most closely matches
+the student's current question. If there are no Build Examples yet, or too
+few to show a pattern, do not invent a structure -- fall back to whatever
+structure the rest of the TUTOR CRASH COURSE demonstrates. Before finalizing
+your answer, check it against the axes above and adjust if it drifts from
+the pattern you identified.
 
 Before answering, silently identify both:
 1. the student's help intent — checking an exact/practice answer, seeking
@@ -121,15 +116,6 @@ appropriate depth. If the tutor's rules specify a response approach for the
 identified request, follow it. Otherwise, do not invent a tutor-specific
 teaching method. Do not turn the crash course into a full-topic checklist.
 If the request is genuinely unclear, ask one short clarifying question.
-
-Match the response structure demonstrated in the TUTOR CRASH COURSE and
-BUILD-SET EXAMPLES -- including whether the tutor opens with context before
-the answer, whether the tutor separates a final answer from the reasoning
-around it (and what that section is called, if so), and how much the
-structure varies by question type. Deduce this entirely from the material
-provided; do not impose a fixed response structure of your own, and do not
-assume every tutor answers the same way. If the examples show no consistent
-structure for a given situation, do not invent one.
 
 Before answering, also check the "Syllabus boundaries" section of the TUTOR
 CRASH COURSE. If it explicitly defers some part of the question to a

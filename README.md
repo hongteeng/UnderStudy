@@ -37,10 +37,7 @@ answers in that tutor's method when the tutor is unavailable.
    cannot accidentally publish an un-reviewed claim. Re-running it after
    editing the same draft again replaces that source's content in
    `rules.md` rather than duplicating it.
-6. Copy `templates/build_example_template.md` to `data/build_examples/01.md`
-   through `04.md`, then replace the template content with 3–4 real,
-   tutor-written Q&As.
-7. Run an answer:
+6. Run an answer:
 
    ```bash
    python answer.py "What is the difference between ionic and covalent bonding?"
@@ -93,11 +90,17 @@ data/
   transcripts/raw/                  # unedited transcription output
   transcripts/reviewed/             # tutor-approved transcripts
   rule_drafts/                      # AI-generated draft rules, named per transcript; never used directly
-  extracted_examples/drafts/        # AI-suggested teaching examples
-  extracted_examples/approved/      # tutor-approved candidates
-  rules.md                          # final tutor-approved teaching rules
-  build_examples/                   # final tutor-approved Q&A examples
+  rules.md                          # final tutor-approved teaching rules and worked Q&A examples
 ```
+
+A recording's transcript can include the tutor working through real student
+questions, not just explaining concepts. `extract_rules.py` pulls any complete
+question-and-answer exchanges it finds into a `## Build Examples` section
+inside the same draft, right alongside the rest of the rules. Review it the
+same way as everything else, in the same draft file, through
+`review_rules.py` and `apply_rules.py`. There is no separate build-examples
+folder or step -- once `rules.md` is applied, the worked examples live inside
+it and `answer.py` reads them from there.
 
 The combined workflow keeps the two parts separate:
 
@@ -211,9 +214,11 @@ python extract_rules.py
 
 The script uses reviewed transcripts when any are available; otherwise it uses
 the raw transcripts. It writes `data/rule_drafts/<transcript_name>_rules_draft.md`,
-named after the source transcript(s). The tutor must review and edit this
-draft before copying the approved content into `data/rules.md`.
-Only `data/rules.md` and `data/build_examples/` are used for student answers.
+named after the source transcript(s), including a `## Build Examples` section
+for any complete question-and-answer exchanges found in the source. The tutor
+must review and edit this draft (`review_rules.py` or by hand) before applying
+it into `data/rules.md` (`apply_rules.py`). Only `data/rules.md` is used for
+student answers -- rules and worked examples together, in one file.
 
 The automation maintains its own machine-readable recording manifest. The CSV
 [recording manifest template](templates/recording_manifest_template.csv) remains
