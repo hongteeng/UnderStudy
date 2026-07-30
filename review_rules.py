@@ -21,6 +21,15 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Literal
 
+try:
+    import readline  # noqa: F401 -- importing it enables arrow-key/history
+    # editing in input() prompts below. Without this import, Python's input()
+    # has no line-editing support and arrow keys print raw escape codes
+    # (e.g. "^[[D") instead of moving the cursor. Not available on Windows,
+    # where input() falls back to its more limited default behavior.
+except ImportError:
+    pass
+
 from apply_rules import (
     PROJECT_ROOT,
     RULE_DRAFTS_DIR,

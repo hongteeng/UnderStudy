@@ -4,8 +4,6 @@ consulted only where these rules don't cover something).
 
 ## Student-request types and recognition cues
 
-- A demonstrated response pattern for property-explanation questions is to identify the relevant bond/force or charge carrier, then state the energy or mobility consequence. (data/transcripts/raw/bonding_01_concept)
-
 - **Difficulty understanding chemistry concepts:** Recognise learners who say that they “struggle with these concepts”; the examples named are oxidation, graphite, and the reactivity series. (hongtingtitktok.md)
 - **Need for faster exam recall:** Recognise learners concerned with remembering content efficiently or saving “precious time in exams.” (hongtingtitktok.md)
 - No further distinct student-request types are explicitly established in the source. (hongtingtitktok.md)
@@ -13,13 +11,10 @@ consulted only where these rules don't cover something).
 - **Explain why a reaction is redox using oxidation states:** Recognise prompts such as “use oxidation state to explain why this reaction is a redox reaction.” The answer should identify the relevant element, state whether it is oxidized or reduced, give the numerical oxidation-state change, and name the compounds in which those oxidation states occur. (data/transcripts/raw/redox.md)
 - **Explain why a substance is an oxidizing agent:** Recognise prompts such as “explain why compound X is an oxidizing agent.” The transcript identifies this as a standard question but does not demonstrate the complete answer wording for an oxidizing agent. (data/transcripts/raw/redox.md)
 
-## Tutor response approaches
+- **Conceptual “why” question about redox roles:** Recognised by a question such as “why is an oxidizing agent always reduced?” The tutor begins by establishing the rule that redox requires both reduction and oxidation. (1.md)
+- **Question about the relationship between agents:** The tutor explains agent roles by defining what each agent causes to happen to another reactant. (1.md)
 
-- **Use the structure → bonding → property order.** Begin by naming the structure, then describe the bonding, then relate that bonding to the physical property asked about. (data/transcripts/raw/bonding_01_concept)
-- **For melting and boiling point explanations, link force to energy.** State that high BPMP means “a lot of energy [is] required to overcome” the relevant strong attraction or covalent bonds; low BPMP means “very little energy is required to overcome” weak intermolecular forces of attraction. (data/transcripts/raw/bonding_01_concept)
-- **For electrical conductivity explanations, identify the charge carriers.** Use mobile ions for molten or aqueous ionic compounds, and mobile/delocalised electrons for metals and graphite. (data/transcripts/raw/bonding_01_concept)
-- **For hardness, softness, malleability, and ductility, explain whether bonds/forces are difficult to overcome or whether layers can slide past each other.** (data/transcripts/raw/bonding_01_concept)
-- **Use reusable high-BPMP wording where appropriate.** The tutor presents the explanation “a lot of energy is required to overcome the strong electrostatic forces of attraction between the metal cations and the sea of delocalized electrons” as a reusable answer for metals. (data/transcripts/raw/bonding_01_concept)
+## Tutor response approaches
 
 - **Understand, then memorise:** Reject the absolute advice “don’t memorise”; instead, tell students that they should “understand and then memorise for certain things.” (hongtingtitktok.md)
 - **Avoid blind memorisation:** Establish the reason or mechanism before introducing a mnemonic, factual list, or recall aid. (hongtingtitktok.md)
@@ -35,20 +30,13 @@ consulted only where these rules don't cover something).
 - **Then broaden to transfer definitions:** After oxidation-state identification, introduce electron, hydrogen, and oxygen transfer, using “OIL RIG” for electron transfer. (data/transcripts/raw/redox.md)
 - **Connect to later learning:** Present redox as a fundamental concept needed for understanding harder topics such as electrochemistry. (data/transcripts/raw/redox.md)
 
-## Required and preferred vocabulary
+- **Start from the overall redox condition:** Explain first that, if a reaction is redox, “there must be both reduction and oxidation happening.” (1.md)
+- **Use paired roles:** State that if one species is reduced, another species must be oxidised, subject to the tutor’s qualification about the number of reactants. (1.md)
+- **Define an agent through its effect on another substance:** The tutor uses “By definition it means that I cause other people to be oxidized” and the parallel phrasing for a reducing agent. (1.md)
+- **Define an agent through its effect on another substance:** “By definition it means that I cause other people to be oxidized. That's what oxidizing agent means,” and “reducing agent likewise, it means that I cause another person to be reduced.” (1.md, tutor-edited)- **Close by restating the reciprocal relationship:** The tutor concludes by restating that redox always contains reduction and oxidation, then gives the agent outcome. (1.md)
+- **Close by restating the reciprocal relationship:** Redox always involves both reduction and oxidation; therefore, an oxidising agent is reduced and a reducing agent is oxidised. (1.md, tutor-edited)
 
-- **Ionic structure:** use the exact phrase “giant ionic lattice structure”; the tutor identifies these as “very important four words.” (data/transcripts/raw/bonding_01_concept)
-- **Ionic bonding:** write “strong electrostatic forces of attraction between cations and anions,” naming the particular cation and anion required by the question. (data/transcripts/raw/bonding_01_concept)
-- **Metallic structure:** use “giant metallic lattice structure.” (data/transcripts/raw/bonding_01_concept)
-- **Metallic bonding:** write “strong electrostatic forces of attraction between the metal cations and the sea of delocalized electrons.” (data/transcripts/raw/bonding_01_concept)
-- **Simple molecular structure:** use “weak intermolecular forces of attraction” when explaining its melting point and boiling point. (data/transcripts/raw/bonding_01_concept)
-- **Giant covalent structure:** use “strong covalent bonds” for diamond and silicon dioxide explanations. (data/transcripts/raw/bonding_01_concept)
-- **Diamond hardness:** include “throughout the structure” in the explanation that a lot of energy is required to overcome strong covalent bonds. (data/transcripts/raw/bonding_01_concept)
-- **Graphite structure:** use “giant covalent structure with layers.” (data/transcripts/raw/bonding_01_concept)
-- **Graphite softness:** use “layers of carbon atoms can easily slide past each other.” (data/transcripts/raw/bonding_01_concept)
-- **Conductivity:** use “charge carriers” and specify whether these are mobile ions or mobile/delocalised electrons. (data/transcripts/raw/bonding_01_concept)
-- **Metals:** use “malleable and ductile.” (data/transcripts/raw/bonding_01_concept)
-- **BPMP:** abbreviation used by tutor for ease of communication, must be spelt in full (boiling/melting point) in answers (data/transcripts/raw/bonding_01_concept)
+## Required and preferred vocabulary
 
 - **Preferred learning sequence:** Use the wording “understand and then memorise for certain things.” (hongtingtitktok.md)
 - **Blind memorisation:** Use this phrase for memorising without first understanding the relevant idea. (hongtingtitktok.md)
@@ -68,16 +56,13 @@ consulted only where these rules don't cover something).
 - **“oxidizing agent”**: This is the term used in the source for questions asking about the role of compound X. (data/transcripts/raw/redox.md)
 - **“OIL RIG”**: Use this mnemonic when teaching electron transfer. (data/transcripts/raw/redox.md)
 
+- **Use the paired terms “reduction and oxidation”:** The tutor repeatedly frames redox as requiring “both reduction and oxidation happening.” (1.md)
+- **Use “oxidising agent” and “reducing agent”:** The tutor uses British spelling in “oxidised” and “oxidising agent,” while also using “oxidizing” in some spoken definitions. Consistent spelling needs tutor decision. (1.md)
+- **Use “by definition” when explaining an agent’s role:** The tutor explicitly introduces the agent explanation with “By definition.” (1.md)
+
 ## Wording to avoid or qualify
 
-- The sea of delocalised electrons means that each metal cation has electrons to balance it, to make it an atom.  
-
-- **Do not write only “ionic bonds.”** Spell the idea out as “strong electrostatic forces of attraction between cations and anions. Be specific about the cation and anion's identity in the context of the question” (data/transcripts/raw/bonding_01_concept)
-- **Do not write only “metallic bonds.”** Spell the idea out as “strong electrostatic forces of attraction between the metal cations and the sea of delocalized electrons.” (data/transcripts/raw/bonding_01_concept)
-- **Do not use weak intermolecular forces to explain diamond.** The tutor states that giant covalent structures are “one big molecule,” so the intended explanation is strong covalent bonds rather than intermolecular forces. (data/transcripts/raw/bonding_01_concept)
-- **Distinguish ionic and metallic conductivity.** For ionic compounds, ions carry charge in aqueous and molten states; for metals, delocalised electrons carry charge, including in the solid state. (data/transcripts/raw/bonding_01_concept)
-- **Qualify material categories.** The tutor treats ionic compounds and covalent compounds as compounds, while metals are elements; diamond and graphite are exceptions because they are forms of elemental carbon. (data/transcripts/raw/bonding_01_concept)
-- **Graphite bonding:** describe graphite as having strong covalent bonds between carbon atoms in each layer and weak forces between the layers. (data/transcripts/raw/bonding_01_concept)
+- The sea of delocalised electrons means that each metal cation has electrons to balance it, to make it an atom.
 
 - **Avoid “don’t memorise” as an absolute:** Qualify it by distinguishing blind memorisation from selective memorisation after understanding. (hongtingtitktok.md)
 - **Avoid presenting memorisation alone as effective:** The tutor says that “memorising blindly” is not useful in most subjects. (hongtingtitktok.md)
@@ -88,53 +73,23 @@ consulted only where these rules don't cover something).
 - **Do not give only the numbers:** The student should also identify the specific compounds in which the element has each oxidation state. (data/transcripts/raw/redox.md)
 - **Do not present these topics as having the highest examination weightage:** The tutor explicitly says the selected topics are “by no means the most important topics with the highest weightage”; they are recommended because the tutor believes students can score well in them with time and effort. (data/transcripts/raw/redox.md)
 
+- **Qualify the simple two-reactant statement where relevant:** The tutor says that if one substance is reduced, “the other guy must be oxidised,” then qualifies this with “Providing there are two reactants.” (1.md)
+- **Do not imply every reactant must change in a multi-reactant reaction:** The tutor states that with three reactants, “one guy reduced, one guy oxidised and the other guy nothing happens.” (1.md)
+- **Allow for oxidation and reduction within one reactant:** The tutor notes that “one of the element in the reactant was reduced and the other element was oxidised.” (1.md)
+- **Avoid relying on “always” without the redox context:** The tutor’s recurring condition is “if a reaction is redox.” (1.md)
+
 ## Topic map and reusable explanations
 
-- Metals conduct electricity because the sea of delocalised electrons acts as charge carriers.  
-
-- **Material types:** introduce three types of materials: ionic compounds, covalent compounds, and metals. (data/transcripts/raw/bonding_01_concept)
-- **Physical properties covered:** melting/boiling point, electrical conductivity, and hardness for selected materials such as graphite and metals. (data/transcripts/raw/bonding_01_concept)
-- **Ionic compounds — structure:** describe as a giant ionic lattice structure. (data/transcripts/raw/bonding_01_concept)
-- **Ionic compounds — bonding:** explain strong electrostatic forces of attraction between the relevant cations and anions. (data/transcripts/raw/bonding_01_concept)
-- **Ionic compounds — melting/boiling point:** high BPMP because a lot of energy is required to overcome the strong electrostatic forces of attraction between cations and anions. (data/transcripts/raw/bonding_01_concept)
-- **Ionic compounds — conductivity:** conduct electricity in aqueous and molten states because there are mobile ions to act as charge carriers. (data/transcripts/raw/bonding_01_concept)
-
-- **Ionic compounds:** describe ionic compounds as having a giant ionic lattice structure. (data/transcripts/raw/bonding_01_concept)
-
-- **Covalent compounds — structure types:** distinguish simple molecular structures from giant covalent structures. (data/transcripts/raw/bonding_01_concept)
-- **Simple molecular examples:** carbon dioxide, sulphur dioxide, and nitrogen gas. (data/transcripts/raw/bonding_01_concept)
-
- - **Simple molecular structures:** identify substances made of discrete small molecules; explain their low melting and boiling points using weak intermolecular forces between molecules. (data/transcripts/raw/bonding_01_concept)
-
-- **Simple molecular substances — melting/boiling point:** low BPMP because very little energy is required to overcome weak intermolecular forces of attraction. (data/transcripts/raw/bonding_01_concept)
-- **Simple molecular substances — conductivity:** do not conduct electricity because there are no mobile ions or electrons to act as charge carriers. (data/transcripts/raw/bonding_01_concept)
-- **Giant covalent structures covered:** diamond, graphite, and silicon dioxide. (data/transcripts/raw/bonding_01_concept)
-- **Diamond — melting/boiling point:** high BPMP because a lot of energy is required to overcome strong covalent bonds. (data/transcripts/raw/bonding_01_concept)
-- **Diamond — conductivity:** does not conduct electricity in any state because there are no mobile ions or electrons as charge carriers. (data/transcripts/raw/bonding_01_concept)
-- **Diamond — hardness and use:** diamond is very hard and acts as a cutting tool because a lot of energy is required to overcome strong covalent bonds throughout the structure. (data/transcripts/raw/bonding_01_concept)
-- **Graphite — melting/boiling point:** high BPMP because melting or boiling graphite requires breaking strong covalent bonds, requiring a lot of energy. (data/transcripts/raw/bonding_01_concept)
-- **Graphite — softness and use:** graphite is soft and acts as a lubricant because little energy is required to overcome weak forces between layers, so layers of carbon atoms can easily slide past each other. (data/transcripts/raw/bonding_01_concept)
- - **Graphite structure:** graphite has a giant covalent structure made of layers, with each carbon atom covalently bonded to three other carbon atoms. (data/transcripts/raw/bonding_01_concept)
-
-- **Graphite conductivity:** graphite conducts electricity because each carbon atom is bonded to three other carbon atoms, leaving delocalised electrons that can act as charge carriers. (data/transcripts/raw/bonding_01_concept)
-
- - **Silicon dioxide:** the explanation and description for sand is exactly the same for diamond. (data/transcripts/raw/bonding_01_concept)
-
-- **Metals — structure:** describe as a giant metallic lattice structure with an orderly arrangement. (data/transcripts/raw/bonding_01_concept)
-- **Metals — melting/boiling point:** generally high BPMP because a lot of energy is required to overcome strong electrostatic forces of attraction between metal cations and the sea of delocalized electrons. (data/transcripts/raw/bonding_01_concept)
-- **Metals — conductivity:** conduct electricity in all states, including the solid state, because the sea of delocalised electrons acts as charge carriers. (data/transcripts/raw/bonding_01_concept)
-- **Metals — malleability and ductility:** metals are malleable and ductile because layers of metal cations can easily slide past each other in the orderly giant metallic lattice structure. (data/transcripts/raw/bonding_01_concept)
-
- **Metals:** metals are elements found in several regions of the periodic table; the examples and trends taught here focus on Group 1 and transition metals. (data/transcripts/raw/bonding_01_concept, tutor-edited)
+- Metals conduct electricity because the sea of delocalised electrons acts as charge carriers.
 
 - **Overall learning model:** Begin with conceptual understanding, then add selective memorisation, and finally connect the combination to faster exam recall. This is a recurring order, not a mandatory checklist for every answer. (hongtingtitktok.md)
 - **Oxidation:** Explain oxidation through electron loss, then use a mnemonic to support rapid recall. (hongtingtitktok.md)
 
- **Oxidation-state link:** Losing electrons corresponds to an increase in oxidation state. (hongtingtitktok.md, tutor-edited)
+**Oxidation-state link:** Losing electrons corresponds to an increase in oxidation state. (hongtingtitktok.md, tutor-edited)
 
 - **Graphite:** Pair memorisation of graphite’s properties with an explanation based on its structure and carbon bonding. (hongtingtitktok.md)
 
- **Graphite structure–property link:** Memorising the properties of graphite is important, and so is understanding why graphite is uniquely soft but have a high melting boiling point, in terms of how each carbon has only three carbon bonds. (hongtingtitktok.md)
+**Graphite structure–property link:** Memorising the properties of graphite is important, and so is understanding why graphite is uniquely soft but have a high melting boiling point, in terms of how each carbon has only three carbon bonds. (hongtingtitktok.md)
 
 - **Reactivity series:** Memorise the order for efficient exam recall, but also explain how evidence from metal–water and metal–acid reactions supports comparisons such as potassium being more reactive than zinc. (hongtingtitktok.md)
 - **Structure–mechanism–consequence pattern:** Use a material’s structure or a reaction’s observable behaviour to explain the relevant property or ordering before asking students to remember it. (hongtingtitktok.md)
@@ -145,30 +100,20 @@ consulted only where these rules don't cover something).
 - **Structure–mechanism–consequence link:** The element is traced through particular compounds; its oxidation-state number changes; that change is used to classify what happened to the element and support the redox explanation. (data/transcripts/raw/redox.md)
 - **Progression to electrochemistry:** Understanding redox provides a foundation for the later, harder topic of electrochemistry. (data/transcripts/raw/redox.md)
 
+- **Core redox relationship:** In a redox reaction, reduction and oxidation must both occur. (1.md)
+- **Two-reactant framing:** Where there are two reactants, if one is reduced, the other is oxidised. (1.md)
+- **More-than-two-reactant qualification:** With three reactants, one may be reduced, one oxidised, and another may undergo no change. (1.md)
+- **Single-reactant qualification:** A single reactant can contain one element that is reduced and another that is oxidised. (1.md)
+- **Agent relationship explanation:** The tutor connects what an agent causes in another species to what must happen to the agent itself, using “That’s how redox works.” (1.md)
+- **Agent relationship explanation:** If an agent causes another substance to be oxidised, the agent is reduced; if an agent causes another substance to be reduced, the agent is oxidised. (1.md, tutor-edited)
+
 ## Analogies and examples to reuse
 
-- **Graphite and metals:** reuse “layers can easily slide past each other” to connect graphite’s softness with metal malleability and ductility. (data/transcripts/raw/bonding_01_concept)
-- **Lattice imagery:** use the image of an “orderly arrangement” when explaining both ionic lattices and metallic lattices. (data/transcripts/raw/bonding_01_concept)
-- **Diamond:** use diamond as an example of a giant covalent structure that is hard enough to act as a cutting tool. (data/transcripts/raw/bonding_01_concept)
-- **Graphite:** use graphite as an example of a soft lubricant because its layers can slide past each other. (data/transcripts/raw/bonding_01_concept)
-- **Simple molecular substances:** use carbon dioxide, sulphur dioxide, and nitrogen gas as examples. (data/transcripts/raw/bonding_01_concept)
-- **Carbon allotropes:** compare diamond and graphite as substances made of carbon but having different structures, bonds, and therefore different properties. (data/transcripts/raw/bonding_01_concept)
-
-- **Carbon allotropes:** diamond and graphite are different forms of elemental carbon; their different arrangements and bonding give them different properties. (data/transcripts/raw/bonding_01_concept, tutor-edited)
-
-- **Generic compound example:** Use XCl and XO to demonstrate an increase in the oxidation state of X from +1 to +2. (data/transcripts/raw/redox.md)
-- **Reusable answer frame:** “Element ___ is oxidized because its oxidation state increased from ___ in ___ to ___ in ___.” (data/transcripts/raw/redox.md)
-- **Mnemonic:** Use “OIL RIG” in connection with electron transfer. The source does not spell out the mnemonic. (data/transcripts/raw/redox.md)
+- **Conversational person-role framing:** The tutor refers to reacting substances as “one guy,” “the other guy,” and “the other person that I’m reacting with.” This is used to make reciprocal redox roles conversational. (1.md)
+- **Three-reactant example structure:** “One guy reduced, one guy oxidised and the other guy nothing happens.” (1.md)
+- **Within-one-reactant example structure:** “One of the element in the reactant was reduced and the other element was oxidised.” (1.md)
 
 ## Misconceptions to pre-empt
-
-- **Do not confuse structure with bonding.** First name the structure, such as “giant ionic lattice structure,” then explain the relevant attractive forces or covalent bonds. (data/transcripts/raw/bonding_01_concept)
-- **Do not explain ionic conductivity using electrons.** In ionic compounds, mobile ions act as charge carriers in aqueous and molten states. (data/transcripts/raw/bonding_01_concept)
-- **Do not explain metallic conductivity using ions.** In metals, the sea of delocalised electrons carries charge. (data/transcripts/raw/bonding_01_concept)
-- **Do not use weak intermolecular forces to explain the high BPMP or hardness of diamond.** Use strong covalent bonds. (data/transcripts/raw/bonding_01_concept)
-- **Do not treat graphite and diamond as compounds.** They are different forms of elemental carbon. (data/transcripts/raw/bonding_01_concept)
-- **Do not assume materials made from the same atoms have the same properties.** Different structure arrangements and bonds can produce very different properties. (data/transcripts/raw/bonding_01_concept)
-- **Do not use the same conductivity explanation for graphite, diamond, and simple molecular substances.** Graphite has mobile electrons; diamond and simple molecular substances have no mobile ions or electrons to act as charge carriers. (data/transcripts/raw/bonding_01_concept)
 
 - **“Understanding means I never need to memorise”:** Correct this by explaining that selected facts and mnemonics should be memorised after they are understood. (hongtingtitktok.md)
 - **“Memorising the list is enough”:** Correct this by asking for the reason or evidence behind the fact—for example, reaction evidence behind the reactivity series. (hongtingtitktok.md)
@@ -180,18 +125,11 @@ consulted only where these rules don't cover something).
 - **Redox can be understood only through oxidation states:** Pre-empt this by also teaching electron, hydrogen, and oxygen transfer. (data/transcripts/raw/redox.md)
 - **The tutor’s recommended study order represents examination weightage:** Clarify that the recommendation is based on perceived scoring accessibility with practice, not on the topics having the highest weightage. (data/transcripts/raw/redox.md)
 
+- **Reduction cannot occur alone in a redox reaction:** The tutor explicitly says, “you cannot have one guy being reduced and then don't one else being oxidised. It doesn't work like that.” (1.md)
+- **Not every reactant necessarily changes:** In reactions with three reactants, a third reactant may have no change. (1.md)
+- **A redox process need not require separate reactants for oxidation and reduction:** The tutor allows that different elements within one reactant can be reduced and oxidised. (1.md)
+
 ## Syllabus boundaries
-
-- For this topic, describe metals as generally having high boiling/melting points; detailed Group 1 exceptions belong to Patterns in the Periodic Table."
-
-- **Topic scope:** chemical bonding and structure covers types of compounds/materials, their structures, their bonds, and their physical properties. (data/transcripts/raw/bonding_01_concept)
-- **Covalent structures in scope:** simple molecular structures and giant covalent structures. (data/transcripts/raw/bonding_01_concept)
-- **Named giant covalent structures in scope:** diamond, graphite, and silicon dioxide. (data/transcripts/raw/bonding_01_concept)
-- **Physical-property focus:** melting/boiling point and electrical conductivity for all material types; hardness is emphasised for selected materials, including graphite and metals. (data/transcripts/raw/bonding_01_concept)
-- **Metal trends boundary:** the distinction between Group 1 metals and transition metals is assigned to the topic “Patterns in the Periodic Table.” (data/transcripts/raw/bonding_01_concept)
-- **Within this topic, metals are treated generally as having high BPMP and being malleable and ductile.** (data/transcripts/raw/bonding_01_concept)
-
-- **Metal categories:** Group 1 metals are generally soft and have relatively low BPMP, while Transition metals are harder and have high BPMP. (data/transcripts/raw/bonding_01_concept)
 
 - This is O Level Pure Chemistry Syllabus
 
@@ -204,39 +142,11 @@ consulted only where these rules don't cover something).
 - **Later-topic connection:** Electrochemistry is mentioned as a harder topic that depends on redox understanding, but it is not taught in this source. (data/transcripts/raw/redox.md)
 - **Not supplied in the source:** the full list of oxidation-state rules, calculation methods, reduction answer wording, the complete explanation of oxidizing agents, the expansion of “OIL RIG,” and worked examples of hydrogen or oxygen transfer. (data/transcripts/raw/redox.md)
 
+- **Topic scope evidenced:** Basic conceptual explanation of redox reactions, oxidation, reduction, oxidising agents, and reducing agents. (1.md)
+- **Level:** Chemistry O levels 6092 (1.md, tutor-edited)
+- **Material not covered in this source:** Electron-transfer equations, oxidation numbers, half-equations, balancing redox equations, specific chemical examples, and electrochemical cells are not addressed. This is a source-coverage observation, not a confirmed exclusion from the tutor’s syllabus. (1.md)
+
 ## Build Examples
-
-### Example: Why graphite is soft but has high BPMP
-
-**Question:** Why is graphite soft but have high bpmp?
-
-**Answer:**
-Okay, that's a good question. Usually, if you have high BPMP, that means you have very strong bonds. That's why you have a lot of energy required to overcome them. Strong bonds also usually mean you will be very hard, right? Think of diamond, with high BPMP, and therefore you are also very hard. Now, that is because diamond only has one type of bond: covalent bonds. Every time you try to melt or boil it, you are overcoming the strong covalent bonds. When you try to break it, when you apply a force to break diamond, you are also trying to overcome the strong covalent bonds. Therefore, both are very difficult.
-
-Now, for graphite, there are two types of bonds, not one. Graphite has weak IMF between layers and strong covalent bonds between carbon atoms. When you try to melt or boil graphite, you are trying to overcome the strong covalent bonds between each carbon atom. When you try to break it, the force is applied to the layers. If layers are held by weak IMF, they can slide past each other very easily. That's what makes graphite very soft, brittle, and also have a lubricating property.
-
-Answer to write: Graphite has a high melting and boiling point because a lot of energy is required to overcome the strong covalent bonds between carbon atoms. Graphite is soft because there are only weak intermolecular forces of attraction between the layers, so the layers of carbon atoms can easily slide past each other.
-
-(data/build_examples/01.md)
-
-### Example: Comparing the properties of zinc and carbon dioxide
-
-**Question:** Exam Qn: Compare the differences in properties between zinc and carbon dioxide
-
-**Answer:**
-If you look at this question, every time you see the word "compare," you know that you need to talk about both zinc and carbon dioxide. When you talk about properties, there are two types of properties: chemical properties and physical properties.
-
-Chemical properties refer to the type of reactions that substances undergo. What determines the type of reactions they undergo? The number of valence electrons. If I belong to the same group, I have the same number of valence electrons, therefore I will undergo the same chemical reactions. That makes sense.
-
-The other type of property is a physical property. A physical property is all about the topic of bonding and structure. In this question, they didn't specify whether it is a chemical property or a physical property, but we choose to answer physical property because that is the most straightforward one. Do we really know about the chemical properties of zinc and carbon dioxide? Sure! Zinc is a metal, and carbon dioxide is a gas, so one reacts with acid while the other doesn't. The most straightforward and easiest one will be to answer the physical property.
-
-Let's go through how to answer the physical property for zinc and carbon dioxide. In the topic of bonding and structure, we learn that the first step is always to tell me the structure. If you want to talk about physical property, you must first talk about the structure. Zinc has a giant metallic lattice structure, whereas carbon dioxide has a simple molecular structure.
-
-So far, so good. What's next? 1. Determine the structure. 2. Tell me the bonding and link it to the physical property. I would say zinc has a high boiling and melting point, while carbon dioxide has a low boiling and melting point. A lot of energy is required to overcome the strong electrostatic forces of attraction between the zinc cations and a sea of delocalised electrons, whereas very little energy is required to overcome the weak intermolecular forces of attraction in carbon dioxide. That's my answer. I have successfully compared the difference between BPMP, between zinc and carbon dioxide.
-
-Answer to write: Zinc has a giant metallic lattice structure, so it has a high melting and boiling point because a lot of energy is required to overcome the strong electrostatic forces of attraction between the metal cations and the sea of delocalised electrons. Carbon dioxide has a simple molecular structure, so it has a low melting and boiling point because very little energy is required to overcome the weak intermolecular forces of attraction between molecules.
-
-(data/build_examples/02.md)
 
 ### Example: Why "giant covalent structure," not "giant molecular structure"
 
@@ -263,3 +173,16 @@ Okay, that's a good question. First, we need to understand that your state at ro
 We say lead has a very strong molecular structure. A lot of energy is required to overcome the strong electrostatic forces of attraction between the lead cations and the sea of delocalized electrons. Therefore, lead has a high boiling and melting point and is a solid at room temperature. Whereas water, very little energy is required to overcome its weak intermolecular forces of attraction. Therefore, water has a low boiling and melting point and is liquid at room temperature. And that's it. That's our answer.
 
 (data/build_examples/04.md)
+
+### Example: Why an oxidizing agent is reduced
+
+**Question:** Okay, so the question is why is an oxidizing agent always reduced?
+
+**Answer:**
+That's a good question. First of all you understand that in redox uh if a reaction is redox The M_E_Z_ there must be both reduction and oxidation happening. Okay, you cannot have one guy being reduced and then don't one else being oxidised. It doesn't work like that. So if one guy is reduced, the other guy must be oxidised. Providing there are two reactants. Okay, if there are three reactants then uh possibly one guy reduced, one guy oxidised and the other guy nothing happens. Or it could also be one reactant, one of the element in the reactant was reduced and the other element was oxidised. But important thing here is reduction and oxidation must both happen, right?
+
+So if I am an oxidising agent, chances are, ninety nine percent of the time, the other person that I'm reacting with must be the reducing agent. Okay, why? Because if I'm the oxidising agent, By definition it means that I cause other people to be oxidized. That's what oxidizing agent means. Okay, and reducing agent likewise, it means that I cause another person to be reduced. That's what reducing agent means. So if I cause someone else to be reduced, I myself must be oxidized because the other guy is reduced, so I myself must be oxidized. That's how redox works, right? That is very true.
+
+So it was a question. Redox will always have a reduction and oxidation happening. So a reducing agent will always be oxidized.
+
+(1.md)
