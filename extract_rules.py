@@ -13,12 +13,11 @@ from openai import (
     OpenAI,
     RateLimitError,
 )
+from teacher_workspace import resolve_teacher
 
 
 PROJECT_ROOT = Path(__file__).parent
-TRANSCRIPTS_DIR = PROJECT_ROOT / "data" / "transcripts"
 PROMPT_PATH = PROJECT_ROOT / "prompts" / "extract_rules_prompt.md"
-RULE_DRAFTS_DIR = PROJECT_ROOT / "data" / "rule_drafts"
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -26,24 +25,27 @@ def parse_arguments() -> argparse.Namespace:
         description="Create a tutor-reviewable rules draft from lesson transcripts."
     )
     parser.add_argument(
+        "--teacher",
+        default=None,
+        help="Teacher ID or display name. Required when more than one teacher exists.",
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=None,
         help=(
-            "Markdown path to write. Defaults to "
-            f"{RULE_DRAFTS_DIR}/<transcript_name>_rules_draft.md, named after "
-            "the source transcript(s)."
+            "Markdown path to write. Defaults to the selected teacher's "
+            "rule_drafts/<transcript_name>_rules_draft.md."
         ),
     )
     return parser.parse_args()
 
 
-def load_transcripts() -> tuple[str, list[str]]:
-    transcript_directory = TRANSCRIPTS_DIR
+def load_transcripts(transcript_directory: Path) -> tuple[str, list[str]]:
     if not transcript_directory.is_dir():
         raise FileNotFoundError(
             "No transcript directory found. Add text transcripts to "
-            f"{TRANSCRIPTS_DIR}."
+            f"{transcript_directory}."
         )
 
     sources = []
@@ -53,7 +55,10 @@ def load_transcripts() -> tuple[str, list[str]]:
             continue
         content = path.read_text(encoding="utf-8").strip()
         if content:
-            relative_path = path.relative_to(PROJECT_ROOT)
+            try:
+                relative_path = path.resolve().relative_to(PROJECT_ROOT.resolve())
+            except ValueError:
+                relative_path = path.resolve()
             sources.append(f"## Source: {relative_path}\n{content}")
             names.append(path.stem)
 
@@ -62,9 +67,9 @@ def load_transcripts() -> tuple[str, list[str]]:
     return "\n\n".join(sources), names
 
 
-def default_output_path(transcript_names: list[str]) -> Path:
+def default_output_path(transcript_names: list[str], rule_drafts_dir: Path) -> Path:
     combined_name = "_and_".join(transcript_names)
-    return RULE_DRAFTS_DIR / f"{combined_name}_rules_draft.md"
+    return rule_drafts_dir / f"{combined_name}_rules_draft.md"
 
 
 def load_extraction_prompt() -> str:
@@ -103,15 +108,22 @@ def generate_draft(instructions: str, transcripts: str) -> str:
 
 def main() -> None:
     args = parse_arguments()
+    workspace = resolve_teacher(args.teacher)
+    workspace.ensure_directories()
     instructions = load_extraction_prompt()
-    transcripts, transcript_names = load_transcripts()
+    transcripts, transcript_names = load_transcripts(workspace.transcripts_dir)
     draft = generate_draft(instructions, transcripts)
 
-    output_path = args.output or default_output_path(transcript_names)
+    output_path = args.output or default_output_path(
+        transcript_names, workspace.rule_drafts_dir
+    )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(draft + "\n", encoding="utf-8")
     print(f"Tutor-reviewable rules draft written to {output_path}")
-    print(f"Review it with: python review_rules.py {output_path}")
+    print(
+        f"Review it with: python review_rules.py --teacher {workspace.teacher_id} "
+        f"{output_path}"
+    )
 
 
 if __name__ == "__main__":

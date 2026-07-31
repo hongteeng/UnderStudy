@@ -58,6 +58,16 @@ Expected output:
 UnderStudy API connection successful.
 ```
 
+## 4. Run the teacher workflow
+
+```bash
+python main.py
+```
+
+Enter the teacher's name, then paste or drag lesson audio files into the
+terminal when prompted. Each teacher receives a separate workspace and
+`rules.md`.
+
 ## Troubleshooting
 
 - `OPENAI_API_KEY is missing`: check that `.env` is in the project folder and

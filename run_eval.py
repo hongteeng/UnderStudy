@@ -8,6 +8,7 @@ from pathlib import Path
 from answer import generate_understudy_answer
 from baseline import generate_baseline_answer
 from format_eval_report import format_report
+from teacher_workspace import resolve_teacher
 
 
 PROJECT_ROOT = Path(__file__).parent
@@ -31,6 +32,11 @@ def parse_arguments() -> argparse.Namespace:
         description=(
             "Run both answer systems on Markdown files in a supplied question directory."
         )
+    )
+    parser.add_argument(
+        "--teacher",
+        default=None,
+        help="Teacher ID or display name. Required when more than one teacher exists.",
     )
     parser.add_argument(
         "question_directory",
@@ -87,6 +93,7 @@ def load_questions(question_directory: Path) -> list[tuple[str, str]]:
 
 def main() -> None:
     args = parse_arguments()
+    workspace = resolve_teacher(args.teacher)
     questions = load_questions(args.question_directory)
 
     rows = []
@@ -96,7 +103,11 @@ def main() -> None:
             {
                 "question_id": question_id,
                 "question": question,
-                "understudy_answer": generate_understudy_answer(question),
+                "understudy_answer": generate_understudy_answer(
+                    question,
+                    rules_path=workspace.rules_path,
+                    syllabus_path=workspace.syllabus_path,
+                ),
                 "baseline_answer": generate_baseline_answer(question),
                 "understudy_rule_score": "",
                 "baseline_rule_score": "",

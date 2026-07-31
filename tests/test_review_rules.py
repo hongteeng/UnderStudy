@@ -99,8 +99,7 @@ class ReviewRulesTests(unittest.TestCase):
             resolved.write_text("# Resolved\n", encoding="utf-8")
             unresolved.write_text("REVIEW REQUIRED\n", encoding="utf-8")
 
-            with patch("review_rules.RULE_DRAFTS_DIR", directory):
-                selected = choose_draft_path(None)
+            selected = choose_draft_path(None, directory)
 
             self.assertEqual(selected, unresolved)
 

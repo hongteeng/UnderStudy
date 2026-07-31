@@ -16,8 +16,7 @@ class ExtractRulesTests(unittest.TestCase):
             )
 
             with patch.object(extract_rules, "PROJECT_ROOT", Path(temporary)):
-                with patch.object(extract_rules, "TRANSCRIPTS_DIR", transcripts):
-                    text, names = extract_rules.load_transcripts()
+                text, names = extract_rules.load_transcripts(transcripts)
 
         self.assertIn("Teacher explains bonding.", text)
         self.assertIn("transcripts/lesson.md", text)
@@ -32,8 +31,7 @@ class ExtractRulesTests(unittest.TestCase):
             (nested / "legacy.md").write_text("Legacy", encoding="utf-8")
 
             with patch.object(extract_rules, "PROJECT_ROOT", Path(temporary)):
-                with patch.object(extract_rules, "TRANSCRIPTS_DIR", transcripts):
-                    text, names = extract_rules.load_transcripts()
+                text, names = extract_rules.load_transcripts(transcripts)
 
         self.assertIn("Current", text)
         self.assertNotIn("Legacy", text)

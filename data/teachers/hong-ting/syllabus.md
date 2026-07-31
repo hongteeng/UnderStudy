@@ -5,7 +5,7 @@ examination in 2026 (© MOE & Cambridge University Press & Assessment 2024).
 https://www.seab.gov.sg/gce-o-level/o-level-syllabuses-examined-for-school-candidates-2026/
 (PDF: 6092_y26_sy.pdf)
 
-This is a secondary source of truth: consult it only when `data/rules.md`
+This is a secondary source of truth: consult it only when this teacher's `rules.md`
 does not cover something. It defines the official scope and wording the exam
 expects, not tutor style — use it to check boundaries and terminology, not to
 generate a tutor's voice.

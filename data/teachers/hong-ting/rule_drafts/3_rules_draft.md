@@ -123,4 +123,4 @@ Right, then for that specific equation we can't use hydrogen transfer or oxygen 
 
 ## Source coverage
 
-- **data/transcripts/3.md:** Covers a student-style question about selecting oxidation state versus electron transfer to identify redox. Main patterns found: allow any method when none is specified; list four methods; present oxidation state as the easiest/default option; select oxygen/hydrogen transfer only when the relevant element appears in the reaction; use electron transfer where ions are present; and choose the method suited to the equation. Contains one complete question-and-answer exchange.
+- **data/teachers/hong-ting/transcripts/3.md:** Covers a student-style question about selecting oxidation state versus electron transfer to identify redox. Main patterns found: allow any method when none is specified; list four methods; present oxidation state as the easiest/default option; select oxygen/hydrogen transfer only when the relevant element appears in the reaction; use electron transfer where ions are present; and choose the method suited to the equation. Contains one complete question-and-answer exchange.

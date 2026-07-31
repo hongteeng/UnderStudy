@@ -1,5 +1,5 @@
 Exam context: Singapore–Cambridge GCE O-Level Pure Chemistry, syllabus 6092.
-See `data/syllabus.md` for the official syllabus reference (secondary source,
+See `data/teachers/hong-ting/syllabus.md` for the official syllabus reference (secondary source,
 consulted only where these rules don't cover something).
 
 ## Student-request types and recognition cues

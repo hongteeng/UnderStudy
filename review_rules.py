@@ -5,9 +5,9 @@ future web interface can reuse ``resolve_draft`` with different decision
 providers.
 
 Examples:
-    python review_rules.py
-    python review_rules.py data/rule_drafts/lesson_rules_draft.md
-    python review_rules.py --apply
+    python review_rules.py --teacher hong-ting
+    python review_rules.py --teacher hong-ting path/to/lesson_rules_draft.md
+    python review_rules.py --teacher hong-ting --apply
 """
 
 from __future__ import annotations
@@ -15,7 +15,6 @@ from __future__ import annotations
 import argparse
 import re
 import shutil
-import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -31,12 +30,12 @@ except ImportError:
     pass
 
 from apply_rules import (
-    PROJECT_ROOT,
-    RULE_DRAFTS_DIR,
+    apply_draft,
     check_no_unresolved_markers,
     split_sections,
     validate_draft,
 )
+from teacher_workspace import TeacherWorkspace, resolve_teacher
 
 
 Action = Literal["keep", "edit", "custom", "exclude"]
@@ -336,6 +335,11 @@ def parse_arguments() -> argparse.Namespace:
         description="Review a generated tutor-rules draft through guided questions."
     )
     parser.add_argument(
+        "--teacher",
+        default=None,
+        help="Teacher ID or display name. Required when more than one teacher exists.",
+    )
+    parser.add_argument(
         "draft",
         type=Path,
         nargs="?",
@@ -354,22 +358,22 @@ def parse_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def choose_draft_path(requested_path: Path | None) -> Path:
+def choose_draft_path(requested_path: Path | None, rule_drafts_dir: Path) -> Path:
     if requested_path:
         path = requested_path.expanduser().resolve()
         if not path.is_file():
             raise FileNotFoundError(f"Draft file not found: {requested_path}")
         return path
 
-    if not RULE_DRAFTS_DIR.is_dir():
-        raise FileNotFoundError(f"No rule drafts directory found at {RULE_DRAFTS_DIR}.")
+    if not rule_drafts_dir.is_dir():
+        raise FileNotFoundError(f"No rule drafts directory found at {rule_drafts_dir}.")
     drafts = sorted(
-        RULE_DRAFTS_DIR.glob("*_rules_draft.md"),
+        rule_drafts_dir.glob("*_rules_draft.md"),
         key=lambda path: path.stat().st_mtime,
         reverse=True,
     )
     if not drafts:
-        raise FileNotFoundError(f"No draft files found in {RULE_DRAFTS_DIR}.")
+        raise FileNotFoundError(f"No draft files found in {rule_drafts_dir}.")
 
     unresolved = [
         path
@@ -415,37 +419,40 @@ def review_file(draft_path: Path) -> None:
     print(f"Backup saved: {backup_path.name}")
 
 
-def apply_with_existing_pipeline(draft_path: Path) -> None:
-    """Apply through Hong Ting's original command instead of replacing it."""
-    result = subprocess.run(
-        [sys.executable, str(PROJECT_ROOT / "apply_rules.py"), str(draft_path)],
-        cwd=PROJECT_ROOT,
-        text=True,
-        capture_output=True,
-        check=False,
-    )
-    if result.returncode:
-        detail = result.stderr.strip() or result.stdout.strip() or "unknown error"
-        raise RuntimeError(detail)
-    if result.stdout.strip():
-        print(result.stdout.strip())
+def apply_with_existing_pipeline(
+    draft_path: Path, workspace: TeacherWorkspace
+) -> None:
+    """Apply through the existing validated merge pipeline."""
+    apply_draft(draft_path, workspace.rules_path)
 
 
 def main() -> None:
     args = parse_arguments()
     try:
-        draft_path = choose_draft_path(args.draft)
+        workspace = resolve_teacher(args.teacher)
+        draft_path = choose_draft_path(args.draft, workspace.rule_drafts_dir)
+        try:
+            draft_path.resolve().relative_to(workspace.rule_drafts_dir.resolve())
+        except ValueError as error:
+            raise ValueError(
+                f"Draft does not belong to teacher {workspace.display_name}: {draft_path}"
+            ) from error
         review_file(draft_path)
 
         should_apply = args.apply
         if not args.apply and not args.no_apply_prompt:
             should_apply = prompt_choice(
-                "Apply these rules to data/rules.md now? [y/N]: ", {"y", "n"}, "n"
+                f"Apply these rules to {workspace.display_name}'s rules.md now? [y/N]: ",
+                {"y", "n"},
+                "n",
             ) == "y"
         if should_apply:
-            apply_with_existing_pipeline(draft_path)
+            apply_with_existing_pipeline(draft_path, workspace)
         else:
-            print(f"To apply later: python apply_rules.py {draft_path}")
+            print(
+                "To apply later: python apply_rules.py "
+                f"--teacher {workspace.teacher_id} {draft_path}"
+            )
     except (FileNotFoundError, RuntimeError, ValueError, UnicodeDecodeError) as error:
         print(f"Error: {error}", file=sys.stderr)
         raise SystemExit(1) from error

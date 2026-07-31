@@ -1,15 +1,15 @@
-"""Merge a tutor-reviewed rules draft into data/rules.md.
+"""Merge a tutor-reviewed rules draft into one teacher's rules.md.
 
 This is the coded version of the "review the draft, then copy approved
-content into data/rules.md" step described in the README. It makes no
+content into rules.md" step described in the README. It makes no
 content decisions of its own -- it only merges text that a tutor has already
 resolved directly in the draft file (every inline review marker and every
 "Needs tutor decision" item must be gone before this will run).
 
 Usage:
-    python apply_rules.py                          # auto-detects the draft
-    python apply_rules.py data/rule_drafts/foo.md   # applies a specific draft
-    python apply_rules.py --check                  # validate only, no write
+    python apply_rules.py --teacher hong-ting
+    python apply_rules.py --teacher hong-ting path/to/foo.md
+    python apply_rules.py --teacher hong-ting --check
 """
 
 import argparse
@@ -18,10 +18,8 @@ import sys
 from pathlib import Path
 from typing import Optional
 
+from teacher_workspace import resolve_teacher
 
-PROJECT_ROOT = Path(__file__).parent
-RULES_PATH = PROJECT_ROOT / "data" / "rules.md"
-RULE_DRAFTS_DIR = PROJECT_ROOT / "data" / "rule_drafts"
 
 # Canonical section order, matching the template in
 # prompts/extract_rules_prompt.md and the existing structure of rules.md.
@@ -64,7 +62,12 @@ UNRESOLVED_MARKERS = ("REVIEW REQUIRED", "Needs tutor decision", "IF KEEP", "IF 
 
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Merge a tutor-reviewed rules draft into data/rules.md."
+        description="Merge a tutor-reviewed rules draft into one teacher's rules.md."
+    )
+    parser.add_argument(
+        "--teacher",
+        default=None,
+        help="Teacher ID or display name. Required when more than one teacher exists.",
     )
     parser.add_argument(
         "draft",
@@ -72,8 +75,8 @@ def parse_arguments() -> argparse.Namespace:
         nargs="?",
         default=None,
         help=(
-            "Path to the reviewed draft file. If omitted and exactly one "
-            f"file exists in {RULE_DRAFTS_DIR}, that file is used."
+            "Path to the reviewed draft file. If omitted and exactly one draft "
+            "exists for the selected teacher, that file is used."
         ),
     )
     parser.add_argument(
@@ -81,27 +84,27 @@ def parse_arguments() -> argparse.Namespace:
         action="store_true",
         help=(
             "Validate the draft (unresolved markers, missing source tags) "
-            "without writing to rules.md."
+            "without writing to the teacher's rules.md."
         ),
     )
     return parser.parse_args()
 
 
-def resolve_draft_path(arg_path: Optional[Path]) -> Path:
+def resolve_draft_path(arg_path: Optional[Path], rule_drafts_dir: Path) -> Path:
     if arg_path:
         if not arg_path.is_file():
             raise FileNotFoundError(f"Draft file not found: {arg_path}")
         return arg_path
-    if not RULE_DRAFTS_DIR.is_dir():
-        raise FileNotFoundError(f"No rule drafts directory found at {RULE_DRAFTS_DIR}.")
-    drafts = sorted(RULE_DRAFTS_DIR.glob("*_rules_draft.md"))
+    if not rule_drafts_dir.is_dir():
+        raise FileNotFoundError(f"No rule drafts directory found at {rule_drafts_dir}.")
+    drafts = sorted(rule_drafts_dir.glob("*_rules_draft.md"))
     if not drafts:
-        raise FileNotFoundError(f"No draft files found in {RULE_DRAFTS_DIR}.")
+        raise FileNotFoundError(f"No draft files found in {rule_drafts_dir}.")
     if len(drafts) > 1:
         names = ", ".join(path.name for path in drafts)
         raise ValueError(
             f"Multiple drafts found ({names}). Pass the one to apply "
-            "explicitly: python apply_rules.py data/rule_drafts/<file>."
+            "explicitly."
         )
     return drafts[0]
 
@@ -141,7 +144,7 @@ def validate_draft(draft_text: str, sections: "dict[str, str]") -> None:
         )
         raise ValueError(
             "This draft has rule(s) with no source citation in parentheses "
-            f"at the end, e.g. `(data/transcripts/<name>)`:\n{listed}\n"
+            f"at the end, e.g. `(<teacher transcript path>)`:\n{listed}\n"
             "Add a source tag to each before applying -- without one, this "
             "rule can never be identified or replaced on a future re-apply."
         )
@@ -210,25 +213,37 @@ def merge(existing_text: str, draft_text: str, source_key: str) -> str:
     return "\n\n".join(parts).strip("\n") + "\n"
 
 
-def main() -> None:
-    args = parse_arguments()
-    draft_path = resolve_draft_path(args.draft)
+def apply_draft(draft_path: Path, rules_path: Path, *, check_only: bool = False) -> None:
+    """Validate and merge one reviewed draft into the supplied teacher rules file."""
     draft_text = draft_path.read_text(encoding="utf-8")
     draft_sections = split_sections(draft_text)
     validate_draft(draft_text, draft_sections)
 
-    if args.check:
+    if check_only:
         print(f"{draft_path.name} is fully resolved and ready to apply.")
         return
 
-    existing_text = RULES_PATH.read_text(encoding="utf-8") if RULES_PATH.is_file() else ""
+    existing_text = rules_path.read_text(encoding="utf-8") if rules_path.is_file() else ""
     source_key = source_key_from_draft(draft_path)
     merged_text = merge(existing_text, draft_text, source_key)
 
-    RULES_PATH.parent.mkdir(parents=True, exist_ok=True)
-    RULES_PATH.write_text(merged_text, encoding="utf-8")
-    print(f"Applied {draft_path.name} into {RULES_PATH}")
+    rules_path.parent.mkdir(parents=True, exist_ok=True)
+    rules_path.write_text(merged_text, encoding="utf-8")
+    print(f"Applied {draft_path.name} into {rules_path}")
     print(f"Any prior '{source_key}' content in rules.md was replaced, not duplicated.")
+
+
+def main() -> None:
+    args = parse_arguments()
+    workspace = resolve_teacher(args.teacher)
+    draft_path = resolve_draft_path(args.draft, workspace.rule_drafts_dir)
+    try:
+        draft_path.resolve().relative_to(workspace.rule_drafts_dir.resolve())
+    except ValueError as error:
+        raise ValueError(
+            f"Draft does not belong to teacher {workspace.display_name}: {draft_path}"
+        ) from error
+    apply_draft(draft_path, workspace.rules_path, check_only=args.check)
 
 
 if __name__ == "__main__":

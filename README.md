@@ -1,234 +1,145 @@
 # UnderStudy
 
-UnderStudy lets a tutor encode their teaching method once, so students receive
-answers in that tutor's method when the tutor is unavailable.
+UnderStudy turns lesson recordings into a reviewed set of teaching rules for
+each teacher. Every teacher has an isolated workspace, so recordings and rules
+from different teachers are never combined.
 
-## First answering-engine test
+## Setup
 
-1. Follow [SETUP.md](SETUP.md) to configure Python and `OPENAI_API_KEY`.
-2. Add one or more lesson transcripts to `data/transcripts/`, or use the
-   automated recording workflow below.
-3. Create a tutor-reviewable draft from those transcripts:
+Follow [SETUP.md](SETUP.md), activate the virtual environment, and make sure
+`.env` contains `OPENAI_API_KEY`.
 
-   ```bash
-   python extract_rules.py
-   ```
-
-   This writes `data/rule_drafts/<transcript_name>_rules_draft.md`, named
-   after the source transcript(s).
-4. Review the draft through the guided console:
-
-   ```bash
-   python review_rules.py
-   ```
-
-   For each flagged rule, choose the original wording, the suggested edit,
-   a custom edit, or exclusion. For any remaining open decision, enter the
-   tutor's wording or remove it. The reviewer cleans the marker text,
-   validates the result, saves a `.bak` backup, and asks whether to apply the
-   finished rules immediately.
-5. Apply the reviewed draft into `data/rules.md`:
-
-   ```bash
-   python apply_rules.py
-   ```
-
-   This refuses to run if the draft still has unresolved markers, so you
-   cannot accidentally publish an un-reviewed claim. Re-running it after
-   editing the same draft again replaces that source's content in
-   `rules.md` rather than duplicating it.
-6. Run an answer:
-
-   ```bash
-   python answer.py "What is the difference between ionic and covalent bonding?"
-   ```
-
-   Or run `python answer.py` and type the question when prompted.
-
-## Plain-GPT baseline
-
-Use the baseline for a fair comparison: it uses the same model as UnderStudy
-but has no tutor rules or teaching examples.
+## Run the complete console workflow
 
 ```bash
-python baseline.py "What is the difference between ionic and covalent bonding?"
+python main.py
 ```
 
-Or run `python baseline.py` and type the question when prompted.
+The program will:
 
-## Evaluation scaffold
+1. ask for the teacher's name;
+2. open that teacher's existing workspace or create a new one;
+3. ask for lesson audio files or a folder containing audio files;
+4. copy those recordings into the teacher's incoming folder;
+5. transcribe each recording and create a rules draft;
+6. ask the teacher to keep, edit, replace, or exclude flagged rules; and
+7. apply approved material to that teacher's `rules.md`.
 
-When the tutor releases a set of Markdown question files for evaluation, run:
+At an audio prompt, paste a path or drag a file into the terminal. You can add
+several files one at a time. Press Enter on an empty line to start processing.
+MP3, MP4, MPEG, MPGA, M4A, WAV, and WebM files are supported.
 
-```bash
-python run_eval.py path/to/question_folder
-```
+Entering the same teacher name on a later run reopens the same workspace and
+adds new lessons to the same `rules.md`.
 
-Each `.md` file must contain one question; its filename becomes the
-`question_id`. The command runs UnderStudy and the plain-GPT baseline for each
-file, then writes `results/eval_output.csv`.
+## Teacher storage
 
-The score and reviewer columns are intentionally blank. The tutor should score
-the answer pairs manually; before a blind review, copy the two answer columns
-into a separate sheet and remove or randomize their labels. This script does
-not evaluate the answers automatically.
-
-Everything under `data/` is shared through Git so both teammates work from the
-same recordings, transcripts, drafts, rules, examples, and evaluation
-materials. Only `.env` and other secret or machine-specific files stay out of
-the repository.
-
-## Lesson-recording intake
-
-The shared `data/` folder separates automated drafts from the tutor-approved
-materials used by students:
+Each teacher gets a stable, safe ID such as `hong-ting` or `jane-tan`:
 
 ```text
-data/
-  recordings/incoming/              # newly uploaded lesson audio
-  recordings/processed/             # audio successfully transcribed
-  transcripts/                      # lesson transcripts used by extract_rules.py
-  rule_drafts/                      # AI-generated draft rules, named per transcript; never used directly
-  rules.md                          # final tutor-approved teaching rules and worked Q&A examples
+data/teachers/
+  hong-ting/
+    teacher.json
+    rules.md
+    syllabus.md                         # optional
+    recordings/
+      incoming/
+      processed/
+      transcription_manifest.json
+    transcripts/
+    rule_drafts/
+    internal/
 ```
 
-A recording's transcript can include the tutor working through real student
-questions, not just explaining concepts. `extract_rules.py` pulls any complete
-question-and-answer exchanges it finds into a `## Build Examples` section
-inside the same draft, right alongside the rest of the rules. Review it the
-same way as everything else, in the same draft file, through
-`review_rules.py` and `apply_rules.py`. There is no separate build-examples
-folder or step -- once `rules.md` is applied, the worked examples live inside
-it and `answer.py` reads them from there.
+Only the code and extraction prompt are shared. The manifest, recordings,
+transcripts, drafts, syllabus, and final rules belong to exactly one teacher.
+Hong Ting's original project data is stored under
+`data/teachers/hong-ting/`.
 
-The combined workflow keeps the two parts separate:
+## Use individual commands
 
-```text
-lesson recording
-  → transcription automation
-  → transcript
-  → Hong Ting's rules extractor
-  → tutor review and Hong Ting's apply gate
-  → answering and evaluation
-```
-
-The transcription stage only supplies a new source transcript. It does not
-replace the extraction prompt, rules-merging checks, answering logic, build
-examples, or evaluation pipeline.
-
-### Run the complete recording pipeline once
-
-Put an MP3, MP4, MPEG, MPGA, M4A, WAV, or WebM lesson recording in
-`data/recordings/incoming/`, then run:
+The console wizard is the normal entry point. Individual stages remain
+available for debugging or rerunning one step. When more than one teacher
+exists, include `--teacher`.
 
 ```bash
-python transcribe_recordings.py --extract-rules
+python transcribe_recordings.py --teacher hong-ting --extract-rules
+python extract_rules.py --teacher hong-ting
+python review_rules.py --teacher hong-ting
+python apply_rules.py --teacher hong-ting
+python answer.py --teacher hong-ting "What is ionic bonding?"
 ```
 
-For every completed recording, the worker:
+`extract_rules.py` manually combines all transcripts belonging to the selected
+teacher. The normal recording automation extracts only the recording that just
+finished, so older lessons are not drafted again.
 
-1. transcribes the lesson with speaker labels;
-2. writes `data/transcripts/<recording_name>.md`;
-3. moves the original audio to `data/recordings/processed/`;
-4. records the result in `data/recordings/transcription_manifest.json`; and
-5. hands that transcript to Hong Ting's existing extraction engine, which
-   creates `data/rule_drafts/<recording_name>_rules_draft.md`.
+### Redo one recording
 
-The background worker cannot open an interactive prompt, so after it creates a
-draft, review it with:
+Place a fresh copy in that teacher's incoming folder, then run:
 
 ```bash
-python review_rules.py
+python transcribe_recordings.py --teacher hong-ting --reset redox.mp3
+python transcribe_recordings.py --teacher hong-ting --extract-rules
 ```
 
-Press Enter to accept a suggested edit when one is available. The final prompt
-can apply the reviewed rules immediately, so no manual Markdown cleanup is
-needed. This console helper only collects the tutor's choices; final validation
-and merging still run through Hong Ting's original `apply_rules.py` command.
+Reset removes only that lesson's processed audio, transcript, draft, manifest
+entry, backup, and previously applied rules. It keeps the fresh incoming copy.
 
-Files still being copied are left alone until they stop changing. A recording
-with the same contents is never transcribed twice. Failed recordings remain in
-`incoming/` and can be retried with:
+### Identify the teacher in multi-speaker audio
+
+Without a reference clip, transcripts still contain generic speaker labels.
+For stronger speaker identification, supply a clear 2–10 second reference:
 
 ```bash
-python transcribe_recordings.py --retry-failed --extract-rules
+python transcribe_recordings.py \
+  --teacher hong-ting \
+  --teacher-name "Hong Ting" \
+  --teacher-reference /absolute/path/to/reference.m4a \
+  --extract-rules
 ```
 
-To deliberately redo a recording that was already completed, leave the fresh
-copy in `incoming/` and reset only that lesson before running the pipeline:
-
-```bash
-python transcribe_recordings.py --reset redox.mp3
-python transcribe_recordings.py --extract-rules
-```
-
-Reset removes that lesson's old transcript, draft, manifest entry, backup, and
-previously applied rules. It does not delete the fresh recording in `incoming/`
-or touch other lessons.
+### Long recordings
 
 Recordings larger than the API upload limit are compressed and split with
-`ffmpeg`. Install it with `brew install ffmpeg` before processing long lessons.
-
-### Identify the teacher in a multi-speaker lesson
-
-Record a clear 2–10 second teacher reference clip and add both settings to
-`.env`:
-
-```text
-TEACHER_SPEAKER_NAME=Hong Ting
-TEACHER_REFERENCE_AUDIO=/absolute/path/to/hong_ting_reference.m4a
-```
-
-If both settings are omitted, the transcript still includes speaker labels,
-but they will be generic labels assigned by the transcription model.
-
-### Keep it running automatically on macOS
-
-First inspect the generated background-service configuration:
+`ffmpeg`:
 
 ```bash
-python install_lesson_automation.py --dry-run
+brew install ffmpeg
 ```
 
-Then install and start it:
+### Background automation on macOS
+
+A separate background worker can be installed for each teacher:
 
 ```bash
-python install_lesson_automation.py
+python install_lesson_automation.py --teacher hong-ting --dry-run
+python install_lesson_automation.py --teacher hong-ting
 ```
 
-It starts at login and continuously runs the equivalent of:
+It watches that teacher's incoming folder and creates transcripts and drafts.
+Review remains interactive, so run `review_rules.py --teacher hong-ting` later.
+
+Remove the worker with:
 
 ```bash
-python transcribe_recordings.py --watch --extract-rules
+python install_lesson_automation.py --teacher hong-ting --uninstall
 ```
 
-To use a Dropbox, Google Drive, or iCloud folder as the teacher's upload
-destination, add its absolute path to `.env`:
-
-```text
-UNDERSTUDY_INCOMING_DIR=/absolute/path/to/synced/lesson-recordings
-```
-
-The teacher can then record directly into that synced folder; the remaining
-steps happen automatically. Logs are written under `data/internal/`. Remove
-the background worker with `python install_lesson_automation.py --uninstall`.
-
-### Hong Ting's manual transcript-to-rules operation
-
-To run Hong Ting's original extractor manually, create one combined draft from
-all available transcripts:
+## Test teacher-specific answers
 
 ```bash
-python extract_rules.py
+python answer.py --teacher hong-ting "Why does graphite conduct electricity?"
 ```
 
-The script reads every transcript in `data/transcripts/`. It writes
-`data/rule_drafts/<transcript_name>_rules_draft.md`,
-named after the source transcript(s), including a `## Build Examples` section
-for any complete question-and-answer exchanges found in the source. The tutor
-must review and edit this draft (`review_rules.py` or by hand) before applying
-it into `data/rules.md` (`apply_rules.py`). Only `data/rules.md` is used for
-student answers -- rules and worked examples together, in one file.
+The answering engine reads only the selected teacher's `rules.md` and optional
+`syllabus.md`.
 
-The automation maintains its own machine-readable recording manifest at
-`data/recordings/transcription_manifest.json`.
+For the existing evaluation questions:
+
+```bash
+python run_eval.py --teacher hong-ting data/eval_questions
+```
+
+This compares UnderStudy with a plain-model baseline and writes the existing
+CSV and Markdown evaluation outputs under `results/`.

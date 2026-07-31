@@ -43,6 +43,8 @@ class TranscriptionWorkerTests(unittest.TestCase):
             "incoming_dir": self.incoming,
             "processed_dir": self.processed,
             "transcripts_dir": self.transcripts,
+            "rule_drafts_dir": self.root / "drafts",
+            "rules_path": self.root / "rules.md",
             "manifest_path": self.root / "manifest.json",
             "lock_path": self.root / "worker.lock",
             "model": "gpt-4o-transcribe-diarize",
@@ -175,14 +177,13 @@ class TranscriptionWorkerTests(unittest.TestCase):
         transcript.write_text("Teacher explains ionic bonding.", encoding="utf-8")
         drafts = self.root / "drafts"
 
-        with patch.object(extract_rules, "RULE_DRAFTS_DIR", drafts):
+        with patch.object(
+            extract_rules, "load_extraction_prompt", return_value="Hong Ting prompt"
+        ):
             with patch.object(
-                extract_rules, "load_extraction_prompt", return_value="Hong Ting prompt"
-            ):
-                with patch.object(
-                    extract_rules, "generate_draft", return_value="# Rules draft"
-                ) as generate:
-                    result = transcription.create_rules_draft(transcript)
+                extract_rules, "generate_draft", return_value="# Rules draft"
+            ) as generate:
+                result = transcription.create_rules_draft(transcript, drafts)
 
         self.assertEqual(result, drafts / "lesson_rules_draft.md")
         self.assertEqual(result.read_text(encoding="utf-8"), "# Rules draft\n")

@@ -1,16 +1,16 @@
 """Answer a student question using a tutor's rules and teaching examples."""
 
+import argparse
 import os
 import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
 from openai import OpenAI
+from teacher_workspace import resolve_teacher
 
 
 PROJECT_ROOT = Path(__file__).parent
-RULES_PATH = PROJECT_ROOT / "data" / "rules.md"
-SYLLABUS_PATH = PROJECT_ROOT / "data" / "syllabus.md"
 
 
 def read_required_file(path: Path, description: str) -> str:
@@ -25,16 +25,29 @@ def read_required_file(path: Path, description: str) -> str:
     return content
 
 
-def load_syllabus() -> str | None:
+def load_syllabus(path: Path) -> str | None:
     """Return the syllabus reference text, or None if it isn't set up yet."""
-    if not SYLLABUS_PATH.is_file():
+    if not path.is_file():
         return None
-    content = SYLLABUS_PATH.read_text(encoding="utf-8").strip()
+    content = path.read_text(encoding="utf-8").strip()
     return content or None
 
 
-def get_question() -> str:
-    question = " ".join(sys.argv[1:]).strip()
+def parse_arguments() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Answer a student question using one teacher's rules."
+    )
+    parser.add_argument(
+        "--teacher",
+        default=None,
+        help="Teacher ID or display name. Required when more than one teacher exists.",
+    )
+    parser.add_argument("question", nargs="*", help="Student question.")
+    return parser.parse_args()
+
+
+def get_question(parts: list[str]) -> str:
+    question = " ".join(parts).strip()
     if not question:
         question = input("Student question: ").strip()
     if not question:
@@ -42,14 +55,23 @@ def get_question() -> str:
     return question
 
 
-def generate_understudy_answer(question: str) -> str:
+def generate_understudy_answer(
+    question: str,
+    *,
+    rules_path: Path | None = None,
+    syllabus_path: Path | None = None,
+) -> str:
     """Generate an answer using the tutor's rules and build-set examples."""
     load_dotenv()
     if not os.getenv("OPENAI_API_KEY"):
         raise RuntimeError("OPENAI_API_KEY is missing. Add it to your local .env file.")
 
-    rules = read_required_file(RULES_PATH, "tutor rules file")
-    syllabus = load_syllabus()
+    if rules_path is None or syllabus_path is None:
+        workspace = resolve_teacher()
+        rules_path = rules_path or workspace.rules_path
+        syllabus_path = syllabus_path or workspace.syllabus_path
+    rules = read_required_file(rules_path, "tutor rules file")
+    syllabus = load_syllabus(syllabus_path)
     model = os.getenv("OPENAI_MODEL", "gpt-5.6-sol")
 
     syllabus_section = (
@@ -177,8 +199,16 @@ reference or general knowledge as usual.
 
 
 def main() -> None:
-    question = get_question()
-    print(generate_understudy_answer(question))
+    args = parse_arguments()
+    workspace = resolve_teacher(args.teacher)
+    question = get_question(args.question)
+    print(
+        generate_understudy_answer(
+            question,
+            rules_path=workspace.rules_path,
+            syllabus_path=workspace.syllabus_path,
+        )
+    )
 
 
 if __name__ == "__main__":

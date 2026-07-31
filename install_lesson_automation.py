@@ -14,16 +14,29 @@ import subprocess
 import sys
 from pathlib import Path
 
+from teacher_workspace import TeacherWorkspace, resolve_teacher
+
 
 PROJECT_ROOT = Path(__file__).parent.resolve()
-LABEL = "com.understudy.lesson-automation"
 LAUNCH_AGENTS_DIR = Path.home() / "Library" / "LaunchAgents"
-PLIST_PATH = LAUNCH_AGENTS_DIR / f"{LABEL}.plist"
+
+
+def label_for(workspace: TeacherWorkspace) -> str:
+    return f"com.understudy.lesson-automation.{workspace.teacher_id}"
+
+
+def plist_path_for(workspace: TeacherWorkspace) -> Path:
+    return LAUNCH_AGENTS_DIR / f"{label_for(workspace)}.plist"
 
 
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Install the UnderStudy lesson worker as a macOS LaunchAgent."
+    )
+    parser.add_argument(
+        "--teacher",
+        default=None,
+        help="Teacher ID or display name. Required when more than one teacher exists.",
     )
     action = parser.add_mutually_exclusive_group()
     action.add_argument("--uninstall", action="store_true", help="Remove the worker.")
@@ -52,18 +65,22 @@ def worker_python() -> Path:
     return virtualenv_python
 
 
-def build_plist(retry_failed: bool = False) -> dict[str, object]:
+def build_plist(
+    workspace: TeacherWorkspace, retry_failed: bool = False
+) -> dict[str, object]:
     arguments = [
         str(worker_python()),
         str(PROJECT_ROOT / "transcribe_recordings.py"),
         "--watch",
         "--extract-rules",
+        "--teacher",
+        workspace.teacher_id,
     ]
     if retry_failed:
         arguments.append("--retry-failed")
-    log_directory = PROJECT_ROOT / "data" / "internal"
+    log_directory = workspace.internal_dir
     return {
-        "Label": LABEL,
+        "Label": label_for(workspace),
         "ProgramArguments": arguments,
         "WorkingDirectory": str(PROJECT_ROOT),
         "RunAtLoad": True,
@@ -88,39 +105,44 @@ def run_launchctl(arguments: list[str], allow_failure: bool = False) -> None:
         raise RuntimeError(f"launchctl failed: {detail}")
 
 
-def install(retry_failed: bool) -> None:
-    plist = build_plist(retry_failed)
-    (PROJECT_ROOT / "data" / "internal").mkdir(parents=True, exist_ok=True)
+def install(workspace: TeacherWorkspace, retry_failed: bool) -> None:
+    plist = build_plist(workspace, retry_failed)
+    workspace.internal_dir.mkdir(parents=True, exist_ok=True)
     LAUNCH_AGENTS_DIR.mkdir(parents=True, exist_ok=True)
-    temporary = PLIST_PATH.with_suffix(".plist.tmp")
+    plist_path = plist_path_for(workspace)
+    temporary = plist_path.with_suffix(".plist.tmp")
     with temporary.open("wb") as output:
         plistlib.dump(plist, output, sort_keys=True)
-    temporary.replace(PLIST_PATH)
+    temporary.replace(plist_path)
 
-    run_launchctl(["bootout", launch_domain(), str(PLIST_PATH)], allow_failure=True)
-    run_launchctl(["bootstrap", launch_domain(), str(PLIST_PATH)])
-    run_launchctl(["kickstart", "-k", f"{launch_domain()}/{LABEL}"])
-    print(f"Installed and started {LABEL}")
-    print(f"Incoming recordings: {PROJECT_ROOT / 'data/recordings/incoming'}")
-    print(f"Logs: {PROJECT_ROOT / 'data/internal'}")
+    run_launchctl(["bootout", launch_domain(), str(plist_path)], allow_failure=True)
+    run_launchctl(["bootstrap", launch_domain(), str(plist_path)])
+    run_launchctl(["kickstart", "-k", f"{launch_domain()}/{label_for(workspace)}"])
+    print(f"Installed and started {label_for(workspace)}")
+    print(f"Incoming recordings: {workspace.incoming_dir}")
+    print(f"Logs: {workspace.internal_dir}")
 
 
-def uninstall() -> None:
-    run_launchctl(["bootout", launch_domain(), str(PLIST_PATH)], allow_failure=True)
-    if PLIST_PATH.exists():
-        PLIST_PATH.unlink()
-    print(f"Removed {LABEL}")
+def uninstall(workspace: TeacherWorkspace) -> None:
+    plist_path = plist_path_for(workspace)
+    run_launchctl(["bootout", launch_domain(), str(plist_path)], allow_failure=True)
+    if plist_path.exists():
+        plist_path.unlink()
+    print(f"Removed {label_for(workspace)}")
 
 
 def main() -> None:
     args = parse_arguments()
     try:
+        workspace = resolve_teacher(args.teacher)
         if args.dry_run:
-            sys.stdout.buffer.write(plistlib.dumps(build_plist(args.retry_failed)))
+            sys.stdout.buffer.write(
+                plistlib.dumps(build_plist(workspace, args.retry_failed))
+            )
         elif args.uninstall:
-            uninstall()
+            uninstall(workspace)
         else:
-            install(args.retry_failed)
+            install(workspace, args.retry_failed)
     except (FileNotFoundError, RuntimeError, OSError) as error:
         print(f"Error: {error}", file=sys.stderr)
         raise SystemExit(1) from error

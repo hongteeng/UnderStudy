@@ -1,15 +1,15 @@
 """Automatically turn lesson recordings into speaker-labelled transcripts.
 
-The default one-shot mode processes every settled audio file in
-``data/recordings/incoming``. Use ``--watch`` to keep the worker running and
+The default one-shot mode processes every settled audio file in the selected
+teacher's incoming folder. Use ``--watch`` to keep the worker running and
 ``--extract-rules`` to create a tutor-reviewable rules draft after each
 successful transcription.
 
 Examples:
-    python transcribe_recordings.py
-    python transcribe_recordings.py --watch --extract-rules
-    python transcribe_recordings.py --retry-failed --extract-rules
-    python transcribe_recordings.py --reset redox.mp3
+    python transcribe_recordings.py --teacher hong-ting
+    python transcribe_recordings.py --teacher hong-ting --watch --extract-rules
+    python transcribe_recordings.py --teacher hong-ting --retry-failed --extract-rules
+    python transcribe_recordings.py --teacher hong-ting --reset redox.mp3
 """
 
 from __future__ import annotations
@@ -44,18 +44,10 @@ from openai import (
     PermissionDeniedError,
     RateLimitError,
 )
+from teacher_workspace import project_relative, resolve_teacher
 
 
 PROJECT_ROOT = Path(__file__).parent
-DEFAULT_INCOMING_DIR = PROJECT_ROOT / "data" / "recordings" / "incoming"
-DEFAULT_PROCESSED_DIR = PROJECT_ROOT / "data" / "recordings" / "processed"
-DEFAULT_TRANSCRIPTS_DIR = PROJECT_ROOT / "data" / "transcripts"
-DEFAULT_RULE_DRAFTS_DIR = PROJECT_ROOT / "data" / "rule_drafts"
-DEFAULT_RULES_PATH = PROJECT_ROOT / "data" / "rules.md"
-DEFAULT_MANIFEST_PATH = (
-    PROJECT_ROOT / "data" / "recordings" / "transcription_manifest.json"
-)
-DEFAULT_LOCK_PATH = PROJECT_ROOT / "data" / "internal" / "transcription.lock"
 DEFAULT_MODEL = "gpt-4o-transcribe-diarize"
 DEFAULT_MAX_UPLOAD_BYTES = 24 * 1024 * 1024
 SUPPORTED_EXTENSIONS = {".mp3", ".mp4", ".mpeg", ".mpga", ".m4a", ".wav", ".webm"}
@@ -67,6 +59,8 @@ class Settings:
     incoming_dir: Path
     processed_dir: Path
     transcripts_dir: Path
+    rule_drafts_dir: Path
+    rules_path: Path
     manifest_path: Path
     lock_path: Path
     model: str
@@ -91,14 +85,14 @@ def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
 
-def env_path(name: str, default: Path) -> Path:
-    value = os.getenv(name)
-    return Path(value).expanduser().resolve() if value else default
-
-
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Transcribe new lesson recordings and archive completed audio."
+    )
+    parser.add_argument(
+        "--teacher",
+        default=None,
+        help="Teacher ID or display name. Required when more than one teacher exists.",
     )
     parser.add_argument(
         "--watch",
@@ -163,25 +157,26 @@ def parse_arguments() -> argparse.Namespace:
 
 def load_settings(args: argparse.Namespace) -> Settings:
     load_dotenv(PROJECT_ROOT / ".env")
+    workspace = resolve_teacher(args.teacher)
+    workspace.ensure_directories()
     incoming_dir = (
         args.incoming.expanduser().resolve()
         if args.incoming
-        else env_path("UNDERSTUDY_INCOMING_DIR", DEFAULT_INCOMING_DIR)
+        else workspace.incoming_dir
     )
-    teacher_reference_value = args.teacher_reference or (
-        Path(os.environ["TEACHER_REFERENCE_AUDIO"])
-        if os.getenv("TEACHER_REFERENCE_AUDIO")
-        else None
-    )
+    teacher_reference_value = args.teacher_reference
     teacher_reference = (
         teacher_reference_value.expanduser().resolve()
         if teacher_reference_value
         else None
     )
-    teacher_name = args.teacher_name or os.getenv("TEACHER_SPEAKER_NAME")
+    teacher_name = (
+        args.teacher_name
+        or (workspace.display_name if teacher_reference else None)
+    )
     if bool(teacher_reference) != bool(teacher_name):
         raise ValueError(
-            "Set both TEACHER_REFERENCE_AUDIO and TEACHER_SPEAKER_NAME, or neither."
+            "Use --teacher-reference with --teacher-name, or omit both."
         )
     if teacher_reference and not teacher_reference.is_file():
         raise FileNotFoundError(f"Teacher reference audio not found: {teacher_reference}")
@@ -203,10 +198,12 @@ def load_settings(args: argparse.Namespace) -> Settings:
 
     return Settings(
         incoming_dir=incoming_dir,
-        processed_dir=env_path("UNDERSTUDY_PROCESSED_DIR", DEFAULT_PROCESSED_DIR),
-        transcripts_dir=env_path("UNDERSTUDY_TRANSCRIPTS_DIR", DEFAULT_TRANSCRIPTS_DIR),
-        manifest_path=env_path("UNDERSTUDY_MANIFEST_PATH", DEFAULT_MANIFEST_PATH),
-        lock_path=DEFAULT_LOCK_PATH,
+        processed_dir=workspace.processed_dir,
+        transcripts_dir=workspace.transcripts_dir,
+        rule_drafts_dir=workspace.rule_drafts_dir,
+        rules_path=workspace.rules_path,
+        manifest_path=workspace.manifest_path,
+        lock_path=workspace.lock_path,
         model=args.model or os.getenv("OPENAI_TRANSCRIPTION_MODEL", DEFAULT_MODEL),
         language=os.getenv("TRANSCRIPTION_LANGUAGE") or None,
         teacher_name=teacher_name,
@@ -519,10 +516,7 @@ def format_timestamp(seconds: float) -> str:
 
 
 def display_path(path: Path) -> str:
-    try:
-        return str(path.resolve().relative_to(PROJECT_ROOT.resolve()))
-    except ValueError:
-        return str(path.resolve())
+    return project_relative(path)
 
 
 def render_transcript(
@@ -600,10 +594,12 @@ def reset_recording(
     settings: Settings,
     recording_name: str,
     *,
-    rules_path: Path = DEFAULT_RULES_PATH,
-    rule_drafts_dir: Path = DEFAULT_RULE_DRAFTS_DIR,
+    rules_path: Path | None = None,
+    rule_drafts_dir: Path | None = None,
 ) -> list[Path]:
     """Remove the outputs and manifest entry for exactly one lesson recording."""
+    rules_path = rules_path or settings.rules_path
+    rule_drafts_dir = rule_drafts_dir or settings.rule_drafts_dir
     requested = Path(recording_name).name
     requested_stem = Path(requested).stem.casefold()
     manifest = ManifestStore(settings.manifest_path)
@@ -682,18 +678,14 @@ def archive_recording(source: Path, processed_dir: Path) -> Path:
     return destination
 
 
-def create_rules_draft(transcript_path: Path) -> Path:
-    """Hand one transcript to Hong Ting's existing rules-extraction engine.
+def create_rules_draft(transcript_path: Path, rule_drafts_dir: Path) -> Path:
+    """Hand one transcript to the existing rules-extraction engine.
 
     The extractor itself remains responsible for the prompt and model call.
     This small adapter only scopes the input to the recording that just
     finished, so a background scan does not rebuild every older transcript.
     """
-    from extract_rules import (
-        RULE_DRAFTS_DIR,
-        generate_draft,
-        load_extraction_prompt,
-    )
+    from extract_rules import generate_draft, load_extraction_prompt
 
     content = transcript_path.read_text(encoding="utf-8").strip()
     if not content:
@@ -705,12 +697,12 @@ def create_rules_draft(transcript_path: Path) -> Path:
 
     source = f"## Source: {source_label}\n{content}"
     draft = generate_draft(load_extraction_prompt(), source)
-    destination = RULE_DRAFTS_DIR / f"{transcript_path.stem}_rules_draft.md"
+    destination = rule_drafts_dir / f"{transcript_path.stem}_rules_draft.md"
     write_text_atomically(destination, draft.rstrip() + "\n")
     return destination
 
 
-def retry_failed_rule_drafts(manifest: ManifestStore) -> None:
+def retry_failed_rule_drafts(manifest: ManifestStore, settings: Settings) -> None:
     for fingerprint, record in list(manifest.recordings.items()):
         if record.get("status") != "completed" or record.get("rules_status") != "failed":
             continue
@@ -721,7 +713,7 @@ def retry_failed_rule_drafts(manifest: ManifestStore) -> None:
         if not transcript_path.is_file():
             continue
         try:
-            draft_path = create_rules_draft(transcript_path)
+            draft_path = create_rules_draft(transcript_path, settings.rule_drafts_dir)
         except Exception as error:
             manifest.update(fingerprint, rules_error=str(error))
             print(f"Rule extraction still failing for {transcript_path.name}: {error}")
@@ -743,7 +735,7 @@ def scan_once(
 ) -> tuple[int, int, int]:
     manifest = ManifestStore(settings.manifest_path)
     if extract_rules_enabled and retry_failed:
-        retry_failed_rule_drafts(manifest)
+        retry_failed_rule_drafts(manifest, settings)
 
     processed_count = 0
     skipped_count = 0
@@ -804,7 +796,9 @@ def scan_once(
         rules_error: str | None = None
         if extract_rules_enabled:
             try:
-                rules_path = create_rules_draft(transcript_path)
+                rules_path = create_rules_draft(
+                    transcript_path, settings.rule_drafts_dir
+                )
             except Exception as error:
                 rules_status = "failed"
                 rules_error = str(error)
@@ -816,7 +810,10 @@ def scan_once(
                 rules_status = "completed"
                 rules_draft = display_path(rules_path)
                 print(f"Rules draft written: {rules_draft}")
-                print(f"Review it with: python review_rules.py {rules_draft}")
+                print(
+                    "Review it with: python review_rules.py "
+                    f"--teacher {settings.rules_path.parent.name} {rules_draft}"
+                )
 
         manifest.update(
             fingerprint,
