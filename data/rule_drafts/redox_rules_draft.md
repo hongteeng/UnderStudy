@@ -2,57 +2,57 @@
 
 ## Student-request types and recognition cues
 
-- **Explain why a reaction is redox using oxidation states:** Recognise prompts such as “use oxidation state to explain why this reaction is a redox reaction.” The answer should identify the relevant element, state whether it is oxidized or reduced, give the numerical oxidation-state change, and name the compounds in which those oxidation states occur. (data/transcripts/raw/redox.md)
-- **Explain why a substance is an oxidizing agent:** Recognise prompts such as “explain why compound X is an oxidizing agent.” The transcript identifies this as a standard question but does not demonstrate the complete answer wording for an oxidizing agent. (data/transcripts/raw/redox.md)
+- **Explain why a reaction is a redox reaction using oxidation states:** Recognise prompts such as “use oxidation state to explain why this reaction is a redox reaction.” The expected explanation identifies the element, states that its oxidation state increased or decreased, gives both oxidation-state values, and names the compound containing the element at each stage. (redox.md)
+- **Explain why a compound is an oxidizing agent:** Recognise prompts such as “explain why compound X is an oxidizing agent.” The tutor describes this as a standard question with a reusable answer, but the transcript does not demonstrate that answer. (redox.md)
+- **Identify or understand redox through transfer models:** Recognise requests involving electron, hydrogen, or oxygen transfer as distinct from oxidation-state identification. The source names these models but does not demonstrate how to answer questions using them. (redox.md)
 
 ## Tutor response approaches
 
-- **Begin with oxidation-state rules:** Treat oxidation-state rules as the first area to practise when learning redox. (data/transcripts/raw/redox.md)
-- **Move from rules to standard question forms:** After oxidation-state rules, practise using oxidation states to identify and explain redox reactions and oxidizing agents. (data/transcripts/raw/redox.md)
-- **Use a reusable sentence structure:** Model answers on: “Element X is oxidized because its oxidation state increased from plus one in XCl to plus two in XO.” Substitute the actual element, numerical values, and compounds from the question. (data/transcripts/raw/redox.md)
-- **Require both numerical and chemical context:** Emphasise that students must state that the oxidation-state number increased and identify the specific compound containing the element before and after the change. (data/transcripts/raw/redox.md)
-- **Then broaden to transfer definitions:** After oxidation-state identification, introduce electron, hydrogen, and oxygen transfer, using “OIL RIG” for electron transfer. (data/transcripts/raw/redox.md)
-- **Connect to later learning:** Present redox as a fundamental concept needed for understanding harder topics such as electrochemistry. (data/transcripts/raw/redox.md)
+- **Begin with foundations:** Start the redox sequence with oxidation-state rules. (redox.md)
+- **Move from rules to standard questions:** After oxidation-state rules, apply them to prompts asking why a reaction is redox or why a substance is an oxidizing agent. (redox.md)
+- **Use a reusable sentence structure:** Model an answer such as “element X is oxidized because its oxidation state increased from plus 1 in XCl to plus 2 in XO.” (redox.md)
+- **Make the direction explicit:** Require the student to say that the oxidation-state number increased, rather than merely listing the two values. (redox.md)
+- **Locate each oxidation state:** Require the student to identify the specific compound in which the element has each oxidation state. (redox.md)
+- **Broaden after oxidation states:** Extend understanding beyond oxidation states to electron, hydrogen, and oxygen transfer. (redox.md)
 
 ## Required and preferred vocabulary
 
-- **“oxidation state increased from … in … to … in …”**: Use this structure when explaining oxidation by oxidation-state change. (data/transcripts/raw/redox.md)
-- **“Element X is oxidized because …”**: Preferred opening for identifying oxidation in the demonstrated answer pattern. (data/transcripts/raw/redox.md)
-- **Name the specific compounds:** Include both the initial and final compounds, not merely the oxidation-state numbers. (data/transcripts/raw/redox.md)
-- **Use numerical oxidation states:** State values explicitly, such as “plus one” and “plus two.” (data/transcripts/raw/redox.md)
-- **“oxidizing agent”**: This is the term used in the source for questions asking about the role of compound X. (data/transcripts/raw/redox.md)
-- **“OIL RIG”**: Use this mnemonic when teaching electron transfer. (data/transcripts/raw/redox.md)
+- **“oxidation state”:** Use this term when identifying and explaining oxidation or reduction. (redox.md)
+- **“is oxidized because its oxidation state increased”:** Preferred causal wording for an oxidation-state explanation. (redox.md)
+- **State both numerical values:** Use a structure such as “increased from plus 1 in XCl to plus 2 in XO.” (redox.md)
+- **Name the compounds:** Attach each oxidation-state value to the compound in which the element appears, such as “plus 1 in XCl” and “plus 2 in XO.” (redox.md)
+- **“redox reaction” and “oxidizing agent”:** These are the source’s named question categories. (redox.md)
 
 ## Wording to avoid or qualify
 
-- **Do not give only the direction of change:** “Its oxidation state increased” is incomplete without the initial and final oxidation-state numbers. (data/transcripts/raw/redox.md)
-- **Do not give only the numbers:** The student should also identify the specific compounds in which the element has each oxidation state. (data/transcripts/raw/redox.md)
-- **Do not present these topics as having the highest examination weightage:** The tutor explicitly says the selected topics are “by no means the most important topics with the highest weightage”; they are recommended because the tutor believes students can score well in them with time and effort. (data/transcripts/raw/redox.md)
+- **Do not give only the oxidation-state values:** Explicitly state that the number increased when explaining oxidation. (redox.md)
+- **Do not omit the chemical contexts:** Giving “plus 1 to plus 2” alone is insufficient under the tutor’s demonstrated approach; identify the specific compound associated with each value. (redox.md)
 
+- **Characterise the question style:** Present redox as a fundamental concept and emphasize that many O-level redox questions use recurring answer structures. (redox.md, tutor-edited)
 ## Topic map and reusable explanations
 
-- **Suggested learning order:** oxidation-state rules → identification and explanation of redox through oxidation-state changes → oxidizing-agent questions → electron, hydrogen, and oxygen transfer. (data/transcripts/raw/redox.md)
-- **Oxidation-state explanation pattern:** Identify the element, state “oxidized” or “reduced,” give the direction and numerical change in oxidation state, and identify the compound associated with each value. (data/transcripts/raw/redox.md)
-- **Demonstrated oxidation explanation:** “Element X is oxidized because its oxidation state increased from plus one in XCl to plus two in XO.” (data/transcripts/raw/redox.md)
-- **Structure–mechanism–consequence link:** The element is traced through particular compounds; its oxidation-state number changes; that change is used to classify what happened to the element and support the redox explanation. (data/transcripts/raw/redox.md)
-- **Progression to electrochemistry:** Understanding redox provides a foundation for the later, harder topic of electrochemistry. (data/transcripts/raw/redox.md)
+- **Suggested topic order within redox:** Learn oxidation-state rules first; then practise standard oxidation-state explanations; then cover electron, hydrogen, and oxygen transfer. (redox.md)
+- **Reusable oxidation explanation:** “Element X is oxidized because its oxidation state increased from plus 1 in XCl to plus 2 in XO.” (redox.md)
+- **Structure of the explanation:** Identify the element and process → state the direction of change → give the initial and final oxidation states → identify the compound containing the element at each state. (redox.md)
+- **Conceptual progression:** Redox is presented as a fundamental concept needed before harder topics such as Electrochemistry. (redox.md)
 
+- Not only do you need to understand and identify redox reactions through oxidation states, you also need to understand electron, hydrogen and oxygen transfer using the mnemonic OIL RIG (redox.md, tutor-edited)
 ## Analogies and examples to reuse
 
-- **Generic compound example:** Use XCl and XO to demonstrate an increase in the oxidation state of X from +1 to +2. (data/transcripts/raw/redox.md)
-- **Reusable answer frame:** “Element ___ is oxidized because its oxidation state increased from ___ in ___ to ___ in ___.” (data/transcripts/raw/redox.md)
-- **Mnemonic:** Use “OIL RIG” in connection with electron transfer. The source does not spell out the mnemonic. (data/transcripts/raw/redox.md)
+- **Generic oxidation-state example:** Use XCl and XO to model an element changing from oxidation state plus 1 to plus 2 without tying the sentence structure to a particular named element. (redox.md)
+- No analogy is demonstrated in the supplied transcript. (redox.md)
 
 ## Misconceptions to pre-empt
 
-- **An unquantified increase is enough:** Correct this by requiring the student to state the initial and final oxidation-state numbers. (data/transcripts/raw/redox.md)
-- **Oxidation-state numbers alone are enough:** Correct this by requiring the student to name the specific compound in which each oxidation state occurs. (data/transcripts/raw/redox.md)
-- **Redox can be understood only through oxidation states:** Pre-empt this by also teaching electron, hydrogen, and oxygen transfer. (data/transcripts/raw/redox.md)
-- **The tutor’s recommended study order represents examination weightage:** Clarify that the recommendation is based on perceived scoring accessibility with practice, not on the topics having the highest weightage. (data/transcripts/raw/redox.md)
+- **Listing values is not the whole explanation:** Students may identify plus 1 and plus 2 but fail to say that the oxidation state increased. Correct this by requiring the direction of numerical change. (redox.md)
+- **Oxidation states need chemical context:** Students may give the numbers without identifying where they occur. Correct this by naming the relevant compound for each oxidation state. (redox.md)
+- **Redox is not presented only through oxidation states:** The tutor also expects understanding through electron, hydrogen, and oxygen transfer, although the transcript does not explain these models. (redox.md)
 
 ## Syllabus boundaries
 
-- **Student level:** O-level chemistry. (data/transcripts/raw/redox.md)
-- **Included scope:** oxidation-state rules, oxidation-state explanations of redox, oxidizing-agent questions, and electron, hydrogen, and oxygen transfer. (data/transcripts/raw/redox.md)
-- **Later-topic connection:** Electrochemistry is mentioned as a harder topic that depends on redox understanding, but it is not taught in this source. (data/transcripts/raw/redox.md)
-- **Not supplied in the source:** the full list of oxidation-state rules, calculation methods, reduction answer wording, the complete explanation of oxidizing agents, the expansion of “OIL RIG,” and worked examples of hydrogen or oxygen transfer. (data/transcripts/raw/redox.md)
+- **Student level:** O-level Chemistry. (redox.md)
+- **Immediate scope:** Redox, especially oxidation-state rules, oxidation-state explanations, oxidizing-agent questions, and electron/hydrogen/oxygen transfer. (redox.md)
+- **Later-topic link:** Electrochemistry is described as a harder topic for which redox understanding is needed; it is not taught in this transcript. (redox.md)
+- **Priority claim:** Redox is the tutor’s second suggested topic to “start grinding” when independently studying the whole O-level Chemistry syllabus in three months. This is a study-priority recommendation, not a stated syllabus teaching order. (redox.md)
+- **Weighting qualification:** The tutor explicitly says these recommended topics are not necessarily the most important or highest-weighted topics; they are selected because the tutor believes students can score well in them with time and effort. (redox.md)
+- **Material not supplied:** The transcript does not enumerate the oxidation-state rules, demonstrate the oxidizing-agent answer, explain transfer models, or cover Electrochemistry. (redox.md)

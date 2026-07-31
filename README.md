@@ -154,6 +154,18 @@ with the same contents is never transcribed twice. Failed recordings remain in
 python transcribe_recordings.py --retry-failed --extract-rules
 ```
 
+To deliberately redo a recording that was already completed, leave the fresh
+copy in `incoming/` and reset only that lesson before running the pipeline:
+
+```bash
+python transcribe_recordings.py --reset redox.mp3
+python transcribe_recordings.py --extract-rules
+```
+
+Reset removes that lesson's old transcript, draft, manifest entry, backup, and
+previously applied rules. It does not delete the fresh recording in `incoming/`
+or touch other lessons.
+
 Recordings larger than the API upload limit are compressed and split with
 `ffmpeg`. Install it with `brew install ffmpeg` before processing long lessons.
 

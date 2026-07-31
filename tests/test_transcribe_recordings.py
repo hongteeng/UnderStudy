@@ -190,6 +190,59 @@ class TranscriptionWorkerTests(unittest.TestCase):
         self.assertEqual(instructions, "Hong Ting prompt")
         self.assertIn("Teacher explains ionic bonding.", source)
 
+    def test_reset_keeps_incoming_and_removes_only_matching_lesson(self):
+        incoming = self.create_recording(name="redox.mp3", content=b"redox audio")
+        processed = self.processed / "redox.mp3"
+        transcript = self.transcripts / "redox.md"
+        drafts = self.root / "drafts"
+        draft = drafts / "redox_rules_draft.md"
+        backup = drafts / "redox_rules_draft.md.bak"
+        rules = self.root / "rules.md"
+        drafts.mkdir()
+        processed.write_bytes(b"old audio")
+        transcript.write_text("old transcript", encoding="utf-8")
+        draft.write_text("old draft", encoding="utf-8")
+        backup.write_text("old backup", encoding="utf-8")
+        rules.write_text(
+            "# Rules\n\n## Topic\n\n"
+            "- Keep bonding. (bonding.md)\n\n"
+            "- Remove redox. (data/transcripts/raw/redox.md)\n",
+            encoding="utf-8",
+        )
+        settings = self.settings()
+        manifest = transcription.ManifestStore(settings.manifest_path)
+        manifest.update(
+            "redox-fingerprint",
+            source_name="redox.mp3",
+            status="completed",
+            processed_audio=str(processed),
+            transcript=str(transcript),
+            rules_draft=str(draft),
+        )
+        manifest.update(
+            "other-fingerprint",
+            source_name="other.mp3",
+            status="completed",
+        )
+
+        transcription.reset_recording(
+            settings,
+            "redox.mp3",
+            rules_path=rules,
+            rule_drafts_dir=drafts,
+        )
+
+        self.assertTrue(incoming.is_file())
+        self.assertFalse(processed.exists())
+        self.assertFalse(transcript.exists())
+        self.assertFalse(draft.exists())
+        self.assertFalse(backup.exists())
+        self.assertNotIn("redox", rules.read_text(encoding="utf-8"))
+        self.assertIn("Keep bonding", rules.read_text(encoding="utf-8"))
+        remaining = transcription.ManifestStore(settings.manifest_path).recordings
+        self.assertNotIn("redox-fingerprint", remaining)
+        self.assertIn("other-fingerprint", remaining)
+
 
 if __name__ == "__main__":
     unittest.main()

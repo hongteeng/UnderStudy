@@ -9,12 +9,12 @@
       "rules_draft": "data/rule_drafts/redox_rules_draft.md",
       "rules_error": null,
       "rules_status": "completed",
-      "segment_count": 25,
+      "segment_count": 19,
       "source_name": "redox.mp3",
       "source_size": 1442047,
       "status": "completed",
       "transcript": "data/transcripts/raw/redox.md",
-      "updated_at": "2026-07-29T14:49:11+00:00"
+      "updated_at": "2026-07-29T15:28:55+00:00"
     },
     "44cbb90d8a9b97e2f3c42ea7ceea4232d7f138b07f9de0eb961bb02ff21b5b66": {
       "attempts": 1,

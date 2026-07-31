@@ -9,6 +9,7 @@ Examples:
     python transcribe_recordings.py
     python transcribe_recordings.py --watch --extract-rules
     python transcribe_recordings.py --retry-failed --extract-rules
+    python transcribe_recordings.py --reset redox.mp3
 """
 
 from __future__ import annotations
@@ -19,6 +20,7 @@ import hashlib
 import json
 import mimetypes
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -48,6 +50,8 @@ PROJECT_ROOT = Path(__file__).parent
 DEFAULT_INCOMING_DIR = PROJECT_ROOT / "data" / "recordings" / "incoming"
 DEFAULT_PROCESSED_DIR = PROJECT_ROOT / "data" / "recordings" / "processed"
 DEFAULT_TRANSCRIPTS_DIR = PROJECT_ROOT / "data" / "transcripts" / "raw"
+DEFAULT_RULE_DRAFTS_DIR = PROJECT_ROOT / "data" / "rule_drafts"
+DEFAULT_RULES_PATH = PROJECT_ROOT / "data" / "rules.md"
 DEFAULT_MANIFEST_PATH = (
     PROJECT_ROOT / "data" / "recordings" / "transcription_manifest.json"
 )
@@ -110,6 +114,15 @@ def parse_arguments() -> argparse.Namespace:
         "--retry-failed",
         action="store_true",
         help="Retry recordings or rule drafts previously marked as failed.",
+    )
+    parser.add_argument(
+        "--reset",
+        metavar="RECORDING",
+        default=None,
+        help=(
+            "Forget one recording and remove its old transcript, draft, and "
+            "applied rules so the copy in incoming/ can be processed again."
+        ),
     )
     parser.add_argument(
         "--incoming",
@@ -553,6 +566,94 @@ def write_text_atomically(path: Path, content: str) -> None:
     temporary.replace(path)
 
 
+def manifest_path(value: str) -> Path:
+    path = Path(value).expanduser()
+    return path.resolve() if path.is_absolute() else (PROJECT_ROOT / path).resolve()
+
+
+def path_is_within(path: Path, directory: Path) -> bool:
+    try:
+        path.resolve().relative_to(directory.resolve())
+    except ValueError:
+        return False
+    return True
+
+
+def remove_applied_rules(rules_path: Path, source_markers: set[str]) -> bool:
+    if not rules_path.is_file() or not source_markers:
+        return False
+    original = rules_path.read_text(encoding="utf-8")
+    blocks = re.split(r"\n\s*\n", original)
+    kept = [
+        block
+        for block in blocks
+        if not any(marker and marker in block for marker in source_markers)
+    ]
+    updated = "\n\n".join(kept).strip("\n") + "\n"
+    if updated == original:
+        return False
+    write_text_atomically(rules_path, updated)
+    return True
+
+
+def reset_recording(
+    settings: Settings,
+    recording_name: str,
+    *,
+    rules_path: Path = DEFAULT_RULES_PATH,
+    rule_drafts_dir: Path = DEFAULT_RULE_DRAFTS_DIR,
+) -> list[Path]:
+    """Remove the outputs and manifest entry for exactly one lesson recording."""
+    requested = Path(recording_name).name
+    requested_stem = Path(requested).stem.casefold()
+    manifest = ManifestStore(settings.manifest_path)
+    matches = [
+        (fingerprint, record)
+        for fingerprint, record in manifest.recordings.items()
+        if Path(str(record.get("source_name", ""))).name.casefold()
+        == requested.casefold()
+        or Path(str(record.get("source_name", ""))).stem.casefold()
+        == requested_stem
+    ]
+    if not matches:
+        raise ValueError(f"No manifest entry found for recording: {recording_name}")
+
+    allowed_roots = (
+        settings.processed_dir,
+        settings.transcripts_dir,
+        rule_drafts_dir,
+    )
+    deleted: list[Path] = []
+    source_markers: set[str] = set()
+    for fingerprint, record in matches:
+        transcript_value = record.get("transcript")
+        if transcript_value:
+            transcript = manifest_path(str(transcript_value))
+            source_markers.add(str(transcript_value))
+            source_markers.add(transcript.name)
+
+        for field in ("processed_audio", "transcript", "rules_draft", "last_duplicate"):
+            value = record.get(field)
+            if not value:
+                continue
+            path = manifest_path(str(value))
+            if not any(path_is_within(path, root) for root in allowed_roots):
+                raise ValueError(f"Refusing to remove an unexpected path: {path}")
+            candidates = [path]
+            if field == "rules_draft":
+                candidates.append(path.with_suffix(path.suffix + ".bak"))
+            for candidate in candidates:
+                if candidate.is_file():
+                    candidate.unlink()
+                    deleted.append(candidate)
+        manifest.recordings.pop(fingerprint, None)
+
+    manifest.save()
+    if remove_applied_rules(rules_path, source_markers):
+        deleted.append(rules_path)
+    return deleted
+
+
 def transcribe_recording(
     source: Path, settings: Settings, client: OpenAI
 ) -> tuple[Path, int, float | None]:
@@ -736,6 +837,8 @@ def scan_once(
 
 def run(args: argparse.Namespace) -> int:
     settings = load_settings(args)
+    if args.reset and (args.watch or args.extract_rules or args.retry_failed):
+        raise ValueError("Use --reset by itself, without watch, extraction, or retry flags.")
     for directory in (
         settings.incoming_dir,
         settings.processed_dir,
@@ -744,6 +847,15 @@ def run(args: argparse.Namespace) -> int:
         directory.mkdir(parents=True, exist_ok=True)
 
     with single_worker_lock(settings.lock_path):
+        if args.reset:
+            deleted = reset_recording(settings, args.reset)
+            print(f"Reset complete for {Path(args.reset).name}.")
+            if deleted:
+                print("Removed old outputs:")
+                for path in deleted:
+                    print(f"  - {display_path(path)}")
+            print("The recording in incoming/ will be transcribed on the next run.")
+            return 0
         while True:
             processed, skipped, failed = scan_once(
                 settings,

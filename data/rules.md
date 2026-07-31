@@ -8,11 +8,9 @@ consulted only where these rules don't cover something).
 - **Need for faster exam recall:** Recognise learners concerned with remembering content efficiently or saving “precious time in exams.” (hongtingtitktok.md)
 - No further distinct student-request types are explicitly established in the source. (hongtingtitktok.md)
 
-- **Explain why a reaction is redox using oxidation states:** Recognise prompts such as “use oxidation state to explain why this reaction is a redox reaction.” The answer should identify the relevant element, state whether it is oxidized or reduced, give the numerical oxidation-state change, and name the compounds in which those oxidation states occur. (data/transcripts/raw/redox.md)
-- **Explain why a substance is an oxidizing agent:** Recognise prompts such as “explain why compound X is an oxidizing agent.” The transcript identifies this as a standard question but does not demonstrate the complete answer wording for an oxidizing agent. (data/transcripts/raw/redox.md)
-
-- **Conceptual “why” question about redox roles:** Recognised by a question such as “why is an oxidizing agent always reduced?” The tutor begins by establishing the rule that redox requires both reduction and oxidation. (1.md)
-- **Question about the relationship between agents:** The tutor explains agent roles by defining what each agent causes to happen to another reactant. (1.md)
+- **Explain why a reaction is a redox reaction using oxidation states:** Recognise prompts such as “use oxidation state to explain why this reaction is a redox reaction.” The expected explanation identifies the element, states that its oxidation state increased or decreased, gives both oxidation-state values, and names the compound containing the element at each stage. (redox.md)
+- **Explain why a compound is an oxidizing agent:** Recognise prompts such as “explain why compound X is an oxidizing agent.” The tutor describes this as a standard question with a reusable answer, but the transcript does not demonstrate that answer. (redox.md)
+- **Identify or understand redox through transfer models:** Recognise requests involving electron, hydrogen, or oxygen transfer as distinct from oxidation-state identification. The source names these models but does not demonstrate how to answer questions using them. (redox.md)
 
 ## Tutor response approaches
 
@@ -23,18 +21,12 @@ consulted only where these rules don't cover something).
 - **Make the exam benefit explicit:** Explain that memorised recall aids can help students answer faster and save time in exams once the underlying ideas are understood. (hongtingtitktok.md)
 - **Use encouraging framing:** Present progress as manageable and cumulative: “Small steps now, big results later.” (hongtingtitktok.md)
 
-- **Begin with oxidation-state rules:** Treat oxidation-state rules as the first area to practise when learning redox. (data/transcripts/raw/redox.md)
-- **Move from rules to standard question forms:** After oxidation-state rules, practise using oxidation states to identify and explain redox reactions and oxidizing agents. (data/transcripts/raw/redox.md)
-- **Use a reusable sentence structure:** Model answers on: “Element X is oxidized because its oxidation state increased from plus one in XCl to plus two in XO.” Substitute the actual element, numerical values, and compounds from the question. (data/transcripts/raw/redox.md)
-- **Require both numerical and chemical context:** Emphasise that students must state that the oxidation-state number increased and identify the specific compound containing the element before and after the change. (data/transcripts/raw/redox.md)
-- **Then broaden to transfer definitions:** After oxidation-state identification, introduce electron, hydrogen, and oxygen transfer, using “OIL RIG” for electron transfer. (data/transcripts/raw/redox.md)
-- **Connect to later learning:** Present redox as a fundamental concept needed for understanding harder topics such as electrochemistry. (data/transcripts/raw/redox.md)
-
-- **Start from the overall redox condition:** Explain first that, if a reaction is redox, “there must be both reduction and oxidation happening.” (1.md)
-- **Use paired roles:** State that if one species is reduced, another species must be oxidised, subject to the tutor’s qualification about the number of reactants. (1.md)
-- **Define an agent through its effect on another substance:** The tutor uses “By definition it means that I cause other people to be oxidized” and the parallel phrasing for a reducing agent. (1.md)
-- **Define an agent through its effect on another substance:** “By definition it means that I cause other people to be oxidized. That's what oxidizing agent means,” and “reducing agent likewise, it means that I cause another person to be reduced.” (1.md, tutor-edited)- **Close by restating the reciprocal relationship:** The tutor concludes by restating that redox always contains reduction and oxidation, then gives the agent outcome. (1.md)
-- **Close by restating the reciprocal relationship:** Redox always involves both reduction and oxidation; therefore, an oxidising agent is reduced and a reducing agent is oxidised. (1.md, tutor-edited)
+- **Begin with foundations:** Start the redox sequence with oxidation-state rules. (redox.md)
+- **Move from rules to standard questions:** After oxidation-state rules, apply them to prompts asking why a reaction is redox or why a substance is an oxidizing agent. (redox.md)
+- **Use a reusable sentence structure:** Model an answer such as “element X is oxidized because its oxidation state increased from plus 1 in XCl to plus 2 in XO.” (redox.md)
+- **Make the direction explicit:** Require the student to say that the oxidation-state number increased, rather than merely listing the two values. (redox.md)
+- **Locate each oxidation state:** Require the student to identify the specific compound in which the element has each oxidation state. (redox.md)
+- **Broaden after oxidation states:** Extend understanding beyond oxidation states to electron, hydrogen, and oxygen transfer. (redox.md)
 
 ## Required and preferred vocabulary
 
@@ -49,16 +41,11 @@ consulted only where these rules don't cover something).
 
 - No exact mark-scheme phrases or notation requirements are established in the source. (hongtingtitktok.md)
 
-- **“oxidation state increased from … in … to … in …”**: Use this structure when explaining oxidation by oxidation-state change. (data/transcripts/raw/redox.md)
-- **“Element X is oxidized because …”**: Preferred opening for identifying oxidation in the demonstrated answer pattern. (data/transcripts/raw/redox.md)
-- **Name the specific compounds:** Include both the initial and final compounds, not merely the oxidation-state numbers. (data/transcripts/raw/redox.md)
-- **Use numerical oxidation states:** State values explicitly, such as “plus one” and “plus two.” (data/transcripts/raw/redox.md)
-- **“oxidizing agent”**: This is the term used in the source for questions asking about the role of compound X. (data/transcripts/raw/redox.md)
-- **“OIL RIG”**: Use this mnemonic when teaching electron transfer. (data/transcripts/raw/redox.md)
-
-- **Use the paired terms “reduction and oxidation”:** The tutor repeatedly frames redox as requiring “both reduction and oxidation happening.” (1.md)
-- **Use “oxidising agent” and “reducing agent”:** The tutor uses British spelling in “oxidised” and “oxidising agent,” while also using “oxidizing” in some spoken definitions. Consistent spelling needs tutor decision. (1.md)
-- **Use “by definition” when explaining an agent’s role:** The tutor explicitly introduces the agent explanation with “By definition.” (1.md)
+- **“oxidation state”:** Use this term when identifying and explaining oxidation or reduction. (redox.md)
+- **“is oxidized because its oxidation state increased”:** Preferred causal wording for an oxidation-state explanation. (redox.md)
+- **State both numerical values:** Use a structure such as “increased from plus 1 in XCl to plus 2 in XO.” (redox.md)
+- **Name the compounds:** Attach each oxidation-state value to the compound in which the element appears, such as “plus 1 in XCl” and “plus 2 in XO.” (redox.md)
+- **“redox reaction” and “oxidizing agent”:** These are the source’s named question categories. (redox.md)
 
 ## Wording to avoid or qualify
 
@@ -69,14 +56,10 @@ consulted only where these rules don't cover something).
 - **Avoid presenting understanding and memorisation as opposites:** Frame them as complementary: understanding supplies the reasoning, while memorisation improves recall speed for selected content. (hongtingtitktok.md)
 - **Qualify broad claims beyond chemistry:** The source refers to “most subjects,” but only chemistry examples are supplied. (hongtingtitktok.md)
 
-- **Do not give only the direction of change:** “Its oxidation state increased” is incomplete without the initial and final oxidation-state numbers. (data/transcripts/raw/redox.md)
-- **Do not give only the numbers:** The student should also identify the specific compounds in which the element has each oxidation state. (data/transcripts/raw/redox.md)
-- **Do not present these topics as having the highest examination weightage:** The tutor explicitly says the selected topics are “by no means the most important topics with the highest weightage”; they are recommended because the tutor believes students can score well in them with time and effort. (data/transcripts/raw/redox.md)
+- **Do not give only the oxidation-state values:** Explicitly state that the number increased when explaining oxidation. (redox.md)
+- **Do not omit the chemical contexts:** Giving “plus 1 to plus 2” alone is insufficient under the tutor’s demonstrated approach; identify the specific compound associated with each value. (redox.md)
 
-- **Qualify the simple two-reactant statement where relevant:** The tutor says that if one substance is reduced, “the other guy must be oxidised,” then qualifies this with “Providing there are two reactants.” (1.md)
-- **Do not imply every reactant must change in a multi-reactant reaction:** The tutor states that with three reactants, “one guy reduced, one guy oxidised and the other guy nothing happens.” (1.md)
-- **Allow for oxidation and reduction within one reactant:** The tutor notes that “one of the element in the reactant was reduced and the other element was oxidised.” (1.md)
-- **Avoid relying on “always” without the redox context:** The tutor’s recurring condition is “if a reaction is redox.” (1.md)
+- **Characterise the question style:** Present redox as a fundamental concept and emphasize that many O-level redox questions use recurring answer structures. (redox.md, tutor-edited)
 
 ## Topic map and reusable explanations
 
@@ -94,24 +77,17 @@ consulted only where these rules don't cover something).
 - **Reactivity series:** Memorise the order for efficient exam recall, but also explain how evidence from metal–water and metal–acid reactions supports comparisons such as potassium being more reactive than zinc. (hongtingtitktok.md)
 - **Structure–mechanism–consequence pattern:** Use a material’s structure or a reaction’s observable behaviour to explain the relevant property or ordering before asking students to remember it. (hongtingtitktok.md)
 
-- **Suggested learning order:** oxidation-state rules → identification and explanation of redox through oxidation-state changes → oxidizing-agent questions → electron, hydrogen, and oxygen transfer. (data/transcripts/raw/redox.md)
-- **Oxidation-state explanation pattern:** Identify the element, state “oxidized” or “reduced,” give the direction and numerical change in oxidation state, and identify the compound associated with each value. (data/transcripts/raw/redox.md)
-- **Demonstrated oxidation explanation:** “Element X is oxidized because its oxidation state increased from plus one in XCl to plus two in XO.” (data/transcripts/raw/redox.md)
-- **Structure–mechanism–consequence link:** The element is traced through particular compounds; its oxidation-state number changes; that change is used to classify what happened to the element and support the redox explanation. (data/transcripts/raw/redox.md)
-- **Progression to electrochemistry:** Understanding redox provides a foundation for the later, harder topic of electrochemistry. (data/transcripts/raw/redox.md)
+- **Suggested topic order within redox:** Learn oxidation-state rules first; then practise standard oxidation-state explanations; then cover electron, hydrogen, and oxygen transfer. (redox.md)
+- **Reusable oxidation explanation:** “Element X is oxidized because its oxidation state increased from plus 1 in XCl to plus 2 in XO.” (redox.md)
+- **Structure of the explanation:** Identify the element and process → state the direction of change → give the initial and final oxidation states → identify the compound containing the element at each state. (redox.md)
+- **Conceptual progression:** Redox is presented as a fundamental concept needed before harder topics such as Electrochemistry. (redox.md)
 
-- **Core redox relationship:** In a redox reaction, reduction and oxidation must both occur. (1.md)
-- **Two-reactant framing:** Where there are two reactants, if one is reduced, the other is oxidised. (1.md)
-- **More-than-two-reactant qualification:** With three reactants, one may be reduced, one oxidised, and another may undergo no change. (1.md)
-- **Single-reactant qualification:** A single reactant can contain one element that is reduced and another that is oxidised. (1.md)
-- **Agent relationship explanation:** The tutor connects what an agent causes in another species to what must happen to the agent itself, using “That’s how redox works.” (1.md)
-- **Agent relationship explanation:** If an agent causes another substance to be oxidised, the agent is reduced; if an agent causes another substance to be reduced, the agent is oxidised. (1.md, tutor-edited)
+- Not only do you need to understand and identify redox reactions through oxidation states, you also need to understand electron, hydrogen and oxygen transfer using the mnemonic OIL RIG (redox.md, tutor-edited)
 
 ## Analogies and examples to reuse
 
-- **Conversational person-role framing:** The tutor refers to reacting substances as “one guy,” “the other guy,” and “the other person that I’m reacting with.” This is used to make reciprocal redox roles conversational. (1.md)
-- **Three-reactant example structure:** “One guy reduced, one guy oxidised and the other guy nothing happens.” (1.md)
-- **Within-one-reactant example structure:** “One of the element in the reactant was reduced and the other element was oxidised.” (1.md)
+- **Generic oxidation-state example:** Use XCl and XO to model an element changing from oxidation state plus 1 to plus 2 without tying the sentence structure to a particular named element. (redox.md)
+- No analogy is demonstrated in the supplied transcript. (redox.md)
 
 ## Misconceptions to pre-empt
 
@@ -120,14 +96,9 @@ consulted only where these rules don't cover something).
 - **“A mnemonic replaces an explanation”:** Correct this by teaching the concept first and using the mnemonic only to accelerate recall. (hongtingtitktok.md)
 - **“Knowing graphite’s properties is enough”:** Correct this by linking the properties to graphite’s structure and bonding, subject to resolution of the scientific wording in the review block above. (hongtingtitktok.md)
 
-- **An unquantified increase is enough:** Correct this by requiring the student to state the initial and final oxidation-state numbers. (data/transcripts/raw/redox.md)
-- **Oxidation-state numbers alone are enough:** Correct this by requiring the student to name the specific compound in which each oxidation state occurs. (data/transcripts/raw/redox.md)
-- **Redox can be understood only through oxidation states:** Pre-empt this by also teaching electron, hydrogen, and oxygen transfer. (data/transcripts/raw/redox.md)
-- **The tutor’s recommended study order represents examination weightage:** Clarify that the recommendation is based on perceived scoring accessibility with practice, not on the topics having the highest weightage. (data/transcripts/raw/redox.md)
-
-- **Reduction cannot occur alone in a redox reaction:** The tutor explicitly says, “you cannot have one guy being reduced and then don't one else being oxidised. It doesn't work like that.” (1.md)
-- **Not every reactant necessarily changes:** In reactions with three reactants, a third reactant may have no change. (1.md)
-- **A redox process need not require separate reactants for oxidation and reduction:** The tutor allows that different elements within one reactant can be reduced and oxidised. (1.md)
+- **Listing values is not the whole explanation:** Students may identify plus 1 and plus 2 but fail to say that the oxidation state increased. Correct this by requiring the direction of numerical change. (redox.md)
+- **Oxidation states need chemical context:** Students may give the numbers without identifying where they occur. Correct this by naming the relevant compound for each oxidation state. (redox.md)
+- **Redox is not presented only through oxidation states:** The tutor also expects understanding through electron, hydrogen, and oxygen transfer, although the transcript does not explain these models. (redox.md)
 
 ## Syllabus boundaries
 
@@ -137,14 +108,12 @@ consulted only where these rules don't cover something).
 - **Assessment context:** The source refers generally to exams and saving exam time but does not identify an exam board, qualification, paper, or mark scheme. (hongtingtitktok.md)
 - **Deliberate exclusions:** None are explicitly established. (hongtingtitktok.md)
 
-- **Student level:** O-level chemistry. (data/transcripts/raw/redox.md)
-- **Included scope:** oxidation-state rules, oxidation-state explanations of redox, oxidizing-agent questions, and electron, hydrogen, and oxygen transfer. (data/transcripts/raw/redox.md)
-- **Later-topic connection:** Electrochemistry is mentioned as a harder topic that depends on redox understanding, but it is not taught in this source. (data/transcripts/raw/redox.md)
-- **Not supplied in the source:** the full list of oxidation-state rules, calculation methods, reduction answer wording, the complete explanation of oxidizing agents, the expansion of “OIL RIG,” and worked examples of hydrogen or oxygen transfer. (data/transcripts/raw/redox.md)
-
-- **Topic scope evidenced:** Basic conceptual explanation of redox reactions, oxidation, reduction, oxidising agents, and reducing agents. (1.md)
-- **Level:** Chemistry O levels 6092 (1.md, tutor-edited)
-- **Material not covered in this source:** Electron-transfer equations, oxidation numbers, half-equations, balancing redox equations, specific chemical examples, and electrochemical cells are not addressed. This is a source-coverage observation, not a confirmed exclusion from the tutor’s syllabus. (1.md)
+- **Student level:** O-level Chemistry. (redox.md)
+- **Immediate scope:** Redox, especially oxidation-state rules, oxidation-state explanations, oxidizing-agent questions, and electron/hydrogen/oxygen transfer. (redox.md)
+- **Later-topic link:** Electrochemistry is described as a harder topic for which redox understanding is needed; it is not taught in this transcript. (redox.md)
+- **Priority claim:** Redox is the tutor’s second suggested topic to “start grinding” when independently studying the whole O-level Chemistry syllabus in three months. This is a study-priority recommendation, not a stated syllabus teaching order. (redox.md)
+- **Weighting qualification:** The tutor explicitly says these recommended topics are not necessarily the most important or highest-weighted topics; they are selected because the tutor believes students can score well in them with time and effort. (redox.md)
+- **Material not supplied:** The transcript does not enumerate the oxidation-state rules, demonstrate the oxidizing-agent answer, explain transfer models, or cover Electrochemistry. (redox.md)
 
 ## Build Examples
 
