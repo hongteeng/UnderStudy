@@ -49,7 +49,7 @@ from openai import (
 PROJECT_ROOT = Path(__file__).parent
 DEFAULT_INCOMING_DIR = PROJECT_ROOT / "data" / "recordings" / "incoming"
 DEFAULT_PROCESSED_DIR = PROJECT_ROOT / "data" / "recordings" / "processed"
-DEFAULT_TRANSCRIPTS_DIR = PROJECT_ROOT / "data" / "transcripts" / "raw"
+DEFAULT_TRANSCRIPTS_DIR = PROJECT_ROOT / "data" / "transcripts"
 DEFAULT_RULE_DRAFTS_DIR = PROJECT_ROOT / "data" / "rule_drafts"
 DEFAULT_RULES_PATH = PROJECT_ROOT / "data" / "rules.md"
 DEFAULT_MANIFEST_PATH = (

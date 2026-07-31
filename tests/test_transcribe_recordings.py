@@ -206,7 +206,7 @@ class TranscriptionWorkerTests(unittest.TestCase):
         rules.write_text(
             "# Rules\n\n## Topic\n\n"
             "- Keep bonding. (bonding.md)\n\n"
-            "- Remove redox. (data/transcripts/raw/redox.md)\n",
+            "- Remove redox. (data/transcripts/redox.md)\n",
             encoding="utf-8",
         )
         settings = self.settings()

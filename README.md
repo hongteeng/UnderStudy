@@ -6,7 +6,7 @@ answers in that tutor's method when the tutor is unavailable.
 ## First answering-engine test
 
 1. Follow [SETUP.md](SETUP.md) to configure Python and `OPENAI_API_KEY`.
-2. Add one or more lesson transcripts to `data/transcripts/raw/`, or use the
+2. Add one or more lesson transcripts to `data/transcripts/`, or use the
    automated recording workflow below.
 3. Create a tutor-reviewable draft from those transcripts:
 
@@ -75,8 +75,8 @@ not evaluate the answers automatically.
 
 Everything under `data/` is shared through Git so both teammates work from the
 same recordings, transcripts, drafts, rules, examples, and evaluation
-materials. The `templates/` folder is also committed to Git. Only `.env` and
-other secret or machine-specific files stay out of the repository.
+materials. Only `.env` and other secret or machine-specific files stay out of
+the repository.
 
 ## Lesson-recording intake
 
@@ -87,7 +87,7 @@ materials used by students:
 data/
   recordings/incoming/              # newly uploaded lesson audio
   recordings/processed/             # audio successfully transcribed
-  transcripts/raw/                  # transcription output; the only transcript source extract_rules.py reads
+  transcripts/                      # lesson transcripts used by extract_rules.py
   rule_drafts/                      # AI-generated draft rules, named per transcript; never used directly
   rules.md                          # final tutor-approved teaching rules and worked Q&A examples
 ```
@@ -106,7 +106,7 @@ The combined workflow keeps the two parts separate:
 ```text
 lesson recording
   → transcription automation
-  → raw transcript
+  → transcript
   → Hong Ting's rules extractor
   → tutor review and Hong Ting's apply gate
   → answering and evaluation
@@ -128,7 +128,7 @@ python transcribe_recordings.py --extract-rules
 For every completed recording, the worker:
 
 1. transcribes the lesson with speaker labels;
-2. writes `data/transcripts/raw/<recording_name>.md`;
+2. writes `data/transcripts/<recording_name>.md`;
 3. moves the original audio to `data/recordings/processed/`;
 4. records the result in `data/recordings/transcription_manifest.json`; and
 5. hands that transcript to Hong Ting's existing extraction engine, which
@@ -216,13 +216,13 @@ the background worker with `python install_lesson_automation.py --uninstall`.
 ### Hong Ting's manual transcript-to-rules operation
 
 To run Hong Ting's original extractor manually, create one combined draft from
-all available raw transcripts:
+all available transcripts:
 
 ```bash
 python extract_rules.py
 ```
 
-The script reads every transcript in `data/transcripts/raw/`. It writes
+The script reads every transcript in `data/transcripts/`. It writes
 `data/rule_drafts/<transcript_name>_rules_draft.md`,
 named after the source transcript(s), including a `## Build Examples` section
 for any complete question-and-answer exchanges found in the source. The tutor
@@ -230,6 +230,5 @@ must review and edit this draft (`review_rules.py` or by hand) before applying
 it into `data/rules.md` (`apply_rules.py`). Only `data/rules.md` is used for
 student answers -- rules and worked examples together, in one file.
 
-The automation maintains its own machine-readable recording manifest. The CSV
-[recording manifest template](templates/recording_manifest_template.csv) remains
-available if a separate manual log is wanted.
+The automation maintains its own machine-readable recording manifest at
+`data/recordings/transcription_manifest.json`.

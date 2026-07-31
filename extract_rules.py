@@ -16,7 +16,7 @@ from openai import (
 
 
 PROJECT_ROOT = Path(__file__).parent
-RAW_TRANSCRIPTS_DIR = PROJECT_ROOT / "data" / "transcripts" / "raw"
+TRANSCRIPTS_DIR = PROJECT_ROOT / "data" / "transcripts"
 PROMPT_PATH = PROJECT_ROOT / "prompts" / "extract_rules_prompt.md"
 RULE_DRAFTS_DIR = PROJECT_ROOT / "data" / "rule_drafts"
 
@@ -39,16 +39,16 @@ def parse_arguments() -> argparse.Namespace:
 
 
 def load_transcripts() -> tuple[str, list[str]]:
-    transcript_directory = RAW_TRANSCRIPTS_DIR
+    transcript_directory = TRANSCRIPTS_DIR
     if not transcript_directory.is_dir():
         raise FileNotFoundError(
             "No transcript directory found. Add text transcripts to "
-            f"{RAW_TRANSCRIPTS_DIR}."
+            f"{TRANSCRIPTS_DIR}."
         )
 
     sources = []
     names = []
-    for path in sorted(transcript_directory.rglob("*")):
+    for path in sorted(transcript_directory.iterdir()):
         if not path.is_file() or path.name.startswith("."):
             continue
         content = path.read_text(encoding="utf-8").strip()

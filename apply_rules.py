@@ -141,7 +141,7 @@ def validate_draft(draft_text: str, sections: "dict[str, str]") -> None:
         )
         raise ValueError(
             "This draft has rule(s) with no source citation in parentheses "
-            f"at the end, e.g. `(data/transcripts/raw/<name>)`:\n{listed}\n"
+            f"at the end, e.g. `(data/transcripts/<name>)`:\n{listed}\n"
             "Add a source tag to each before applying -- without one, this "
             "rule can never be identified or replaced on a future re-apply."
         )

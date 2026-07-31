@@ -5,5 +5,5 @@ __pycache__/
 data/internal/transcription.lock
 data/internal/lesson_automation*.log
 data/recordings/transcription_manifest.json.tmp
-data/transcripts/**/*.tmp
+data/transcripts/*.tmp
 data/rule_drafts/*.bak
