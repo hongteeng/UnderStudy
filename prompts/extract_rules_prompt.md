@@ -43,6 +43,18 @@ it as a build example. These become the few-shot examples the answering
 system studies to match the tutor's structure and flow, so fidelity to the
 tutor's actual words and shape matters more here than in any other section.
 
+Extract **every** complete exchange, not just the clearest or longest one. A
+typical lesson recording contains several worked questions — including short
+ones the tutor answers in a few sentences, follow-up questions, and questions
+the tutor poses to the student and then answers himself. Each of these is a
+separate build example. Under-extraction is the main failure mode of this
+section: if you extract only one example from a transcript that works through
+four questions, the answering system loses the tutor's structure for the
+other three question types. When in doubt about whether an exchange is
+complete enough, extract it and let the tutor review it. In **Source
+coverage**, state for each source how many complete worked exchanges you
+found and how many you extracted; these two numbers must match.
+
 For each one:
 
 - Quote the student's question as stated, or as closely as the source allows.

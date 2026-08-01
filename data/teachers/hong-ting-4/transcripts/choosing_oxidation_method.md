@@ -1,6 +1,6 @@
 # Lesson transcript
 
-- Source recording: `New Recording 30.m4a`
+- Source recording: `choosing_oxidation_method.m4a`
 - Transcribed at: 2026-08-01T03:09:16+00:00
 - Transcription model: `gpt-4o-transcribe-diarize`
 - Approximate duration: 00:01:46

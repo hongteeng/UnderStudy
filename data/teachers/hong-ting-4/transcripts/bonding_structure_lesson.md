@@ -1,6 +1,6 @@
 # Lesson transcript
 
-- Source recording: `New Recording 32.m4a`
+- Source recording: `bonding_structure_lesson.m4a`
 - Transcribed at: 2026-08-01T03:28:56+00:00
 - Transcription model: `gpt-4o-transcribe-diarize`
 - Approximate duration: 00:16:06

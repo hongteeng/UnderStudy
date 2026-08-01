@@ -184,12 +184,33 @@ def source_key_from_draft(draft_path: Path) -> str:
     return stem[: -len(suffix)] if stem.endswith(suffix) else stem
 
 
+def block_matches_source(block: str, source_key: str) -> bool:
+    """True only if the block's trailing `(...)` source citation refers to
+    this source file. Matching the whole block text is unsafe: a block that
+    merely mentions the word `redox` in its body must not be treated as
+    coming from `redox.md`."""
+    citation = re.search(r"\(([^()]*)\)\s*$", block)
+    if not citation:
+        return False
+    return bool(
+        re.search(
+            rf"(?:^|[/\s`]){re.escape(source_key)}\.md(?:$|[\s,`])",
+            citation.group(1).strip(),
+        )
+    )
+
+
 def remove_blocks_for_source(title: str, body: str, source_key: str) -> str:
-    """Drop existing blocks tagged with this source, so re-applying an
-    updated draft replaces old content instead of duplicating it."""
+    """Drop existing blocks whose source citation names this source, so
+    re-applying an updated draft replaces old content instead of
+    duplicating it."""
     if not body.strip():
         return body
-    kept = [block for block in split_blocks(title, body) if source_key not in block]
+    kept = [
+        block
+        for block in split_blocks(title, body)
+        if not block_matches_source(block, source_key)
+    ]
     return "\n\n".join(kept).strip("\n")
 
 

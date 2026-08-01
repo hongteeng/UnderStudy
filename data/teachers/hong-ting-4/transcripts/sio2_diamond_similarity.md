@@ -1,6 +1,6 @@
 # Lesson transcript
 
-- Source recording: `New Recording 31.m4a`
+- Source recording: `sio2_diamond_similarity.m4a`
 - Transcribed at: 2026-08-01T03:10:36+00:00
 - Transcription model: `gpt-4o-transcribe-diarize`
 - Approximate duration: 00:02:13

@@ -1,0 +1,703 @@
+# Blind evaluation worksheet
+
+Teacher: Hong Ting 4
+Run: 20260801_072838
+Progress: 5/17 questions reviewed
+
+Answer identities are deliberately hidden. Do not open the `internal` folder until the review is finished.
+
+## Scoring guide
+
+```text
+0 = incorrect or unusable
+1 = needs major correction
+2 = usable after a minor edit
+3 = ready to use and matches the teacher
+```
+
+## Question 1: q1_diamond_vs_nitrogen
+
+Compare the difference between diamond and nitrogen gas.
+
+### Answer A
+
+Diamond and nitrogen gas are both made of non-metal atoms, but they have very different structures and properties.
+
+| Feature | Diamond | Nitrogen gas (N₂) |
+|---|---|---|
+| Type of substance | Giant covalent structure | Simple molecular substance |
+| Particles | Carbon atoms | Molecules containing 2 nitrogen atoms |
+| Bonding | Each carbon atom forms 4 strong covalent bonds in a giant 3D network | The 2 nitrogen atoms in each molecule are held by a strong triple covalent bond; forces between molecules are weak |
+| State at room temperature | Solid | Gas |
+| Melting/boiling point | Very high, because many strong bonds must be broken | Low, because only weak forces between N₂ molecules need to be overcome |
+| Hardness | Extremely hard | Not hard; it is a gas |
+| Electrical conductivity | Does not conduct electricity because its electrons are held in bonds | Does not conduct electricity |
+
+In short: **diamond is a huge network of strongly bonded carbon atoms**, while **nitrogen gas consists of small N₂ molecules with weak forces between them**.
+
+### Answer B
+
+Okay, first of all, this is a structure and bonding question because it asks you to compare physical properties.
+
+Diamond has a giant covalent structure, whilst nitrogen gas has a simple molecular structure.
+
+Diamond has a very high boiling melting point because a lot of energy is required to overcome the strong covalent bonds between carbon atoms in diamond.
+
+Nitrogen gas has a very low boiling melting point because very little energy is needed to overcome the weak intermolecular forces of attraction between nitrogen molecules.
+
+### Blind review
+
+- Answer A score: 2
+- Answer B score: 3
+- Answer A syllabus overshoot: No
+- Answer B syllabus overshoot: No
+- Preferred answer: B
+- Notes: 
+
+---
+
+## Question 2: q2_metal_conductivity_malleability
+
+Explain why metals conduct electricity and why they are malleable.
+
+### Answer A
+
+Metals have a structure called **metallic bonding**.
+
+- Metal atoms form a regular lattice of positive metal ions.
+- Their outer electrons are not held by one specific atom. Instead, they are **delocalised**—free to move through the whole metal.
+
+### Why metals conduct electricity
+Because the delocalised electrons can move. When a voltage is applied, these electrons flow through the metal and carry electric charge, creating an electric current.
+
+### Why metals are malleable
+Malleable means a material can be hammered or bent into shape without breaking.
+
+In a metal, the positive ions are arranged in layers. When force is applied, the layers can slide past one another. The delocalised electrons still attract and hold the positive ions together, even after the layers move. This means the metal changes shape rather than shattering.
+
+### Answer B
+
+Metals have a giant metallic lattice structure.
+
+For electrical conductivity, there are strong electrostatic forces of attraction between the metal cations and a sea of delocalised electrons. The sea of delocalised electrons can move and conduct electricity.
+
+For malleability, layers of metal ions can slide past one another while metallic bonding is maintained. Therefore, a pure metal can be bent or shaped without breaking.
+
+### Blind review
+
+- Answer A score: 2
+- Answer B score: 3
+- Answer A syllabus overshoot: No
+- Answer B syllabus overshoot: No
+- Preferred answer: B
+- Notes: 
+
+---
+
+## Question 3: q3_group1_vs_transition_metals
+
+What is the difference between Group 1 metals and transition metals?
+
+### Answer A
+
+**Group 1 metals** and **transition metals** are both metals, but they have different properties.
+
+### Group 1 metals (alkali metals)
+Examples: lithium, sodium, potassium
+
+- Found in the **first column** of the periodic table.
+- Have **one electron in their outer shell**.
+- Are **very reactive**, especially with water and oxygen.
+- Usually form **+1 ions**.
+- Are soft and can often be cut with a knife.
+- Have relatively low melting points and densities.
+- Their compounds are usually **white or colourless**.
+
+Example: sodium reacts vigorously with water to make sodium hydroxide and hydrogen gas.
+
+### Transition metals
+Examples: iron, copper, nickel, zinc
+
+- Found in the **middle block** of the periodic table.
+- Are generally **less reactive** than Group 1 metals.
+- Are usually hard, strong, and have high melting points.
+- Can form ions with **different charges**, such as iron forming Fe²⁺ and Fe³⁺.
+- Often make **coloured compounds**.
+- Many act as **catalysts**, speeding up chemical reactions without being used up.
+- Often have high densities and are good conductors of heat and electricity.
+
+Example: iron is used in steel because it is strong, while copper is used for electrical wires because it conducts electricity well.
+
+**In short:** Group 1 metals are soft and very reactive, while transition metals are stronger, less reactive, and often form coloured compounds or act as catalysts.
+
+### Answer B
+
+This goes beyond the material we have reviewed, so do double-check it against your syllabus.
+
+Group 1 metals and transition metals are both metals, but they have quite different properties.
+
+Group 1 metals:
+- Have one electron in their outer shell, so they form +1 ions.
+- Are very reactive, especially with water.
+- Are soft and have relatively low melting points and low densities.
+- Usually form white or colourless compounds.
+
+Transition metals:
+- Are less reactive than Group 1 metals.
+- Are harder, stronger, denser, and usually have higher melting points.
+- Can form ions with different charges, for example iron can form Fe²⁺ and Fe³⁺.
+- Often form coloured compounds.
+- Can act as catalysts, for example iron in the Haber process.
+
+### Blind review
+
+- Answer A score: 2
+- Answer B score: 2
+- Answer A syllabus overshoot: No
+- Answer B syllabus overshoot: No
+- Preferred answer: T
+- Notes: 
+
+---
+
+## Question 4: q4_nacl_structure_bonding
+
+Describe the structure and bonding in sodium chloride.
+
+### Answer A
+
+Sodium chloride, NaCl, has a **giant ionic lattice structure**.
+
+- Sodium atoms lose one electron to form positive sodium ions, **Na⁺**.
+- Chlorine atoms gain one electron to form negative chloride ions, **Cl⁻**.
+- The oppositely charged ions are held together by strong **electrostatic attractions**, called **ionic bonds**.
+
+The ions are arranged in a regular, repeating three-dimensional pattern. Each sodium ion is surrounded by chloride ions, and each chloride ion is surrounded by sodium ions.
+
+Because there are many strong ionic bonds throughout the lattice, sodium chloride has a high melting and boiling point. It does not conduct electricity when solid because the ions cannot move, but it does conduct when melted or dissolved in water because the ions are free to move.
+
+### Answer B
+
+Sodium chloride has a giant ionic lattice structure.
+
+There is a strong electrostatic force of attraction between the Na⁺ cations and the Cl⁻ anions.
+
+### Blind review
+
+- Answer A score: 2
+- Answer B score: 2
+- Answer A syllabus overshoot: No
+- Answer B syllabus overshoot: No
+- Preferred answer: B
+- Notes: 
+
+---
+
+## Question 5: q5_nacl_conductivity
+
+Why does sodium chloride conduct electricity when molten but not when solid?
+
+### Answer A
+
+Sodium chloride has a giant ionic lattice structure with strong electrostatic forces of attraction between Na⁺ and Cl⁻ ions.
+
+When it is solid, the ions vibrate about fixed positions and are not free to move, so it does not conduct electricity.
+
+When it is molten, the Na⁺ and Cl⁻ ions are free-moving and can act as charge carriers, so molten sodium chloride conducts electricity.
+
+### Answer B
+
+In solid sodium chloride, the sodium ions (Na⁺) and chloride ions (Cl⁻) are locked in a rigid crystal lattice. They cannot move, so they cannot carry electric charge through the solid.
+
+When sodium chloride is molten (melted), the lattice breaks apart. The Na⁺ and Cl⁻ ions are free to move around, so they can carry charge to the electrodes and allow electricity to flow.
+
+### Blind review
+
+- Answer A score: 2
+- Answer B score: 2
+- Answer A syllabus overshoot: No
+- Answer B syllabus overshoot: No
+- Preferred answer: A
+- Notes: 
+
+---
+
+## Question 6: q6_diamond_vs_graphite_conductivity
+
+Compare the electrical conductivity of diamond and graphite.
+
+### Answer A
+
+First of all, both diamond and graphite are giant covalent structures.
+
+For electrical conductivity, check for mobile ions and mobile electrons.
+
+Diamond cannot conduct electricity because it has neither free moving ions nor free moving electrons.
+
+Graphite can conduct electricity because each carbon atom is bonded to three other carbon atoms, leaving one delocalised electron per carbon atom free to conduct electricity.
+
+### Answer B
+
+Diamond does not conduct electricity because each carbon atom uses all four of its outer electrons to form strong covalent bonds with nearby carbon atoms. There are no free electrons available to carry electrical charge.
+
+Graphite conducts electricity, mainly along its layers. In graphite, each carbon atom forms three covalent bonds, leaving one electron delocalised (free to move) within the layer. These mobile electrons can carry electrical current.
+
+So:
+
+- **Diamond:** electrical insulator  
+- **Graphite:** electrical conductor, especially parallel to its layers
+
+### Blind review
+
+- Answer A score: 
+- Answer B score: 
+- Answer A syllabus overshoot: 
+- Answer B syllabus overshoot: 
+- Preferred answer: 
+- Notes: 
+
+---
+
+## Question 7: q7_co2_low_melting_point
+
+Explain why simple molecular substances like carbon dioxide have low melting points.
+
+### Answer A
+
+Carbon dioxide has a simple molecular structure. Very little energy is needed to overcome the weak intermolecular forces of attraction between the molecules. Therefore, it has a very low melting point.
+
+### Answer B
+
+Simple molecular substances such as carbon dioxide are made of small, separate molecules.
+
+Within each molecule, the atoms are held together by strong covalent bonds. However, the forces **between** the molecules are much weaker. These are called intermolecular forces.
+
+When carbon dioxide melts, the strong covalent bonds inside the CO₂ molecules do not break. Only the weak forces between the molecules need to be overcome. Because these forces need little energy to break, carbon dioxide has a low melting point.
+
+### Blind review
+
+- Answer A score: 
+- Answer B score: 
+- Answer A syllabus overshoot: 
+- Answer B syllabus overshoot: 
+- Preferred answer: 
+- Notes: 
+
+---
+
+## Question 8: q8_silicon_dioxide_structure_mp
+
+State the type of structure present in silicon dioxide and explain its melting point.
+
+### Answer A
+
+Silicon dioxide has a giant covalent structure.
+
+A lot of energy is required to overcome the strong covalent bonds between atoms in silicon dioxide. Therefore, it has a high melting point.
+
+### Answer B
+
+Silicon dioxide has a **giant covalent structure** (also called a **giant molecular lattice** or **network covalent structure**).
+
+Each silicon atom is strongly covalently bonded to oxygen atoms in a continuous three-dimensional network. To melt silicon dioxide, many strong silicon–oxygen covalent bonds must be broken.
+
+This requires a large amount of energy, so silicon dioxide has a **very high melting point**.
+
+### Blind review
+
+- Answer A score: 
+- Answer B score: 
+- Answer A syllabus overshoot: 
+- Answer B syllabus overshoot: 
+- Preferred answer: 
+- Notes: 
+
+---
+
+## Question 9: q9_metal_structure_conductivity
+
+Describe the structure of a typical metal and explain why metals are good conductors of electricity.
+
+### Answer A
+
+A typical metal has a giant lattice structure. Its atoms are arranged in regular layers, and the outer electrons are not held tightly to any one atom.
+
+The metal atoms lose or share their outer electrons, forming:
+
+- a regular arrangement of positive metal ions
+- a “sea” of delocalised electrons moving between the ions
+
+Metals conduct electricity well because these delocalised electrons are free to move through the structure. When a voltage is applied, the electrons drift in one direction and carry electrical charge through the metal.
+
+### Answer B
+
+A typical metal has a giant metallic lattice structure. It consists of metal cations arranged in a regular lattice, with a sea of delocalised electrons.
+
+There are strong electrostatic forces of attraction between the metal cations and a sea of delocalised electrons. The delocalised electrons are free-moving, so they can move through the metal and carry charge. Therefore, metals are good conductors of electricity.
+
+### Blind review
+
+- Answer A score: 
+- Answer B score: 
+- Answer A syllabus overshoot: 
+- Answer B syllabus overshoot: 
+- Preferred answer: 
+- Notes: 
+
+---
+
+## Question 10: q10_metals_malleable_ionic_brittle
+
+Explain why metals are malleable but ionic compounds are brittle.
+
+### Answer A
+
+Metals are malleable because their atoms are held together by **metallic bonding**. In a metal, positive metal ions are arranged in layers and surrounded by a “sea” of mobile electrons. When a force is applied, the layers of ions can slide past one another while the electrons still hold the metal together. This lets metals be hammered into sheets or bent without breaking.
+
+Ionic compounds are brittle because they contain a regular lattice of positive and negative ions. When force causes one layer of ions to shift, ions with the same charge can end up next to each other. Since like charges repel strongly, the lattice splits apart along a plane, causing the crystal to crack or shatter.
+
+### Answer B
+
+Metals have a giant metallic lattice structure. There are strong electrostatic forces of attraction between the metal cations and a sea of delocalised electrons. When a force is applied, layers of metal ions can slide past one another while metallic bonding is maintained, so metals are malleable.
+
+Ionic compounds have a giant ionic lattice structure, with strong electrostatic force of attraction between the cations and the anions. When the layers are forced to shift, ions with the same charge can become next to each other. They repel strongly, so the lattice breaks apart. Therefore, ionic compounds are brittle.
+
+That last point about like charges repelling when the lattice shifts goes slightly beyond the reviewed material, so do double-check it with your class notes.
+
+### Blind review
+
+- Answer A score: 
+- Answer B score: 
+- Answer A syllabus overshoot: 
+- Answer B syllabus overshoot: 
+- Preferred answer: 
+- Notes: 
+
+---
+
+## Question 11: q11_is_graphite_a_molecule
+
+Is graphite a molecule? Explain your answer.
+
+### Answer A
+
+No. Graphite is not a molecule; it has a giant covalent structure.
+
+It consists of layers and layers of carbon atoms joined by strong covalent bonds between atoms. Since it is not made up of separate, discrete molecules, we do not call graphite a molecule.
+
+### Answer B
+
+No. Graphite is not made of separate molecules.
+
+Graphite is a **giant covalent structure** (also called a giant network solid). Its carbon atoms are joined by strong covalent bonds in large, flat sheets of connected hexagons. Each sheet extends over a huge number of atoms rather than forming one small, independent group of atoms.
+
+The sheets are held together by weak forces, so they can slide over one another. This is why graphite feels slippery and can be used in pencils.
+
+So, although graphite is made only of carbon atoms, it does not have individual molecules like water (\(\mathrm{H_2O}\)) or carbon dioxide (\(\mathrm{CO_2}\)).
+
+### Blind review
+
+- Answer A score: 
+- Answer B score: 
+- Answer A syllabus overshoot: 
+- Answer B syllabus overshoot: 
+- Preferred answer: 
+- Notes: 
+
+---
+
+## Question 12: q12_mgo_vs_so2_properties
+
+Compare the properties of magnesium oxide and sulfur dioxide.
+
+### Answer A
+
+| Property | Magnesium oxide, MgO | Sulfur dioxide, SO₂ |
+|---|---|---|
+| Type of substance | Ionic compound | Simple covalent (molecular) compound |
+| Particles present | Mg²⁺ and O²⁻ ions in a giant ionic lattice | Small SO₂ molecules |
+| State at room temperature | White solid | Colourless gas |
+| Melting/boiling point | Very high, because strong electrostatic forces hold ions together | Low, because only weak intermolecular forces act between molecules |
+| Electrical conductivity | Does not conduct when solid; conducts when molten because ions can move | Does not conduct electricity because it has no mobile ions |
+| Oxide type | Basic oxide | Acidic oxide |
+| Reaction with water | Reacts slowly with water to form magnesium hydroxide: MgO + H₂O → Mg(OH)₂ | Dissolves in water to form an acidic solution (sulfurous acid): SO₂ + H₂O ⇌ H₂SO₃ |
+| Reaction with acids/bases | Reacts with acids to form a salt and water | Reacts with alkalis/bases to form sulfite or hydrogensulfite salts |
+| Example use or effect | Used in refractory linings and antacids | Air pollutant; contributes to acid rain and can irritate lungs |
+
+So, magnesium oxide is a high-melting, ionic, basic solid, while sulfur dioxide is a low-boiling, covalent, acidic gas.
+
+### Answer B
+
+First of all, this is a structure and bonding question because you are comparing physical properties.
+
+Number one, structure: magnesium oxide has a giant ionic lattice structure, whilst sulfur dioxide has a simple molecular structure.
+
+Number two, bonding, then link to physical property:
+
+A lot of energy is required to overcome the strong electrostatic force of attraction between the Mg²⁺ cations and O²⁻ anions in magnesium oxide. Therefore, magnesium oxide has a high boiling melting point.
+
+While very little energy is needed to overcome the weak intermolecular forces of attraction in sulfur dioxide. Therefore, sulfur dioxide has a low boiling melting point.
+
+### Blind review
+
+- Answer A score: 
+- Answer B score: 
+- Answer A syllabus overshoot: 
+- Answer B syllabus overshoot: 
+- Preferred answer: 
+- Notes: 
+
+---
+
+## Question 13: q13_transition_metal_reactivity_trends
+
+What are the trends in reactivity across the transition metals?
+
+### Answer A
+
+This goes beyond the material we have reviewed, so do double-check it with your notes.
+
+Across a transition-metal series, there is no perfectly smooth trend in reactivity. Generally, metals towards the left are more reactive, and metals towards the right are less reactive.
+
+For example, in the first transition series:
+- Scandium and titanium are relatively reactive.
+- Metals in the middle, such as iron and nickel, are less reactive.
+- Copper is very unreactive.
+
+This is because, moving across the series, the metal atoms tend to hold their electrons more strongly, so it becomes harder for them to lose electrons and be oxidized.
+
+However, transition-metal reactivity is often irregular, so do not treat it like a simple Group 1 trend.
+
+### Answer B
+
+There is **no perfectly smooth trend** in transition-metal reactivity, because their partially filled \(d\) orbitals and different oxidation states make their chemistry complicated. However, some broad patterns are useful.
+
+### Across a transition series (left to right)
+- Metals toward the **left** of a transition series, such as **scandium, titanium, and vanadium**, tend to be more reactive. They lose electrons relatively easily and form positive ions.
+- Moving toward the **middle**, reactivity generally becomes lower, although there are irregularities. Metals such as **iron, cobalt, and nickel** react slowly with acids and do not react much with cold water.
+- Metals near the **right**, especially **copper, silver, gold, and platinum**, are much less reactive. They are sometimes called **noble metals** because they resist oxidation and corrosion.
+
+For example:
+- **Iron** rusts in air and water.
+- **Copper** reacts slowly with oxygen to form a green patina.
+- **Gold** is extremely unreactive and can be found as the pure metal in nature.
+
+### Important exceptions
+The trend is not regular:
+- **Zinc** is fairly reactive even though it is near the end of the first transition series.
+- **Chromium** and **aluminium** can seem unreactive because they form a tough, protective oxide layer on their surface. This is called **passivation**.
+- Some metals react slowly simply because of a high activation energy, even if a reaction is energetically possible.
+
+### Down a group
+There is also no simple universal trend down transition-metal groups. Heavier transition metals are often less reactive and more corrosion-resistant. For instance:
+- **Platinum** is much less reactive than **nickel**.
+- **Gold** is less reactive than **copper** and **silver**.
+
+### Summary
+In general:
+
+\[
+\text{early transition metals} \;>\; \text{middle transition metals} \;>\; \text{late/noble transition metals}
+\]
+
+in reactivity, but there are many exceptions because of oxidation states, oxide coatings, and differences in electron structure.
+
+### Blind review
+
+- Answer A score: 
+- Answer B score: 
+- Answer A syllabus overshoot: 
+- Answer B syllabus overshoot: 
+- Preferred answer: 
+- Notes: 
+
+---
+
+## Question 14: q14_redox_mg_cuo_oxidation_states
+
+Use oxidation states to explain why the reaction between magnesium and copper(II) oxide is a redox reaction.
+
+### Answer A
+
+Magnesium is oxidized because its oxidation state increases from 0 in Mg to plus 2 in MgO.
+
+Copper is reduced because its oxidation state decreases from plus 2 in CuO to 0 in Cu.
+
+Therefore, both oxidation and reduction occur, so this is a redox reaction.
+
+### Answer B
+
+In the reaction:
+
+\[
+\text{Mg} + \text{CuO} \rightarrow \text{MgO} + \text{Cu}
+\]
+
+the oxidation states change:
+
+- Magnesium starts as an element, so its oxidation state is **0**.
+- In magnesium oxide, magnesium is **+2**.
+
+So magnesium goes from **0 to +2**. It loses electrons, so it is **oxidised**.
+
+- Copper in copper(II) oxide has an oxidation state of **+2**.
+- Copper metal has an oxidation state of **0**.
+
+So copper goes from **+2 to 0**. It gains electrons, so it is **reduced**.
+
+Because magnesium is oxidised and copper(II) is reduced at the same time, the reaction is a **redox reaction**.
+
+### Blind review
+
+- Answer A score: 
+- Answer B score: 
+- Answer A syllabus overshoot: 
+- Answer B syllabus overshoot: 
+- Preferred answer: 
+- Notes: 
+
+---
+
+## Question 15: q15_redox_zn_feso4_oxidation_states
+
+Explain why zinc is oxidized when it reacts with iron(II) sulfate, using oxidation states.
+
+### Answer A
+
+Zinc is oxidized because its oxidation state increases from 0 in Zn to plus 2 in ZnSO₄.
+
+### Answer B
+
+When zinc reacts with iron(II) sulfate, the reaction is:
+
+\[
+\text{Zn} + \text{FeSO}_4 \rightarrow \text{ZnSO}_4 + \text{Fe}
+\]
+
+- Zinc starts as an element, so its oxidation state is **0**.
+- In zinc sulfate, zinc is present as \(\text{Zn}^{2+}\), so its oxidation state is **+2**.
+
+\[
+\text{Zn}^0 \rightarrow \text{Zn}^{2+} + 2e^-
+\]
+
+Zinc’s oxidation state increases from 0 to +2 because it **loses two electrons**. Loss of electrons is oxidation, so **zinc is oxidized**.
+
+At the same time, iron(II) ions gain those electrons:
+
+\[
+\text{Fe}^{2+} + 2e^- \rightarrow \text{Fe}^0
+\]
+
+So iron(II) is reduced, while zinc is oxidized. The sulfate ion does not change; it is a spectator ion.
+
+### Blind review
+
+- Answer A score: 
+- Answer B score: 
+- Answer A syllabus overshoot: 
+- Answer B syllabus overshoot: 
+- Preferred answer: 
+- Notes: 
+
+---
+
+## Question 16: q16_redox_oxidizing_agent_explanation
+
+Explain why compound X is an oxidizing agent.
+
+### Answer A
+
+Compound X is an oxidizing agent if it causes another substance to lose electrons.
+
+In a redox reaction:
+
+- The **oxidizing agent accepts electrons**.
+- By accepting electrons, compound X is **reduced** (its oxidation number decreases).
+- The other substance loses electrons, so it is **oxidized**.
+
+For example, if X contains an element in a high oxidation state, it may readily gain electrons and therefore act as an oxidizing agent.
+
+So the key reason is: **X oxidizes other substances because it accepts electrons from them and is reduced itself.**
+
+If you share the formula or reaction involving compound X, I can explain exactly which element in it is being reduced.
+
+### Answer B
+
+Compound X is an oxidizing agent because it causes another substance to be oxidized. In a redox reaction, reduction and oxidation must both happen, so compound X itself is reduced.
+
+To show this using oxidation states, state that the oxidation state of the relevant element in compound X decreases from its value in X to a lower value in the product.
+
+### Blind review
+
+- Answer A score: 
+- Answer B score: 
+- Answer A syllabus overshoot: 
+- Answer B syllabus overshoot: 
+- Preferred answer: 
+- Notes: 
+
+---
+
+## Question 17: q17_redox_electron_transfer_oil_rig
+
+Explain oxidation and reduction in terms of electron transfer, using the mnemonic OIL RIG.
+
+### Answer A
+
+**OIL RIG** is a mnemonic for remembering electron transfer in redox reactions:
+
+- **OIL** = **Oxidation Is Loss** of electrons  
+- **RIG** = **Reduction Is Gain** of electrons  
+
+So:
+
+- When an atom, ion, or molecule **loses electrons**, it is **oxidized**.
+- When it **gains electrons**, it is **reduced**.
+
+For example:
+
+\[
+\text{Mg} \rightarrow \text{Mg}^{2+} + 2e^-
+\]
+
+Magnesium loses 2 electrons, so magnesium is **oxidized**.
+
+\[
+\text{Cl}_2 + 2e^- \rightarrow 2\text{Cl}^-
+\]
+
+Chlorine gains electrons, so chlorine is **reduced**.
+
+Oxidation and reduction always happen together: the electrons lost by one substance must be gained by another.
+
+### Answer B
+
+OIL RIG helps you remember electron transfer:
+
+Oxidation Is Loss — a substance is oxidized when it loses electrons.
+
+Reduction Is Gain — a substance is reduced when it gains electrons.
+
+For example:
+
+Mg → Mg²⁺ + 2e⁻
+
+Magnesium loses two electrons, so magnesium is oxidized.
+
+Cl₂ + 2e⁻ → 2Cl⁻
+
+Chlorine gains electrons, so chlorine is reduced.
+
+If a reaction is redox, both reduction and oxidation are happening: electrons lost by one substance are gained by another.
+
+### Blind review
+
+- Answer A score: 
+- Answer B score: 
+- Answer A syllabus overshoot: 
+- Answer B syllabus overshoot: 
+- Preferred answer: 
+- Notes: 
+
+---

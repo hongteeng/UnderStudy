@@ -1,6 +1,6 @@
 # Lesson transcript
 
-- Source recording: `New Recording 29.m4a`
+- Source recording: `oxidising_agent_reduced.m4a`
 - Transcribed at: 2026-08-01T03:07:58+00:00
 - Transcription model: `gpt-4o-transcribe-diarize`
 - Approximate duration: 00:01:46
