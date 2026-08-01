@@ -57,7 +57,16 @@ def split_blocks(title: str, body: str) -> "list[str]":
 
 # If any of these strings are still present, the draft has not been fully
 # reviewed and this script refuses to touch rules.md.
-UNRESOLVED_MARKERS = ("REVIEW REQUIRED", "Needs tutor decision", "IF KEEP", "IF EDIT", "IF EXCLUDE")
+UNRESOLVED_MARKERS = (
+    "REVIEW REQUIRED",
+    "Needs tutor decision",
+    "IF KEEP",
+    "IF EDIT",
+    "IF EXCLUDE",
+    "RULE AS DRAFTED",
+    "ISSUE WITH THIS RULE",
+    "SUGGESTED REVISION",
+)
 
 
 def parse_arguments() -> argparse.Namespace:

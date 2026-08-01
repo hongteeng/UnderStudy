@@ -134,7 +134,7 @@ def review_and_apply(workspace: TeacherWorkspace, draft_paths: list[Path]) -> in
     for index, draft_path in enumerate(draft_paths, start=1):
         print("\n" + "=" * 72)
         print(f"RULE REVIEW {index} OF {len(draft_paths)}")
-        review_file(draft_path)
+        review_file(draft_path, workspace.transcripts_dir)
         choice = input(
             f"Apply this lesson to {workspace.display_name}'s rules.md? [Y/n]: "
         ).strip().lower()

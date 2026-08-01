@@ -42,14 +42,24 @@ Action = Literal["keep", "edit", "custom", "exclude"]
 META_DECISION_SECTION = "Needs tutor decision"
 DRAFT_ONLY_SECTIONS = (
     "Review status",
-    "Needs tutor decision",
+    META_DECISION_SECTION,
     "Review summary",
     "Source coverage",
 )
 REVIEW_START = "> ⚠ **REVIEW REQUIRED**"
 FIELD_PATTERN = re.compile(
-    r"^>\s*\*\*(POINT TO REVIEW|IF KEEP|IF EDIT|IF EXCLUDE):\*\*\s*(.*)$"
+    r"^>\s*\*\*(POINT TO REVIEW|IF KEEP|IF EDIT|IF EXCLUDE|RULE AS DRAFTED|"
+    r"ISSUE WITH THIS RULE|SUGGESTED REVISION):\*\*\s*(.*)$"
 )
+FIELD_ALIASES = {
+    "POINT TO REVIEW": "issue",
+    "ISSUE WITH THIS RULE": "issue",
+    "IF KEEP": "rule",
+    "RULE AS DRAFTED": "rule",
+    "IF EDIT": "suggestion",
+    "SUGGESTED REVISION": "suggestion",
+    "IF EXCLUDE": "exclude",
+}
 SOURCE_PATTERN = re.compile(r"Source:\s*`([^`]+)`")
 SOURCE_CITATION_PATTERN = re.compile(r"\(([^()]*)\)\s*$")
 HEADING_PATTERN = re.compile(r"^##\s+(.+?)\s*$")
@@ -59,6 +69,7 @@ HEADING_PATTERN = re.compile(r"^##\s+(.+?)\s*$")
 class ReviewBlock:
     start: int
     end: int
+    section: str
     source: str
     point: str
     keep: str | None
@@ -80,8 +91,57 @@ class InlineDecision:
     lead: str | None
 
 
+@dataclass(frozen=True)
+class DecisionContext:
+    draft_rules: tuple[str, ...] = ()
+    transcript_excerpts: tuple[str, ...] = ()
+
+
 ReviewProvider = Callable[[ReviewBlock, int, int], ReviewResolution]
 InlineProvider = Callable[[InlineDecision, int, int], str | None]
+
+
+CONTEXT_STOP_WORDS = {
+    "about",
+    "after",
+    "also",
+    "and",
+    "are",
+    "but",
+    "confirm",
+    "confirmation",
+    "decide",
+    "does",
+    "every",
+    "for",
+    "from",
+    "full",
+    "has",
+    "have",
+    "into",
+    "its",
+    "needs",
+    "not",
+    "only",
+    "provide",
+    "required",
+    "rule",
+    "rules",
+    "source",
+    "state",
+    "that",
+    "the",
+    "their",
+    "there",
+    "this",
+    "through",
+    "tutor",
+    "use",
+    "uses",
+    "whether",
+    "with",
+    "wording",
+}
 
 
 def parse_review_blocks(text: str) -> list[ReviewBlock]:
@@ -94,7 +154,13 @@ def parse_review_blocks(text: str) -> list[ReviewBlock]:
 
     blocks: list[ReviewBlock] = []
     index = 0
+    current_section = "Document"
     while index < len(lines):
+        heading = HEADING_PATTERN.match(lines[index].rstrip("\r\n"))
+        if heading:
+            current_section = heading.group(1)
+            index += 1
+            continue
         if not lines[index].startswith(REVIEW_START):
             index += 1
             continue
@@ -113,7 +179,7 @@ def parse_review_blocks(text: str) -> list[ReviewBlock]:
         for line in block_lines[1:]:
             match = FIELD_PATTERN.match(line)
             if match:
-                current_field = match.group(1)
+                current_field = FIELD_ALIASES[match.group(1)]
                 fields[current_field] = match.group(2).strip()
             elif current_field:
                 continuation = line.removeprefix("> ").strip()
@@ -125,10 +191,11 @@ def parse_review_blocks(text: str) -> list[ReviewBlock]:
             ReviewBlock(
                 start=offsets[start_index],
                 end=end,
+                section=current_section,
                 source=source,
-                point=fields.get("POINT TO REVIEW", "Review this extracted rule."),
-                keep=fields.get("IF KEEP") or None,
-                edit=fields.get("IF EDIT") or None,
+                point=fields.get("issue", "Review this drafted rule."),
+                keep=fields.get("rule") or None,
+                edit=fields.get("suggestion") or None,
             )
         )
     return blocks
@@ -150,7 +217,11 @@ def extract_source_from_rule(rule: str, fallback: str) -> str:
 
 def normalise_rule(text: str, source: str, tutor_edited: bool) -> str:
     rule = strip_quote_prefix(text).strip()
-    rule = re.sub(r"^\*\*(?:IF KEEP|IF EDIT):\*\*\s*", "", rule)
+    rule = re.sub(
+        r"^\*\*(?:IF KEEP|IF EDIT|RULE AS DRAFTED|SUGGESTED REVISION):\*\*\s*",
+        "",
+        rule,
+    )
     if not rule.startswith("-"):
         rule = f"- {rule}"
     elif not rule.startswith("- "):
@@ -199,7 +270,45 @@ def remove_markdown_section(text: str, title: str) -> str:
     return pattern.sub("", text)
 
 
+def legacy_meta_decisions(text: str) -> list[str]:
+    """Find old-style missing-content questions that are not rule review blocks."""
+    decisions: list[str] = []
+    current_section = "Document"
+    for line in text.splitlines():
+        heading = HEADING_PATTERN.match(line)
+        if heading:
+            current_section = heading.group(1)
+            continue
+        if current_section != META_DECISION_SECTION or not re.match(r"^\s*-\s+", line):
+            continue
+        plain = re.sub(r"[*_`]", "", line).strip().casefold()
+        if plain.startswith(("- none", "- no separate", "- no tutor")):
+            continue
+        decisions.append(line.strip())
+    return decisions
+
+
+def decision_from_line(
+    line: str, line_number: int, section: str
+) -> InlineDecision:
+    source_match = SOURCE_CITATION_PATTERN.search(line.strip())
+    source = (
+        source_match.group(1).split(",", 1)[0].strip()
+        if source_match
+        else "source transcript"
+    )
+    lead_match = re.match(r"^\s*-\s*(\*\*[^*]+:\*\*)", line)
+    return InlineDecision(
+        line_number=line_number,
+        section=section,
+        original_line=line,
+        source=source,
+        lead=lead_match.group(1) if lead_match else None,
+    )
+
+
 def parse_inline_decisions(text: str) -> list[InlineDecision]:
+    """Return decision markers embedded in normal rule sections only."""
     decisions: list[InlineDecision] = []
     current_section = "Document"
     for line_number, line in enumerate(text.splitlines(), start=1):
@@ -207,25 +316,124 @@ def parse_inline_decisions(text: str) -> list[InlineDecision]:
         if heading:
             current_section = heading.group(1)
             continue
-        if "Needs tutor decision" not in line:
+        if current_section in DRAFT_ONLY_SECTIONS or "Needs tutor decision" not in line:
             continue
-        source_match = SOURCE_CITATION_PATTERN.search(line.strip())
-        source = (
-            source_match.group(1).split(",", 1)[0].strip()
-            if source_match
-            else "source transcript"
-        )
-        lead_match = re.match(r"^\s*-\s*(\*\*[^*]+:\*\*)", line)
-        decisions.append(
-            InlineDecision(
-                line_number=line_number,
-                section=current_section,
-                original_line=line,
-                source=source,
-                lead=lead_match.group(1) if lead_match else None,
-            )
-        )
+        decisions.append(decision_from_line(line, line_number, current_section))
     return decisions
+
+
+def context_terms(text: str) -> set[str]:
+    cleaned = re.sub(r"\([^()]*\)\s*$", "", text)
+    words = re.findall(r"[a-z0-9]+", cleaned.casefold())
+    aliases = {
+        "oxidizing": "oxidising",
+        "oxidized": "oxidised",
+        "increases": "increase",
+        "increased": "increase",
+        "questions": "question",
+        "students": "student",
+    }
+    return {
+        aliases.get(word, word)
+        for word in words
+        if len(word) > 2 and word not in CONTEXT_STOP_WORDS
+    }
+
+
+def ranked_context(
+    query: str, candidates: list[str], *, limit: int = 2
+) -> tuple[str, ...]:
+    query_terms = context_terms(query)
+    scored: list[tuple[int, int, str]] = []
+    for position, candidate in enumerate(candidates):
+        overlap = len(query_terms & context_terms(candidate))
+        if overlap:
+            scored.append((overlap, -position, candidate))
+    scored.sort(reverse=True)
+    return tuple(candidate for _, _, candidate in scored[:limit])
+
+
+def draft_rule_candidates(text: str) -> list[str]:
+    candidates: list[str] = []
+    current_section = "Document"
+    for line in text.splitlines():
+        heading = HEADING_PATTERN.match(line)
+        if heading:
+            current_section = heading.group(1)
+            continue
+        if current_section in DRAFT_ONLY_SECTIONS or not re.match(r"^\s*-\s+", line):
+            continue
+        candidates.append(f"[{current_section}] {line.strip()}")
+    return candidates
+
+
+def transcript_candidates(path: Path | None) -> list[str]:
+    if path is None or not path.is_file():
+        return []
+    candidates: list[str] = []
+    in_transcript = False
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.strip() == "## Transcript":
+            in_transcript = True
+            continue
+        if not in_transcript or not line.strip() or line.startswith("## "):
+            continue
+        candidates.append(line.strip())
+    return candidates
+
+
+def find_transcript(
+    source: str, transcripts_dir: Path | None
+) -> Path | None:
+    source_path = Path(source).expanduser()
+    candidates: list[Path] = []
+    if source_path.is_absolute():
+        candidates.append(source_path)
+    if transcripts_dir is not None:
+        candidates.append(transcripts_dir / source_path.name)
+        if not source_path.suffix:
+            candidates.append(transcripts_dir / f"{source_path.name}.md")
+    for candidate in candidates:
+        if candidate.is_file():
+            return candidate
+    return None
+
+
+def decision_key(decision: InlineDecision) -> tuple[str, str]:
+    return decision.section, decision.original_line.strip()
+
+
+def build_decision_contexts(
+    text: str, transcripts_dir: Path | None = None
+) -> dict[tuple[str, str], DecisionContext]:
+    """Find relevant existing rules and source passages for review prompts."""
+    decisions = parse_inline_decisions(text)
+    draft_candidates = draft_rule_candidates(text)
+    transcript_cache: dict[str, list[str]] = {}
+    contexts: dict[tuple[str, str], DecisionContext] = {}
+    for decision in decisions:
+        if decision.source not in transcript_cache:
+            transcript_cache[decision.source] = transcript_candidates(
+                find_transcript(decision.source, transcripts_dir)
+            )
+        contexts[decision_key(decision)] = DecisionContext(
+            draft_rules=ranked_context(decision.original_line, draft_candidates),
+            transcript_excerpts=ranked_context(
+                decision.original_line, transcript_cache[decision.source]
+            ),
+        )
+    return contexts
+
+
+def normalise_decision_answer(
+    decision: InlineDecision, replacement: str | None
+) -> str | None:
+    if replacement is None or not replacement.strip():
+        return None
+    custom = replacement.strip()
+    if decision.lead and not custom.startswith("**") and not custom.startswith("-"):
+        custom = f"{decision.lead} {custom}"
+    return normalise_rule(custom, decision.source, tutor_edited=True)
 
 
 def resolve_inline_decisions(text: str, provider: InlineProvider) -> str:
@@ -239,15 +447,12 @@ def resolve_inline_decisions(text: str, provider: InlineProvider) -> str:
         if not decision:
             resolved_lines.append(line)
             continue
-        replacement = provider(decision, decisions.index(decision) + 1, len(decisions))
-        if replacement is None or not replacement.strip():
-            continue
-        custom = replacement.strip()
-        if decision.lead and not custom.startswith("**") and not custom.startswith("-"):
-            custom = f"{decision.lead} {custom}"
-        resolved_lines.append(
-            normalise_rule(custom, decision.source, tutor_edited=True) + "\n"
+        replacement = normalise_decision_answer(
+            decision, provider(decision, decisions.index(decision) + 1, len(decisions))
         )
+        if replacement is None:
+            continue
+        resolved_lines.append(replacement + "\n")
     return "".join(resolved_lines)
 
 
@@ -260,10 +465,9 @@ def resolve_draft(
     text: str, review_provider: ReviewProvider, inline_provider: InlineProvider
 ) -> str:
     reviewed = resolve_review_blocks(text, review_provider)
-    reviewed = remove_markdown_section(reviewed, META_DECISION_SECTION)
-    reviewed = resolve_inline_decisions(reviewed, inline_provider)
     for section in DRAFT_ONLY_SECTIONS:
         reviewed = remove_markdown_section(reviewed, section)
+    reviewed = resolve_inline_decisions(reviewed, inline_provider)
     return clean_spacing(reviewed)
 
 
@@ -281,24 +485,25 @@ def console_review_provider(
     block: ReviewBlock, index: int, total: int
 ) -> ReviewResolution:
     print("\n" + "=" * 72)
-    print(f"REVIEW {index} OF {total}")
-    print(f"Issue: {block.point}")
+    print(f"RULE ISSUE {index} OF {total} — {block.section}")
     if block.keep:
-        print(f"\n[K] Keep original\n    {block.keep}")
+        print(f"\nRule as drafted:\n  {block.keep}")
+    print(f"\nWhy the AI flagged this rule:\n  {block.point}")
     if block.edit:
-        print(f"\n[E] Use suggested edit\n    {block.edit}")
-    print("\n[C] Type a custom rule")
-    print("[X] Exclude this rule")
+        print(f"\nSuggested revision:\n  {block.edit}")
+    if block.keep:
+        print("\n[K] Keep the drafted rule")
+    if block.edit:
+        print("[E] Accept the suggested revision")
+    print("[C] Write your own replacement")
+    print("[X] Exclude the rule")
 
     allowed = {"c", "x"}
     if block.keep:
         allowed.add("k")
     if block.edit:
         allowed.add("e")
-    default = "e" if block.edit else ("k" if block.keep else None)
-    choice = prompt_choice(
-        f"\nChoice{f' [{default.upper()}]' if default else ''}: ", allowed, default
-    )
+    choice = prompt_choice("\nChoice: ", allowed)
     if choice == "c":
         custom = input(
             "Type the final rule (the source citation is added automatically):\n> "
@@ -315,19 +520,38 @@ def console_review_provider(
 
 
 def console_inline_provider(
-    decision: InlineDecision, index: int, total: int
+    decision: InlineDecision,
+    index: int,
+    total: int,
+    context: DecisionContext | None = None,
 ) -> str | None:
     print("\n" + "=" * 72)
     print(f"OPEN DECISION {index} OF {total} — {decision.section}")
     print(decision.original_line.strip())
+    context = context or DecisionContext()
+    print("\nClosest existing draft wording:")
+    if context.draft_rules:
+        for rule in context.draft_rules:
+            print(f"  {rule}")
+    else:
+        print("  No related rule wording was drafted.")
+    print("\nClosest source transcript wording:")
+    if context.transcript_excerpts:
+        for excerpt in context.transcript_excerpts:
+            print(f"  {excerpt}")
+    else:
+        print("  No matching transcript passage was found.")
     print("\n[E] Enter the teacher's final wording")
     print("[X] Remove this undecided rule")
-    choice = prompt_choice("\nChoice [X]: ", {"e", "x"}, "x")
+    choice = prompt_choice("\nChoice: ", {"e", "x"})
     if choice == "x":
         return None
-    return input(
+    answer = input(
         "Type the final wording (label and source citation are added automatically):\n> "
     ).strip()
+    while not answer:
+        answer = input("The wording cannot be empty. Try again:\n> ").strip()
+    return answer
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -399,16 +623,39 @@ def choose_draft_path(requested_path: Path | None, rule_drafts_dir: Path) -> Pat
         print(f"Enter a number from 1 to {len(candidates)}.")
 
 
-def review_file(draft_path: Path) -> None:
+def review_file(draft_path: Path, transcripts_dir: Path | None = None) -> None:
     original = draft_path.read_text(encoding="utf-8")
+    old_questions = legacy_meta_decisions(original)
+    if old_questions:
+        raise ValueError(
+            "This draft uses the old missing-content review format "
+            f"({len(old_questions)} open questions). Regenerate the rules draft "
+            "with the current extractor before reviewing it."
+        )
     review_count = len(parse_review_blocks(original))
-    without_meta = remove_markdown_section(original, META_DECISION_SECTION)
-    decision_count = len(parse_inline_decisions(without_meta))
+    decision_count = len(parse_inline_decisions(original))
     print(f"Reviewing: {draft_path}")
-    print(f"Questions: {review_count} flagged rules, {decision_count} open decisions")
+    print(f"Rule issues to review: {review_count}")
+    if decision_count:
+        print(f"Legacy unresolved rule lines: {decision_count}")
+
+    if transcripts_dir is None:
+        inferred = draft_path.parent.parent / "transcripts"
+        transcripts_dir = inferred if inferred.is_dir() else None
+    contexts = build_decision_contexts(original, transcripts_dir)
+
+    def contextual_provider(
+        decision: InlineDecision, index: int, total: int
+    ) -> str | None:
+        return console_inline_provider(
+            decision,
+            index,
+            total,
+            contexts.get(decision_key(decision)),
+        )
 
     reviewed = resolve_draft(
-        original, console_review_provider, console_inline_provider
+        original, console_review_provider, contextual_provider
     )
     validate_draft(reviewed, split_sections(reviewed))
 
@@ -437,7 +684,7 @@ def main() -> None:
             raise ValueError(
                 f"Draft does not belong to teacher {workspace.display_name}: {draft_path}"
             ) from error
-        review_file(draft_path)
+        review_file(draft_path, workspace.transcripts_dir)
 
         should_apply = args.apply
         if not args.apply and not args.no_apply_prompt:

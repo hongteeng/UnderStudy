@@ -7,7 +7,14 @@ before it is ever used to answer students.
 Extract only patterns and content supported by the supplied source material.
 Do not invent a teaching method, marking requirement, misconception, student
 intent category, or syllabus boundary. If the source does not establish
-something, mark it **Needs tutor decision**.
+something, omit it. Missing information is not a faulty rule and must not be
+turned into a tutor-review question.
+
+Every item in the main rule sections must be useful guidance for answering or
+teaching a student. Do not add bullets whose main purpose is to report that the
+transcript did not provide a definition, template, example, exam board, rule
+list, or other information. Those are source-coverage observations, not
+teaching rules.
 
 Look for:
 
@@ -71,35 +78,49 @@ If the source contains no complete worked examples, leave this section with
 only a short note that none were found and why — do not leave it silently
 empty, and do not force something borderline into this format.
 
-When a source claim appears scientifically uncertain, overly broad, or
-internally inconsistent, do not silently correct it or present it as settled.
-Place this inline immediately after the affected rule, using this format:
+## Reviewing the drafted rules
+
+After drafting the rule sections, inspect the **rules you wrote**. Flag a rule
+only when the wording of that drafted rule itself could cause a wrong or
+misleading student answer because it is:
+
+- scientifically inaccurate or genuinely uncertain;
+- broader or more absolute than the source supports;
+- internally inconsistent with another extracted rule;
+- materially ambiguous about when or how it should be applied; or
+- presented as the tutor's established method despite insufficient evidence.
+
+Do not flag the transcript itself. Do not create review questions merely
+because the transcript omitted information. Do not ask the tutor to supply
+missing lesson content, a full rule set, an exam board, an unspoken template,
+or an expansion of a term unless a drafted rule actually asserts something
+questionable about it. Do not flag cosmetic grammar, stylistic preferences,
+or harmless incompleteness. A flag should be rare and should matter to a
+future student-facing answer.
+
+Replace the questionable rule with this block in the exact location where the
+rule would otherwise appear:
 
 ```md
 > ⚠ **REVIEW REQUIRED** — Source: `source_filename`
-> **POINT TO REVIEW:** brief reason this source claim needs a decision.
-> **IF KEEP:** - [rule bullet using the tutor's original source wording, in
->   the exact bullet format of the section it belongs to — bold lead phrase
->   if that section uses one, plain prose, ending with (source_filename)]
-> **IF EDIT:** - [rule bullet using a clearly-improved replacement, in the
->   same bullet format, ending with (source_filename, tutor-edited)]
+> **RULE AS DRAFTED:** - [the exact questionable rule bullet, in the format of
+>   its destination section, ending with (source_filename)]
+> **ISSUE WITH THIS RULE:** [specific explanation of what is wrong or risky in
+>   this rule as written and how it could mislead a student]
+> **SUGGESTED REVISION:** - [a concrete safer replacement in the same bullet
+>   format, ending with (source_filename, tutor-edited)]
 > **IF EXCLUDE:** delete this entire block.
 ```
 
-Each bullet under **IF KEEP** and **IF EDIT** must already be formatted
-exactly as it would appear as a standalone rule in that section — so the
-tutor can resolve the block by deleting the warning lines and the option they
-don't want, with zero rewriting needed. Never silently correct, improve,
-paraphrase, or substitute the tutor's source wording under **IF KEEP**; it
-must still convey the tutor's original claim even though it is now wrapped in
-standard bullet formatting. The **IF EDIT** bullet may contain a suggested
-replacement, but it must never be presented as the original, unedited
-version — always tag it `tutor-edited` in its source citation.
+The **RULE AS DRAFTED** and **SUGGESTED REVISION** bullets must each already
+be valid standalone rules. The issue must discuss the rule's actual wording;
+it must not merely say that the source lacked detail. Never place the
+questionable rule elsewhere in the document in addition to this block.
 
-Do not place an unverified rule elsewhere in the document without its inline
-warning. Also list every unresolved inline warning in **Review summary** as a
-short index with a link or section reference; the summary is not the only
-location of the warning.
+List every rule-review block in **Review summary** as a short index with its
+section name. If there are no questionable drafted rules, say so. Keep
+**Needs tutor decision** empty or state that there are no separate decisions;
+do not use it to collect missing-content requests.
 
 Return Markdown with exactly these sections:
 

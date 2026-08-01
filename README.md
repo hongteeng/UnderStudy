@@ -25,6 +25,11 @@ The program will:
 6. ask the teacher to keep, edit, replace, or exclude flagged rules; and
 7. apply approved material to that teacher's `rules.md`.
 
+The reviewer flags the drafted rule, not the source transcript. Each review
+screen shows the rule as drafted, the specific risk in that rule, and a
+suggested revision. Missing transcript details are omitted rather than turned
+into open-ended questions for the teacher.
+
 At an audio prompt, paste a path or drag a file into the terminal. You can add
 several files one at a time. Press Enter on an empty line to start processing.
 MP3, MP4, MPEG, MPGA, M4A, WAV, and WebM files are supported.
