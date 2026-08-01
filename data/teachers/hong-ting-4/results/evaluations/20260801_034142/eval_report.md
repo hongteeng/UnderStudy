@@ -1,0 +1,482 @@
+# UnderStudy evaluation report
+
+- Teacher: Hong Ting 4
+- Run: 20260801_034142
+- Model: gpt-5.6-sol
+- Questions: 13
+- Baseline: Generic baseline
+- Created: 2026-08-01T03:41:42+00:00
+- Completed: 2026-08-01T04:10:34+00:00
+
+## Summary
+
+| Measure | UnderStudy | Generic baseline |
+|---|---:|---:|
+| Average teacher-fit score (0–3) | 2.54 | 1.69 |
+| Preferred answers | 10 | 0 |
+| Syllabus overshoots | 0 | 2 |
+
+Ties: 3
+
+## Question 1: q1_diamond_vs_nitrogen
+
+**Question:** Compare the difference between diamond and nitrogen gas.
+
+### UnderStudy answer
+
+First of all, we need to identify their structures.
+
+Diamond has a giant covalent structure, whereas nitrogen gas has a simple molecular structure.
+
+Secondly, bonding: diamond has strong covalent bonds between atoms throughout its structure. Nitrogen gas has weak intermolecular forces of attraction between its nitrogen molecules.
+
+Therefore, a lot of energy is required to overcome the strong covalent bonds in diamond, so diamond has high boiling and melting points. Very little energy is required to overcome the weak intermolecular forces of attraction in nitrogen, so nitrogen has low boiling and melting points.
+
+So the main difference is:
+
+Diamond is a giant covalent substance with high boiling and melting points, while nitrogen is a simple molecular substance with low boiling and melting points.
+
+### Generic baseline answer
+
+| Feature | Diamond | Nitrogen gas |
+|---|---|---|
+| **Chemical formula** | C | N₂ |
+| **Structure** | Giant covalent lattice: each carbon atom bonds to four others | Simple molecules: two nitrogen atoms joined by a strong triple bond |
+| **State at room temperature** | Solid | Gas |
+| **Melting/boiling point** | Very high because many strong covalent bonds must be broken | Very low because only weak forces between N₂ molecules must be overcome |
+| **Hardness** | Extremely hard due to its rigid 3D structure | Not applicable as it is a gas |
+| **Electrical conductivity** | Does not conduct; all electrons are held in bonds | Does not conduct; it has no free charged particles |
+
+**Key difference:** Diamond is a **giant covalent structure**, whereas nitrogen consists of **small, separate N₂ molecules**. Although the bond inside each nitrogen molecule is strong, the forces **between** nitrogen molecules are weak.
+
+### Review result
+
+- UnderStudy teacher-fit score: 3
+- Generic baseline teacher-fit score: 2
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: No
+- Preferred answer: UnderStudy
+- Notes: B does not provide context, but is more readable and human, but A's terminology might not be used
+
+---
+
+## Question 2: q2_metal_conductivity_malleability
+
+**Question:** Explain why metals conduct electricity and why they are malleable.
+
+### UnderStudy answer
+
+Metals have a giant metallic lattice structure. There are strong electrostatic forces of attraction between the metal cations and a sea of delocalised electrons.
+
+Metals conduct electricity because the sea of delocalised electrons can move through the structure and carry electrical charge.
+
+Metals are malleable because layers of metal ions can slide past one another while metallic bonding is maintained. Therefore, metals can be bent or hammered into different shapes without breaking.
+
+### Generic baseline answer
+
+Metals have a structure of **positive metal ions surrounded by delocalized electrons**. These electrons are not attached to one particular atom and can move throughout the metal.
+
+- **Electrical conductivity:** When a voltage is applied, the delocalized electrons move through the metal and carry electric charge.
+- **Malleability:** Metallic bonding is non-directional. Layers of metal ions can slide past one another while remaining attracted to the delocalized electrons, so the metal bends or changes shape instead of shattering.
+
+This “sea of electrons” explains both properties.
+
+### Review result
+
+- UnderStudy teacher-fit score: 2
+- Generic baseline teacher-fit score: 2
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: No
+- Preferred answer: Tie
+- Notes: answer needs to provide more context?
+
+---
+
+## Question 3: q3_group1_vs_transition_metals
+
+**Question:** What is the difference between Group 1 metals and transition metals?
+
+### UnderStudy answer
+
+Group 1 metals and transition metals are both metals, but they have different physical and chemical properties.
+
+| Group 1 metals | Transition metals |
+|---|---|
+| Soft and can often be cut with a knife | Hard and strong |
+| Relatively low densities | Generally higher densities |
+| Relatively low melting points | Generally high melting points |
+| Very reactive, especially with water | Less reactive |
+| Form ions with a fixed charge of +1 | Can form ions with different charges |
+| Usually form white compounds | Often form coloured compounds |
+| Usually do not act as catalysts | Often act as catalysts |
+
+For example, sodium is a Group 1 metal, while iron and copper are transition metals.
+
+This comparison goes slightly beyond the material reviewed here, so double-check the exact list of properties required by your syllabus.
+
+### Generic baseline answer
+
+### Group 1 metals vs transition metals
+
+| Property | Group 1 metals | Transition metals |
+|---|---|---|
+| **Position in periodic table** | Far-left column | Central block |
+| **Examples** | Lithium, sodium, potassium | Iron, copper, nickel |
+| **Reactivity** | Very reactive, especially with water | Generally less reactive |
+| **Hardness** | Soft; can often be cut with a knife | Usually hard and strong |
+| **Density** | Usually low | Usually high |
+| **Melting points** | Relatively low | Usually high |
+| **Ions formed** | Always form **+1 ions** | Can form ions with different charges, such as Fe²⁺ and Fe³⁺ |
+| **Compounds** | Usually white or colourless | Often coloured |
+| **Catalysts** | Rarely used as catalysts | Often act as catalysts |
+
+Both groups conduct heat and electricity because they are metals. A key difference is that **Group 1 metals are soft and highly reactive**, while **transition metals are generally stronger, less reactive, and can form coloured compounds and ions with different charges**.
+
+### Review result
+
+- UnderStudy teacher-fit score: 3
+- Generic baseline teacher-fit score: 2
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: No
+- Preferred answer: UnderStudy
+- Notes: None
+
+---
+
+## Question 4: q4_nacl_structure_bonding
+
+**Question:** Describe the structure and bonding in sodium chloride.
+
+### UnderStudy answer
+
+Sodium chloride has a giant ionic lattice structure.
+
+It consists of a regular, repeating arrangement of Na⁺ and Cl⁻ ions. The ionic bonding is the strong electrostatic force of attraction between the Na⁺ cations and Cl⁻ anions.
+
+### Generic baseline answer
+
+Sodium chloride has a **giant ionic lattice structure**.
+
+- Each sodium atom transfers one electron to a chlorine atom.
+- Sodium forms a positive ion, **Na⁺**, while chlorine forms a negative ion, **Cl⁻**.
+- The oppositely charged ions are arranged in a regular, repeating three-dimensional lattice in a **1:1 ratio**.
+- Strong **electrostatic attractions** between Na⁺ and Cl⁻ ions act in all directions. These attractions are called **ionic bonds**.
+
+Because many strong ionic bonds must be overcome, sodium chloride has a high melting and boiling point. It conducts electricity only when molten or dissolved, because its ions can then move.
+
+### Review result
+
+- UnderStudy teacher-fit score: 3
+- Generic baseline teacher-fit score: 2
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: No
+- Preferred answer: UnderStudy
+- Notes: None
+
+---
+
+## Question 5: q5_nacl_conductivity
+
+**Question:** Why does sodium chloride conduct electricity when molten but not when solid?
+
+### UnderStudy answer
+
+First of all, sodium chloride has a giant ionic lattice structure containing Na⁺ and Cl⁻ ions.
+
+When sodium chloride is solid, these ions vibrate about fixed positions and are not free to move. Therefore, there are no mobile charge carriers, so solid sodium chloride does not conduct electricity.
+
+When sodium chloride is molten, the Na⁺ and Cl⁻ ions are free-moving. They act as charge carriers, so molten sodium chloride conducts electricity.
+
+### Generic baseline answer
+
+Sodium chloride conducts electricity only when its charged particles can move.
+
+- **Solid sodium chloride:** The positive sodium ions, **Na⁺**, and negative chloride ions, **Cl⁻**, are locked in a rigid crystal lattice. They cannot move, so they cannot carry electric charge through the solid.
+- **Molten sodium chloride:** Heating breaks down the lattice, allowing the **Na⁺** and **Cl⁻** ions to move freely. These moving ions carry charge, so the liquid conducts electricity.
+
+The ions still exist in the solid; they are simply unable to move.
+
+### Review result
+
+- UnderStudy teacher-fit score: 3
+- Generic baseline teacher-fit score: 2
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: No
+- Preferred answer: UnderStudy
+- Notes: issue is b provide more context, like heating breaking down the lattice, so the answer is more complete. however a has the correct terminology for sg exams
+
+---
+
+## Question 6: q6_diamond_vs_graphite_conductivity
+
+**Question:** Compare the electrical conductivity of diamond and graphite.
+
+### UnderStudy answer
+
+First of all, diamond and graphite are both giant covalent structures, but their different structures affect their electrical conductivity.
+
+In diamond, each carbon atom forms four strong covalent bonds in a tetrahedral structure. Therefore, diamond has neither free-moving ions nor free-moving electrons, so it cannot conduct electricity.
+
+In graphite, each carbon atom is bonded to three other carbon atoms, leaving one delocalised electron per carbon atom free to conduct electricity.
+
+Therefore, graphite conducts electricity, whereas diamond does not.
+
+### Generic baseline answer
+
+- **Diamond** is a **very poor electrical conductor (an insulator)**. Each carbon atom uses all four outer electrons in strong covalent bonds, so there are no free electrons to carry charge.
+
+- **Graphite** is a **good electrical conductor**, especially along its layers. Each carbon atom forms three covalent bonds, leaving one electron delocalized and free to move through the layer.
+
+Thus, **graphite conducts electricity, while diamond generally does not**.
+
+### Review result
+
+- UnderStudy teacher-fit score: 3
+- Generic baseline teacher-fit score: 2
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: No
+- Preferred answer: UnderStudy
+- Notes: b is perfect
+
+---
+
+## Question 7: q7_co2_low_melting_point
+
+**Question:** Explain why simple molecular substances like carbon dioxide have low melting points.
+
+### UnderStudy answer
+
+First, carbon dioxide has a simple molecular structure.
+
+Secondly, there are weak intermolecular forces of attraction between its molecules.
+
+Very little energy is required to overcome these weak intermolecular forces of attraction. Therefore, carbon dioxide has a low melting point.
+
+### Generic baseline answer
+
+Simple molecular substances such as carbon dioxide consist of small, separate molecules.
+
+- The **covalent bonds within each CO₂ molecule are strong**.
+- However, the **intermolecular forces between different CO₂ molecules are weak**.
+- Only a small amount of energy is needed to overcome these weak forces, so simple molecular substances usually have **low melting points**.
+
+The covalent bonds inside the molecules are not broken when the substance melts.
+
+### Review result
+
+- UnderStudy teacher-fit score: 3
+- Generic baseline teacher-fit score: 2
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: No
+- Preferred answer: UnderStudy
+- Notes: must link to structure and bonding first, provide some more context
+
+---
+
+## Question 8: q8_silicon_dioxide_structure_mp
+
+**Question:** State the type of structure present in silicon dioxide and explain its melting point.
+
+### UnderStudy answer
+
+Silicon dioxide has a giant covalent structure. It contains strong covalent bonds between silicon and oxygen atoms. A lot of energy is required to overcome these bonds, so silicon dioxide has a high melting point.
+
+### Generic baseline answer
+
+Silicon dioxide has a **giant covalent (network) structure**. Each silicon atom is strongly covalently bonded to oxygen atoms in a three-dimensional network.
+
+It has a **high melting point** because many strong Si–O covalent bonds must be broken to melt it, requiring a large amount of energy.
+
+### Review result
+
+- UnderStudy teacher-fit score: 3
+- Generic baseline teacher-fit score: 1
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: Yes
+- Preferred answer: UnderStudy
+- Notes: 3 dimensional network is out of syllabus and redundant
+
+---
+
+## Question 9: q9_metal_structure_conductivity
+
+**Question:** Describe the structure of a typical metal and explain why metals are good conductors of electricity.
+
+### UnderStudy answer
+
+First, structure: a typical metal has a giant metallic lattice structure containing closely packed metal cations surrounded by a sea of delocalised electrons.
+
+Secondly, bonding: there are strong electrostatic forces of attraction between the metal cations and a sea of delocalised electrons.
+
+Number three, physical property: the delocalised electrons are free-moving and can carry electrical charge through the structure. Therefore, metals are good conductors of electricity.
+
+### Generic baseline answer
+
+A typical metal has a **giant, regular lattice of closely packed positive metal ions**. The outer-shell electrons are **delocalised**, meaning they are not attached to one particular ion and can move throughout the structure. Strong electrostatic attraction between the positive ions and these electrons forms **metallic bonds**.
+
+Metals conduct electricity well because the delocalised electrons are free to move through the lattice. When a potential difference is applied, these electrons flow and carry electrical charge.
+
+### Review result
+
+- UnderStudy teacher-fit score: 3
+- Generic baseline teacher-fit score: 2
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: No
+- Preferred answer: UnderStudy
+- Notes: signposting in b is very accurate
+
+---
+
+## Question 10: q10_metals_malleable_ionic_brittle
+
+**Question:** Explain why metals are malleable but ionic compounds are brittle.
+
+### UnderStudy answer
+
+First, consider their structures and bonding.
+
+Metals have a giant metallic lattice structure. There are strong electrostatic forces of attraction between the metal cations and a sea of delocalised electrons. When a force is applied, layers of metal ions can slide past one another while metallic bonding is maintained. Therefore, metals are malleable and can be bent or hammered into shape.
+
+Ionic compounds have a giant ionic lattice structure, with a strong electrostatic force of attraction between the cations and the anions. When a force shifts the layers, ions with the same charge are brought next to one another. These like-charged ions repel strongly, causing the lattice to crack. Therefore, ionic compounds are brittle.
+
+The ionic brittleness detail goes slightly beyond the reviewed material here, so double-check it against your course notes.
+
+### Generic baseline answer
+
+**Metals are malleable** because their positive metal ions are arranged in layers surrounded by a “sea” of delocalized electrons. When force is applied, the layers can slide past one another while the electrons continue attracting and holding the ions together. The metal changes shape without breaking.
+
+**Ionic compounds are brittle** because their lattice contains alternating positive and negative ions. If a force shifts the layers, ions with the same charge can become aligned. These like charges strongly repel each other, causing the crystal to split or shatter.
+
+### Review result
+
+- UnderStudy teacher-fit score: 2
+- Generic baseline teacher-fit score: 2
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: No
+- Preferred answer: Tie
+- Notes: None
+
+---
+
+## Question 11: q11_is_graphite_a_molecule
+
+**Question:** Is graphite a molecule? Explain your answer.
+
+### UnderStudy answer
+
+First of all, graphite is not a molecule. It has a giant covalent structure.
+
+In graphite, each carbon atom is covalently bonded to three other carbon atoms, forming layers of carbon atoms. These atoms are joined in a continuous network by strong covalent bonds between atoms, rather than existing as separate, discrete molecules.
+
+Therefore, graphite is a giant covalent structure, not a molecule.
+
+### Generic baseline answer
+
+No, graphite is **not a molecule**. It is a **giant covalent structure** made entirely of carbon atoms.
+
+In graphite, each carbon atom is strongly bonded to three other carbon atoms, forming large flat layers of connected hexagons. Because there are no separate, individual groups of atoms with a fixed size, graphite cannot be described as separate molecules. Its formula is simply **C**.
+
+### Review result
+
+- UnderStudy teacher-fit score: 2
+- Generic baseline teacher-fit score: 2
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: No
+- Preferred answer: Tie
+- Notes: None
+
+---
+
+## Question 12: q12_mgo_vs_so2_properties
+
+**Question:** Compare the properties of magnesium oxide and sulfur dioxide.
+
+### UnderStudy answer
+
+First of all, classify their structures.
+
+Magnesium oxide has a giant ionic lattice structure, whereas sulfur dioxide has a simple molecular structure.
+
+Magnesium oxide has high melting and boiling points. There is a strong electrostatic force of attraction between the Mg²⁺ and O²⁻ ions, so a lot of energy is required to overcome this attraction.
+
+Sulfur dioxide has low melting and boiling points. Very little energy is required to overcome the weak intermolecular forces of attraction between sulfur dioxide molecules.
+
+For electrical conductivity, solid magnesium oxide does not conduct because its ions are in fixed positions and are not free to move. However, molten magnesium oxide conducts electricity because its ions are free-moving and can act as charge carriers.
+
+Sulfur dioxide does not conduct electricity because it has no free-moving ions or free-moving electrons.
+
+### Generic baseline answer
+
+| Property | Magnesium oxide (MgO) | Sulfur dioxide (SO₂) |
+|---|---|---|
+| **Type of bonding** | Ionic: Mg²⁺ and O²⁻ ions | Covalent: simple molecules |
+| **State at room temperature** | White solid | Colourless gas with a choking smell |
+| **Melting/boiling point** | Very high because of strong ionic attractions | Low because forces between molecules are weak |
+| **Electrical conductivity** | Conducts when molten, but not when solid | Does not conduct electricity |
+| **Acid–base character** | **Basic oxide**; reacts with acids to form a salt and water | **Acidic oxide**; dissolves in water to give an acidic solution and reacts with bases |
+| **Reaction with water** | Forms magnesium hydroxide slowly: MgO + H₂O → Mg(OH)₂ | Produces an acidic solution, often represented as: SO₂ + H₂O ⇌ H₂SO₃ |
+| **Other features** | Relatively stable solid | Toxic air pollutant; contributes to acid rain |
+
+The main difference is that **magnesium oxide is a basic ionic solid**, while **sulfur dioxide is an acidic covalent gas**.
+
+### Review result
+
+- UnderStudy teacher-fit score: 3
+- Generic baseline teacher-fit score: 1
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: No
+- Preferred answer: UnderStudy
+- Notes: issue is b is not structured in a table format, but the answers are more accurate.  e.g. covalent: simple molecules, what does that mean?
+
+---
+
+## Question 13: q13_transition_metal_reactivity_trends
+
+**Question:** What are the trends in reactivity across the transition metals?
+
+### UnderStudy answer
+
+First of all, unlike Group 1 metals, transition metals do not show a simple, regular trend in reactivity across a period.
+
+Across the first transition series, the general pattern is:
+
+- Reactivity tends to decrease from left to right.
+- Metals near the left, such as titanium and vanadium, are generally more easily oxidized.
+- Metals near the right, such as copper, are generally less reactive.
+- However, the trend is irregular because transition metals can have different oxidation states and some form protective oxide layers. For example, chromium may appear unreactive because of its protective oxide layer.
+- Overall, transition metals are generally less reactive than Group 1 and Group 2 metals. Many react slowly—or not at all—with cold water, while the more reactive ones can react with dilute acids.
+
+So the key conclusion is: reactivity generally decreases across a transition series, but there are several irregularities, so electrode-potential data are needed for precise comparisons.
+
+This trend goes beyond the tutor’s reviewed material, so double-check the exact level of detail required by your syllabus.
+
+### Generic baseline answer
+
+### Reactivity across a transition-metal series
+
+Moving **from left to right across a transition-metal period**, metallic reactivity **generally decreases**, although the trend is not smooth.
+
+- **Early transition metals** (such as titanium and vanadium) lose electrons relatively easily and are more readily oxidised.
+- **Middle metals** (such as chromium, manganese and iron) have variable reactivity. Some appear unreactive because they form a thin, protective oxide layer—called **passivation**.
+- **Later metals** (such as nickel and copper) hold their electrons more strongly and are generally less reactive. Copper, for example, does not normally react with dilute acids to release hydrogen.
+
+The irregular pattern occurs because the outer \(s\) and \(d\) electrons have very similar energies, so small changes in electron arrangement can strongly affect reactivity.
+
+Transition metals also often make good **catalysts**, with catalytic activity commonly being greatest near the middle of a series because these metals can:
+
+- adopt several oxidation states,
+- form temporary bonds with reactants,
+- provide surfaces on which reactions occur.
+
+So the broad trend is **decreasing metallic reactivity from left to right**, but with many exceptions due to electron configuration and protective oxide layers.
+
+### Review result
+
+- UnderStudy teacher-fit score: 0
+- Generic baseline teacher-fit score: 0
+- UnderStudy syllabus overshoot: No
+- Generic baseline syllabus overshoot: Yes
+- Preferred answer: UnderStudy
+- Notes: question was veering towards out of syllabus
+
+---

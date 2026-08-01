@@ -1,0 +1,58 @@
+{
+  "answers": {
+    "q10_metals_malleable_ionic_brittle": {
+      "A": "understudy",
+      "B": "syllabus_baseline"
+    },
+    "q11_is_graphite_a_molecule": {
+      "A": "understudy",
+      "B": "syllabus_baseline"
+    },
+    "q12_mgo_vs_so2_properties": {
+      "A": "syllabus_baseline",
+      "B": "understudy"
+    },
+    "q13_transition_metal_reactivity_trends": {
+      "A": "understudy",
+      "B": "syllabus_baseline"
+    },
+    "q1_diamond_vs_nitrogen": {
+      "A": "syllabus_baseline",
+      "B": "understudy"
+    },
+    "q2_metal_conductivity_malleability": {
+      "A": "syllabus_baseline",
+      "B": "understudy"
+    },
+    "q3_group1_vs_transition_metals": {
+      "A": "understudy",
+      "B": "syllabus_baseline"
+    },
+    "q4_nacl_structure_bonding": {
+      "A": "understudy",
+      "B": "syllabus_baseline"
+    },
+    "q5_nacl_conductivity": {
+      "A": "understudy",
+      "B": "syllabus_baseline"
+    },
+    "q6_diamond_vs_graphite_conductivity": {
+      "A": "syllabus_baseline",
+      "B": "understudy"
+    },
+    "q7_co2_low_melting_point": {
+      "A": "syllabus_baseline",
+      "B": "understudy"
+    },
+    "q8_silicon_dioxide_structure_mp": {
+      "A": "syllabus_baseline",
+      "B": "understudy"
+    },
+    "q9_metal_structure_conductivity": {
+      "A": "syllabus_baseline",
+      "B": "understudy"
+    }
+  },
+  "run_id": "20260801_034142",
+  "warning": "Keep this file closed until blind review is complete."
+}

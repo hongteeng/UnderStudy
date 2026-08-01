@@ -82,6 +82,10 @@ class TeacherWorkspace:
     def results_dir(self) -> Path:
         return self.root / "results"
 
+    @property
+    def evaluation_runs_dir(self) -> Path:
+        return self.results_dir / "evaluations"
+
     def ensure_directories(self) -> None:
         for directory in (
             self.incoming_dir,
@@ -89,6 +93,7 @@ class TeacherWorkspace:
             self.transcripts_dir,
             self.rule_drafts_dir,
             self.internal_dir,
+            self.results_dir,
         ):
             directory.mkdir(parents=True, exist_ok=True)
 

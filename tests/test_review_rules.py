@@ -93,6 +93,26 @@ RULE_FOCUSED_DRAFT = """# Draft tutor rules
 """
 
 
+NO_BUILD_EXAMPLE_DRAFT = """# Draft tutor rules
+
+## Tutor response approaches
+
+- Explain the numerical oxidation-state change. (redox.md)
+
+## Build Examples
+
+No complete worked exchange was found. The transcript contains only general narration.
+
+## Needs tutor decision
+
+There are no separate tutor decisions.
+
+## Review summary
+
+No questionable drafted rules were identified.
+"""
+
+
 class ReviewRulesTests(unittest.TestCase):
     def test_parser_finds_review_choices(self):
         blocks = parse_review_blocks(DRAFT)
@@ -132,6 +152,17 @@ class ReviewRulesTests(unittest.TestCase):
         self.assertNotIn("RULE AS DRAFTED", reviewed)
         self.assertNotIn("ISSUE WITH THIS RULE", reviewed)
         self.assertNotIn("SUGGESTED REVISION", reviewed)
+        validate_draft(reviewed, split_sections(reviewed))
+
+    def test_empty_build_example_note_is_removed_before_validation(self):
+        reviewed = resolve_draft(
+            NO_BUILD_EXAMPLE_DRAFT,
+            lambda block, index, total: ReviewResolution("exclude"),
+            lambda decision, index, total: None,
+        )
+
+        self.assertIn("## Build Examples", reviewed)
+        self.assertNotIn("No complete worked exchange", reviewed)
         validate_draft(reviewed, split_sections(reviewed))
 
     def test_edit_exclude_and_remove_decision_produce_valid_draft(self):

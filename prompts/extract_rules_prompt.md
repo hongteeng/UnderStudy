@@ -74,9 +74,9 @@ neighboring examples:
 (source_filename)
 ```
 
-If the source contains no complete worked examples, leave this section with
-only a short note that none were found and why — do not leave it silently
-empty, and do not force something borderline into this format.
+If the source contains no complete worked examples, leave **Build Examples**
+empty. Do not add a “none found” placeholder: that is extraction metadata, not
+a worked example, and must never be merged into the tutor's final rules.
 
 ## Reviewing the drafted rules
 

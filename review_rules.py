@@ -270,6 +270,28 @@ def remove_markdown_section(text: str, title: str) -> str:
     return pattern.sub("", text)
 
 
+def remove_empty_build_example_note(text: str) -> str:
+    """Clear old 'none found' prose that is metadata rather than an example."""
+    pattern = re.compile(
+        r"(?ms)^(##\s+Build Examples\s*\n)(.*?)(?=^##\s+|\Z)"
+    )
+
+    def clean(match: re.Match[str]) -> str:
+        body = match.group(2).strip()
+        if not body or re.search(r"(?m)^###\s+Example:", body):
+            return match.group(0)
+        normalised = " ".join(body.casefold().split())
+        is_empty_note = (
+            "no complete worked" in normalised
+            or "no worked example" in normalised
+            or "no build example" in normalised
+            or "none were found" in normalised
+        )
+        return match.group(1) + "\n" if is_empty_note else match.group(0)
+
+    return pattern.sub(clean, text)
+
+
 def legacy_meta_decisions(text: str) -> list[str]:
     """Find old-style missing-content questions that are not rule review blocks."""
     decisions: list[str] = []
@@ -467,6 +489,7 @@ def resolve_draft(
     reviewed = resolve_review_blocks(text, review_provider)
     for section in DRAFT_ONLY_SECTIONS:
         reviewed = remove_markdown_section(reviewed, section)
+    reviewed = remove_empty_build_example_note(reviewed)
     reviewed = resolve_inline_decisions(reviewed, inline_provider)
     return clean_spacing(reviewed)
 

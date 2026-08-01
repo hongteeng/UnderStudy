@@ -54,6 +54,16 @@ data/teachers/
     transcripts/
     rule_drafts/
     internal/
+    results/
+      evaluations/
+        20260801_123456/
+          blind_review.md
+          blind_review.csv
+          eval_report.md                 # created after review is complete
+          eval_output.csv
+          metadata.json
+          inputs/                        # frozen rules, syllabus, and questions
+          internal/                      # progress and hidden A/B answer key
 ```
 
 Only the code and extraction prompt are shared. The manifest, recordings,
@@ -140,11 +150,45 @@ python answer.py --teacher hong-ting "Why does graphite conduct electricity?"
 The answering engine reads only the selected teacher's `rules.md` and optional
 `syllabus.md`.
 
-For the existing evaluation questions:
+## Evaluate a teacher
+
+The shared evaluation questions are already stored in `data/eval_questions`, so
+the normal command only needs the teacher:
 
 ```bash
-python run_eval.py --teacher hong-ting data/eval_questions
+python run_eval.py --teacher hong-ting
 ```
 
-This compares UnderStudy with a plain-model baseline and writes the existing
-CSV and Markdown evaluation outputs under `results/`.
+The evaluation:
+
+1. freezes a copy of that teacher's current rules, optional syllabus, and the
+   question set so the run remains reproducible;
+2. generates an UnderStudy answer and a syllabus-only baseline answer using the
+   same model;
+3. saves after every answer, so an interruption does not discard completed API
+   calls;
+4. randomizes both systems as Answer A and Answer B;
+5. asks the reviewer for a 0–3 teacher-fit score, syllabus-overshoot check,
+   preference, and optional notes; and
+6. reveals the systems and creates the final scored report only after every
+   question has been reviewed.
+
+Every run is isolated under
+`data/teachers/<teacher-id>/results/evaluations/<run-id>/`; one teacher can never
+overwrite another teacher's report. If the teacher has no `syllabus.md`, the
+comparison is clearly recorded as a generic baseline instead.
+
+To generate the answers now and review later:
+
+```bash
+python run_eval.py --teacher hong-ting --no-review
+```
+
+The command prints the exact resume command. You can also resume the newest
+unfinished run with:
+
+```bash
+python run_eval.py --teacher hong-ting --resume latest
+```
+
+During blind review, enter `Q` at either score prompt to save and stop safely.

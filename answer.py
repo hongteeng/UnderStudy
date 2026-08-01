@@ -60,6 +60,7 @@ def generate_understudy_answer(
     *,
     rules_path: Path | None = None,
     syllabus_path: Path | None = None,
+    model: str | None = None,
 ) -> str:
     """Generate an answer using the tutor's rules and build-set examples."""
     load_dotenv()
@@ -72,7 +73,7 @@ def generate_understudy_answer(
         syllabus_path = syllabus_path or workspace.syllabus_path
     rules = read_required_file(rules_path, "tutor rules file")
     syllabus = load_syllabus(syllabus_path)
-    model = os.getenv("OPENAI_MODEL", "gpt-5.6-sol")
+    model = model or os.getenv("OPENAI_MODEL", "gpt-5.6-sol")
 
     syllabus_section = (
         f"\nSYLLABUS REFERENCE (secondary source)\n{syllabus}\n"

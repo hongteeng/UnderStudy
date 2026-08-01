@@ -1,0 +1,17 @@
+{
+  "baseline_type": "generic",
+  "completed_at": "2026-08-01T04:10:34+00:00",
+  "created_at": "2026-08-01T03:41:42+00:00",
+  "model": "gpt-5.6-sol",
+  "question_count": 13,
+  "question_set_sha256": "c1d386188c0df9be9fba4521a0f4c4d7b1694bfcc77d1f36290039ad5b8e5a6a",
+  "rules_sha256": "7fcaba4b5eac7779b32076d1fd2a839711a39647f99058a72933637bb7bfa928",
+  "run_id": "20260801_034142",
+  "source_question_directory": "data/eval_questions",
+  "status": "complete",
+  "syllabus_sha256": null,
+  "teacher_id": "hong-ting-4",
+  "teacher_name": "Hong Ting 4",
+  "updated_at": "2026-08-01T04:10:34+00:00",
+  "version": 2
+}

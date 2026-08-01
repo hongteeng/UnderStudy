@@ -1,0 +1,21 @@
+{
+  "recordings": {
+    "35b45d7b34b98051db04b33b9cfb3daf5865ebd9cb7a0f5e298aa6bd41c4555f": {
+      "attempts": 1,
+      "duration_seconds": 90.07020833333333,
+      "error": null,
+      "model": "gpt-4o-transcribe-diarize",
+      "processed_audio": "data/teachers/hong-ting-3/recordings/processed/redox.mp3",
+      "rules_draft": "data/teachers/hong-ting-3/rule_drafts/redox_rules_draft.md",
+      "rules_error": null,
+      "rules_status": "completed",
+      "segment_count": 26,
+      "source_name": "redox.mp3",
+      "source_size": 1442047,
+      "status": "completed",
+      "transcript": "data/teachers/hong-ting-3/transcripts/redox.md",
+      "updated_at": "2026-08-01T02:59:36+00:00"
+    }
+  },
+  "version": 1
+}
