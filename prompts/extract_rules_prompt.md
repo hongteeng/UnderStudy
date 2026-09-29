@@ -72,7 +72,29 @@ For each one:
   into an answer to a specific question. Only extract genuine, complete
   exchanges.
 
-Format each one as its own subsection, so it can be told apart from
+### Naming the structural pattern across build examples
+
+Once you have extracted the build examples, study them as a set before
+moving on, the same way a colleague would if asked to imitate this tutor.
+Look across all of them together for a repeating shape — not the content of
+any one answer, but *how* the tutor moves through an answer. Consider, for
+example: what (if anything) the tutor does before addressing the question
+itself; the order ideas are introduced in; whether reasoning and the final
+answer are kept separate, and how; how formal or conversational the language
+is; and how the answer ends. Do not assume in advance which of these axes
+will matter for this tutor — read the examples and let the pattern emerge
+from what actually repeats.
+
+If a shape repeats across two or more build examples, it is a real
+response-approach rule, not an incidental feature of one example, and losing
+it would mean losing what makes this tutor recognizable. State it explicitly
+as its own rule in **Tutor response approaches**, in plain language and
+without inventing terminology the tutor did not use, so it survives even if
+the build examples are later trimmed or edited. If no such pattern repeats
+across the available examples — for instance, because there are too few, or
+each answers a genuinely different kind of question — do not invent one.
+
+Format each build example as its own subsection, so it can be told apart from
 neighboring examples:
 
 ```md

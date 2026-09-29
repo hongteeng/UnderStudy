@@ -1,5 +1,20 @@
 # UnderStudy
 
+Students can ask a general LLM, but a correct answer is not always the right
+answer for that student. It may use unfamiliar methods, stray beyond the
+syllabus, or contradict the language their teacher expects.
+
+UnderStudy is built around a simple idea: students do not need another
+generic tutor. They need access to the way their own teacher teaches, when
+that teacher is unavailable — not just the same final answer, but the
+reasoning a teacher walks through before giving it: how they recognize what
+kind of question this is, what habit or method they reach for because of
+that, and how they tell it apart from a question it could be confused with.
+A generic model tends to skip straight to a correct answer. A teacher
+usually teaches the recognition first. UnderStudy's job is to notice
+whichever of these patterns a given teacher actually repeats, and reproduce
+it — not to assume in advance what that pattern will be.
+
 UnderStudy turns lesson recordings into a reviewed set of teaching rules for
 each teacher. Every teacher has an isolated workspace, so recordings and rules
 from different teachers are never combined.
