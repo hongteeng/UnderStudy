@@ -1,0 +1,13 @@
+{
+  "name": "understudy-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc && tsc -p tsconfig.client.json",
+    "start": "npm run build && node dist/server.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}

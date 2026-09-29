@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UnderStudy</title>
+  <style>
+    :root { --bg:#f7f7f5; --card:#fff; --ink:#1c1c1a; --muted:#6b6b66; --line:#e3e3de; --accent:#2f5d50; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#161615; --card:#1f1f1d; --ink:#ecece8; --muted:#9a9a93; --line:#2f2f2c; --accent:#7fb5a3; }
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,sans-serif; }
+    main { max-width:720px; margin:0 auto; padding:24px 16px; display:flex; flex-direction:column; min-height:100vh; }
+    header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px; }
+    h1 { font-size:20px; margin:0; }
+    select, textarea, button { font:inherit; color:inherit; border:1px solid var(--line); border-radius:8px; background:var(--card); }
+    select, input { padding:6px 10px; font:inherit; color:inherit; border:1px solid var(--line); border-radius:8px; background:var(--card); }
+    input { width:120px; }
+    #log { flex:1; display:flex; flex-direction:column; gap:12px; padding-bottom:16px; }
+    .msg { padding:10px 14px; border-radius:12px; max-width:85%; white-space:pre-wrap; border:1px solid var(--line); background:var(--card); }
+    .msg.user { align-self:flex-end; background:var(--accent); color:var(--bg); border-color:var(--accent); }
+    .msg.error { color:#b3261e; }
+    form { display:flex; gap:8px; position:sticky; bottom:0; padding:12px 0; background:var(--bg); }
+    textarea { flex:1; padding:10px 12px; resize:none; }
+    button { padding:0 18px; background:var(--accent); color:var(--bg); border-color:var(--accent); cursor:pointer; }
+    button:disabled { opacity:.5; cursor:wait; }
+    .hint { color:var(--muted); font-size:14px; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>UnderStudy</h1>
+      <div class="hint">
+        <input id="code" type="password" placeholder="Access code" autocomplete="off">
+        <select id="teacher"></select>
+      </div>
+    </header>
+    <div id="log"><p class="hint">Ask a question and get the answer the way your teacher would give it.</p></div>
+    <form id="form">
+      <textarea id="question" rows="2" placeholder="e.g. Why does graphite conduct electricity?"></textarea>
+      <button id="send" type="submit">Ask</button>
+    </form>
+  </main>
+  <script type="module" src="/client.js"></script>
+</body>
+</html>
